@@ -92,6 +92,9 @@ import { SettComponent } from './sett/sett.component';
 
 
 const appRoust: Routes = [
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full'
+  },
   {path: '',component: AppComponent},
   {path: 'login',component: LoginComponent},
   {path: 'member1/:user_username',component: Member1Component},
