@@ -1,0 +1,147 @@
+
+<html >
+    <head>
+        <style>
+           body{
+                background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+            .Css {
+                    color:rgba(27,31,34,0.85);
+                    font-family: Arial;
+                    font-size: 48px;
+                    text-align: center;
+                    line-height: 1.4;
+                   }
+            .Css1 {
+                    color:rgba(27,31,34,0.85);
+                    font-family: Arial;
+                    font-size: 36px;
+                    text-align: center;
+                   }
+            .Css2 {
+                    color:rgba(27,31,34,0.85);
+                    font-family: Arial;
+                    font-size: 18px;
+                    text-align: center;
+                   }
+    
+            p{
+            font-size: 1rem;
+            line-height: 1.4;
+            text-align: center;
+            color: white;
+            }
+        </style>
+    </head>
+        <body>
+            
+            <div class="wrapper">
+                <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+                    <div class="ui-g">
+                        <div class="ui-g-6" >
+                            <br>
+                            <h2>
+                                วิทยาการคอมพิวเตอร์
+                            </h2>
+                            <p style="color: white;">
+                                Informatics Mahasarakham University
+                            </p>
+                                
+                            
+                            <img src="../../assets/images/logo-it-x.png" class="img"> 
+                            
+                        </div>
+                        <div class="ui-g-6" >
+                            <br>
+                            <p-menubar [model]="items" >
+                               
+                            </p-menubar>
+                        </div>
+                    </div>
+                </div>
+                <div class="t">
+                    <h3 class="Css1">
+                       &nbsp;
+                        
+                       <button type="button" class="btn btn-success" [routerLink]="['/addnew/'+this.user_username]" >เพิ่มข่าวประชาสัมพันธ์</button> 
+   
+                        <br><br>
+                      
+                   </h3>
+                   
+               </div>
+                <div class="two">
+                    <h1 class="Css">ข่าวประชาสัมพันธ์</h1> 
+    
+                        <table id="customers" >
+                          
+                                <tr >
+                                    <th style="width: 20%;text-align: center;"><p>หัวข้อข่าว</p></th>
+                                    <th style="width: 60;text-align: center;">รูปภาพช่าว</th>
+                                    <th style="width: 20%;text-align: center;"><p>วันที่</p></th>
+                                    
+                                  </tr>
+                            
+                        <tbody>
+
+                            <tr style="text-align: center;" [class.table-info]="highlightId == result.new_ID"
+                                *ngFor="let result of results | slice:pointStart:pointEnd;let i=index">
+                                <td *ngIf="result.new_status == 1"
+                                style="text-align: center;">
+                                    {{result.new_title}}
+                                </td>
+                                    <td *ngIf="result.new_status == 1"> 
+                                    <a class="text-secondary" [routerLink]="['/new/'+this.user_username,result.new_ID]"
+                                      [queryParams]="{page: activePage}" > 
+                                      <img src={{result.new_image}} 
+                                      alt="" style="width:300px;height:200px;padding: 20px;">
+                                      
+                                      </a></td>
+                                    <td *ngIf="result.new_status == 1"
+                                    style="text-align: center;">
+                                        {{result.new_date}}
+                                    </td>
+                                    </tr>
+
+                               </tbody>   
+                                
+                               
+                            </table>
+    
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                  <li class="page-item">
+                                      <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: 1}"> First</a>
+                                  </li>
+                                  <li class="page-item" [class.disabled]="activePage==1">
+                                      <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: prevPage}"> Previous</a> 
+                                  </li>
+                                  <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i"> 
+                                      <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: i}"> {{ i }} </a> 
+                                  </li>
+                                  <li class="page-item" [class.disabled]="activePage==totalPage"> 
+                                      <a class="page-link" [routerLink]="['/new/'+this.user_username]"  
+                                              [queryParams]="{page: nextPage}"> Next</a>
+                                  </li>
+                                  <li class="page-item">
+                                    <input #pageInput type="number"class="form-control" min="1" max="{{ totalPage }}"
+                                            style="width:80px;" (input)="changePage(pageInput.value)" value="{{ activePage }}" />
+                                  </li>
+                                  <li class="page-item"> 
+                                      <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: totalPage}"> Last</a> 
+                                  </li>
+                                </ul>
+                              </nav>
+               
+              </div>
+              <div class="four"></div>
+             
+               </div>
+               
+        </body>
+    </html> 

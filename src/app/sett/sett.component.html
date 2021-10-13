@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+       body{
+            background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        } 
+    </style>
+</head>
+    <body>
+        
+        <div class="wrapper">
+            <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+                <app-header2></app-header2>
+            </div>
+            <div class="two">
+                  <p> รหัสนิสิต {{this.myValue[0].user_username}}</p>
+                  <div class="a">
+                    <label for="">ID: </label><br>
+                    <label for="">รหัสผ่าน: </label><br>
+                    <label for="">ชื่อ: </label><br>
+                    <label for="">เบอร์โทรศัพท์: </label><br>
+                    <label for=""> email : </label><br>
+                    <label for=""> facebook : </label><br>
+                   
+                   
+                  </div>
+            </div>
+            <div class="three" >
+                 <p>ข้อมูลใหม่</p> <br>
+                <input type="text" value="{{this.myValue[0].user_username}}" size = "50" [(ngModel)]= "username" ><br>
+                <input type="password" value="{{this.myValue[0].user_password}}" size = "50" [(ngModel)]= "password" ><br>
+                <input type="text" value="{{this.myValue[0].user_name}}" size = "50" [(ngModel)]= "name" ><br>
+               <input type="text"  value="{{this.myValue[0].user_phone}}"  size="50" [(ngModel)] = "phone" ><br>
+               <input type="text"  value="{{this.myValue[0].user_email}}" size="50" [(ngModel)] = "email"  ><br>
+               <input type="text"  value="{{this.myValue[0].user_facebook}}" size="50" [(ngModel)] = "facebook" ><br>
+              
+                                 <p>. .</p>
+        <button pButton type="button" label="แก้ไขข้อมูลส่วนตัว" class="ui-button-rounded ui-button-success" (click)='eDit()'></button>
+
+                </div>
+                  
+            </div>
+             
+    </body>
+</html>
+
+

@@ -1,0 +1,44 @@
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    
+  }
+
+  .one {
+    grid-column: 1 / 8;
+    grid-row: 1;
+    background-color:white;  
+  }
+
+  .two{
+    grid-column: 2 / 6;
+    grid-row: 2 / 8;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+  .input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+  .input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .input[type=submit]:hover {
+    background-color: #45a049;
+  }

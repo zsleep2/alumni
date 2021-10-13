@@ -1,0 +1,31 @@
+.button {
+   
+    border: none;
+    color: black;
+    padding: 15px 63px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border: 2px solid #555555
+    
+}
+
+.button:hover {
+    background-color: #00a2ffee; /* Green */
+    
+}
+
+.button1{
+    padding: 15px 70px;
+}
+
+.button2{
+    padding: 15px 68.5px;
+}
+
+.pad{
+    padding: 50px 30px;
+}

@@ -1,0 +1,94 @@
+
+<html >
+    <head>
+        <style>
+           body{
+                background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+            .Css {
+                    color:rgba(27,31,34,0.85);
+                    font-family: Arial;
+                    font-size: 48px;
+                    text-align: center;
+                    line-height: 1.4;
+                   }
+            .Css1 {
+                    color:rgba(27,31,34,0.85);
+                    font-family: Arial;
+                    font-size: 36px;
+                    text-align: center;
+                   }
+            .Css2 {
+                    color:rgba(27,31,34,0.85);
+                    font-family: Arial;
+                    font-size: 18px;
+                    text-align: center;
+                   }
+    
+            p{
+            font-size: 1rem;
+            line-height: 1.4;
+            text-align: center;
+            color: white;
+            }
+        </style>
+    </head>
+        <body>
+            
+            <div class="wrapper">
+                <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+                    <div class="ui-g">
+                        <div class="ui-g-6" >
+                            <br>
+                            <h2>
+                                วิทยาการคอมพิวเตอร์
+                            </h2>
+                            <p style="color: white;">
+                                Informatics Mahasarakham University
+                            </p>
+                                
+                            
+                            <img src="../../assets/images/logo-it-x.png" class="img"> 
+                            
+                        </div>
+                        <div class="ui-g-6" >
+                            <br>
+                            <p-menubar [model]="items" ></p-menubar>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two">
+                    <br>
+                    <h3>เพิ่มอัลบั้ม</h3> <br>
+                    ชื่ออัลบั้ม <br>
+                    <input id="text" type="text" size = "50" pInputText  [(ngModel)]="nameAlbum"> <br> <br>
+                    <button type="button" class="btn btn-success" (click)="addAlbum()" >เพิ่มอัลบั้ม</button> <br>
+                    <br><br>
+                   <!--  <h3>เพิ่มรูปภาพ
+                    </h3>
+                    <div style="margin: auto;width: 31%;border: 1px solid rgb(13, 0, 128);padding: 10px;">
+                        เลือกอัลบั้ม 
+                        <select [(ngModel)]="AlbumSelected" (ngModelChange) = 'onAlbumSelected($event)'>
+                            <option *ngFor="let album of lstAlbum" [value]="album.album_ID">
+                                {{album.album_name}} วันที่ {{album.album_date}}
+                            </option>
+                        </select>
+                    </div>ห
+                    AlbumSelected is :: {{AlbumSelected}}
+                    <br>
+                    เลือกรูปภาพ
+                    <input type ="file" name="" id="" (change)="getFile($event.target.files)"> <br> <br>
+                    <button type="button" class="btn btn-success" (click)="addPhoto()" >เพิ่มรูปภาพ</button> <br> -->
+                <br><br>
+               </div>
+                </div>
+              
+               
+        </body>
+    </html>  

@@ -1,0 +1,49 @@
+<div class="form-popup" id="myForm" >
+  
+      
+      <p>Description</p>
+     <input type="text" [(ngModel)]="text" name="something"> <br>
+     
+          <div class="date-picker-wrapper">
+            <div class="container">
+                <div class="group">
+                    <form >
+                      <label >Start</label>
+                      <input type="date" id="start" name="start"  [(ngModel)]="date1">
+                    </form>
+                </div>
+                <div class="group">
+                  <form >
+                    <label >End</label>
+                    <input type="date" id="end" name="end" [(ngModel)]="date2">
+                  </form>
+                </div>
+            </div>
+        </div> 
+
+        <div class="date-picker-wrapper">
+          <div class="container">
+              <div class="group">
+                <form >
+                  <label for="appt1" >Start time</label>
+                  <input type="time" id="appt1" name="appt1" [(ngModel)]="time1">
+                 
+                </form>
+              </div>
+              <div class="group">
+                <form>
+                  <label for="appt2">End time</label>
+                  <input type="time" id="appt2" name="appt2" [(ngModel)]="time2">
+                </form>
+              </div>
+          </div>
+      </div> 
+
+      <div class="date-picker-wrapper">
+        <div class="container">
+            <div class="group">
+              <button type="button" class="btn btn-success" (click)=" addAT()">OK</button>
+            </div>
+        </div>
+    </div> 
+  </div>

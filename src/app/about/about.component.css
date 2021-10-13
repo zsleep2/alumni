@@ -1,0 +1,40 @@
+
+
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 0px;
+    grid-auto-rows: minmax(100px, auto);
+    
+  }
+  .one {
+    grid-column: 1 / 8;
+    grid-row: 1;
+    background-color:white;  
+  }
+  .t{
+    grid-column: 1 / 2;
+    grid-row: 2 / 8;
+    background-color: white;
+    border: 20px;
+  }
+  .two { 
+    grid-column: 1 / 8;
+    grid-row: 2 / 8;
+   background-color: white;
+  }
+  .four{
+    grid-column: 6 / 8;
+    grid-row: 2 / 8;
+    background-color:white;
+  
+  }
+  
+  p{
+    font-size: 1rem;
+    line-height: 1.4
+  }
+  
+ 
+  

@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+       body{
+            background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+            width: 100%;
+            height: 250%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        } 
+    </style>
+</head>
+    <body>
+        
+        <div class="wrapper">
+            <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+                <app-header2></app-header2>
+            </div>
+            <div class="two"  align = 'center' >
+                <div class="wa">
+                  <!--   <p>{{myValue[0].user_name}}</p> -->
+                    <div class="item1">
+                      <button  *ngIf="this.myrole == 1"
+                      class= "button" [routerLink]="['/admin_user/'+this.user_username]">จัดการเว็บไซต์</button>
+                      <button  class= "button" [routerLink]="['/set/'+this.user_username]">แก้ไขข้อมูลส่วนตัว</button>
+                    </div>
+                    <div class="item2"> 
+                      <button  class= "button"   [routerLink]="['/best/'+this.user_username]">ศิษย์เก่าดีเด่น</button> 
+                    </div>
+                    <div class="item3"> 
+                      <button  class= "button"   [routerLink]="['/about/'+this.user_username]" >About</button>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="four">
+                <app-new-l></app-new-l>
+            </div>
+           
+            <div class="six">
+               
+                  
+                  <button class="btn btn-success" [routerLink]="['/new/'+this.user_username]">
+                    ข่าวทั้งหมด
+                  </button>
+                 
+                  
+              <div class="wrapper2" >
+                    <div class="a"  *ngIf = "this.allnew[0].new_status == 1" >
+                      <div *ngIf = "this.allnew[0] != undefined" >
+                        <img src={{this.allnew[0].new_image}} 
+                       [routerLink]="['/new/'+this.user_username,this.allnew[0].new_ID]"
+                       style="width: 550px;height: 300px">
+                       <p>{{this.allnew[0].new_title}}</p>
+                      </div>
+                       
+                    </div>
+                    <div class="b"  *ngIf = "this.allnew[1].new_status == 1" > 
+                      <div *ngIf = "this.allnew[1] != undefined">
+                        <img src={{this.allnew[1].new_image}}  
+                          [routerLink]="['/new/'+this.user_username,this.allnew[1].new_ID]"
+                          style="width: 550px;height: 300px;"> <br>
+                          <p>{{this.allnew[1].new_title}}</p>
+                      </div>
+                      
+                    </div>
+                    <div class="c"  *ngIf = "this.allnew[2].new_status == 1">
+                      <div *ngIf = "this.allnew[2] != undefined" >
+                         <img src={{this.allnew[2].new_image}}  
+                          [routerLink]="['/new/'+this.user_username,this.allnew[2].new_ID]"
+                          style="width: 550px;height: 300px;">
+                          <p>{{this.allnew[2].new_title}}</p>
+                      </div>
+                    
+                    </div>
+                    <div class="d"  *ngIf = "this.allnew[3].new_status == 1">
+                      <div *ngIf = "this.allnew[3] != undefined">
+                        <img src={{this.allnew[3].new_image}}  
+                          [routerLink]="['/new/'+this.user_username,this.allnew[3].new_ID]"
+                          style="width: 550px;height: 300px;">
+                          <p>{{this.allnew[3].new_title}}</p>
+                      </div>
+                     
+                     
+                    </div>
+                    <div class="e"  >
+                      <div *ngIf = "this.allnew[4] != undefined">
+                        <img src={{this.allnew[4].new_image}}  
+                        [routerLink]="['/new/'+this.user_username,this.allnew[4].new_ID]"
+                         style="width: 550px;height: 300px;"> 
+                         <p>{{this.allnew[4].new_title}}</p>
+                      </div>
+                    </div>
+                    <div class="f">
+                      <div *ngIf = "this.allnew[5] != undefined">
+                        <img src={{this.allnew[5].new_image}}  
+                        [routerLink]="['/new/'+this.user_username,this.allnew[5].new_ID]"
+                         style="width: 550px;height: 300px;"> 
+                         <p>{{this.allnew[5].new_title}}</p>
+                      </div>
+                    </div>
+                    <div class="g">
+                      <div *ngIf = "this.allnew[6] != undefined">
+                        <img src={{this.allnew[6].new_image}}  
+                        [routerLink]="['/new/'+this.user_username,this.allnew[6].new_ID]"
+                         style="width: 550px;height: 300px;"> 
+                         <p>{{this.allnew[6].new_title}}</p>
+                      </div>
+                    </div>
+                    <div class="h">
+                      <div *ngIf = "this.allnew[7] != undefined">
+                        <img src={{this.allnew[7].new_image}}  
+                        [routerLink]="['/new/'+this.user_username,this.allnew[7].new_ID]"
+                         style="width: 550px;height: 300px;"> 
+                         <p>{{this.allnew[7].new_title}}</p>
+                      </div>
+                    </div>
+                    <div class="i">
+                      <div *ngIf = "this.allnew[8] != undefined">
+                        <img src={{this.allnew[8].new_image}}  
+                        [routerLink]="['/new/'+this.user_username,this.allnew[8].new_ID]"
+                         style="width: 550px;height: 300px;"> 
+                         <p>{{this.allnew[8].new_title}}</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="seven">
+                <app-footer></app-footer>
+            </div>
+          </div>
+        
+    </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+       body{
+            background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        } 
+
+     
+    </style>
+</head>
+    <body>
+        
+        <div class="wrapper">
+            <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+                <app-header2></app-header2>
+            </div>
+             <div  class="three" >
+                    <table id="customers" >
+                        <tbody>
+                            <tr>
+                                <th><p>รุ่น</p></th>
+                            </tr>
+                            <label for="fr">รุ่น:</label> &nbsp;
+                            <input type="text" size = "2" pInputText [(ngModel)]="text2"> &nbsp;
+                        
+                            <button pButton type="button" label="ค้นหา" class="ui-button-rounded ui-button-success" (click)='ser()'></button>
+                                &nbsp; 
+                            <button pButton type="button" label="all" class="ui-button-rounded ui-button-Primary" (click)='cl()'></button>
+                            </tbody>
+                        </table>
+                   
+
+                </div>
+
+           
+            <div class="two" align="center" >
+              <table id="customers">           
+                    <thead>
+                    <tr> 
+                        <th>รหัสนิสิต</th>
+                        <th>ชื่อ</th>
+                        <th>email</th>
+                        <th>เบอร์โทรศัพท์</th>
+                        <th>facebook</th>
+                        <th>role</th>
+                    </tr>
+                    </thead>
+               <tbody>
+
+                           
+                        <tr li *ngFor="let user of rUser">
+                       
+                        <td>{{user.user_username}}</td>
+                        <td> {{user.user_name}}</td>
+                        <td>{{user.user_email}}</td>
+                        <td>{{user.user_phone}}</td>
+                        <td>{{user.user_facebook}}</td>   
+                        <td>{{user.user_role}}</td>    
+                        </tr>
+               </tbody>     
+                </table>
+          </div>
+           </div>
+        
+    </body>
+</html>
