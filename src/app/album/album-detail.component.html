@@ -67,24 +67,27 @@
                 <div class ="t"  >
                     <div *ngIf="show" >
                          &nbsp;
-                    เลือกรูปภาพ
-                    <input type ="file" name="" id="" (change)="getFile($event.target.files)"  > <br> <br>
-                    <button *ngIf ="showup"
-                    type="button" class="btn btn-success" (click)="addPhoto()"   >เพิ่มรูปภาพ</button> <br>
+                   <br>
                     <br><br>
                     </div>
                </div>
                    
                     <div  class="two">
-                      <h1>{{results[0].album_name}}</h1>
+                        <div class="hearder">
+                             <h3>{{results[0].album_name}}</h3>
+                        </div>
+                     
                       <div  *ngIf="show" >
-                           แก้ไขชื่ออั้ลบั้ม : &nbsp;
+                          <label style="background-color: rgb(243, 225, 60);color: dimgrey;">แก้ไขชื่ออั้ลบั้ม</label>  &nbsp;
                          <input type="text" style="text-align: center;" 
                              value="{{results[0].album_name}}" [(ngModel)]= "albumName" > &nbsp;
                             <button pButton pRipple type="button" icon="pi pi-check"
-                            class="p-button-rounded" (click)="save()" ></button>
+                            class="p-button-rounded" (click)="save()" ></button> <br>
+                         <label style="background-color: rgb(243, 225, 60);color: dimgrey;">เลือกรูปภาพ</label>  &nbsp;
+                    <input type ="file" name="" id="" (change)="getFile($event.target.files)"  > <br>
+                    <button *ngIf ="showup"
+                    type="button" class="btn btn-success" (click)="addPhoto()"   >เพิ่มรูปภาพ</button>
                       </div>
-                     
                         
                     <div *ngFor="let pho of photo">
                         <br>

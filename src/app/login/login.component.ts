@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
             
          
         }else{
-          console.log('no data');
+         alert('username หรือ รหัสผ่านไม่ถูกต้อง');
         }
     }, error =>{
       console.log('Fail');

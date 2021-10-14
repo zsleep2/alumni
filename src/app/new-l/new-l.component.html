@@ -14,20 +14,31 @@
                 <input type="radio" name="r" id="r3">
                 <input type="radio" name="r" id="r4">
                 <input type="radio" name="r" id="r5">
-                <div class="slide s1">
-                    <img src="../../assets/images/ma.jpg" alt="">
+                
+                <div class="slide s1" *ngIf = "this.allnew[0] != undefined">
+                    <img src={{this.allnew[0].new_image}} 
+                    [routerLink]="['/new/'+this.user_username,this.allnew[0].new_ID]"
+                    >
                 </div>
-                <div class="slide">
-                    <img src="../../assets/images/12.jpg" alt="">
+                <div class="slide" *ngIf = "this.allnew[1] != undefined">
+                    <img src={{this.allnew[1].new_image}} 
+                    [routerLink]="['/new/'+this.user_username,this.allnew[1].new_ID]"
+                    >
                 </div>
-                <div class="slide">
-                    <img src="../../assets/images/13.jpg" alt="">
+                <div class="slide" *ngIf = "this.allnew[2] != undefined">
+                    <img src={{this.allnew[2].new_image}} 
+                    [routerLink]="['/new/'+this.user_username,this.allnew[2].new_ID]"
+                    >
                 </div>
-                <div class="slide">
-                    <img src="../../assets/images/14.jpg" alt="">
+                <div class="slide" *ngIf = "this.allnew[3] != undefined">
+                    <img src={{this.allnew[3].new_image}} 
+                    [routerLink]="['/new/'+this.user_username,this.allnew[3].new_ID]"
+                    >
                 </div>
-                <div class="slide">
-                    <img src="../../assets/images/15.jpg" alt="">
+                <div class="slide" *ngIf = "this.allnew[4] != undefined">
+                    <img src={{this.allnew[4].new_image}} 
+                    [routerLink]="['/new/'+this.user_username,this.allnew[4].new_ID]"
+                    >
                 </div>
             </div>
 

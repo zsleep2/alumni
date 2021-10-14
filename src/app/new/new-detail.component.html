@@ -40,18 +40,18 @@
 
             </div>
             <div *ngFor="let result of results" class="two"  style="text-align: center;" >
-                <h1 style="text-align: center;">
+                <h3 style="text-align: center;">
                   {{ result.new_title }}
-                </h1>
+                </h3>
 
                 <div  *ngIf="show" >
-                   <h3> แก้ไขหัวข้อข่าว   </h3> &nbsp;
+                   <label style="background-color: rgb(243, 225, 60);">แก้ไขหัวข้อข่าว</label>   &nbsp;
                   <input type="text" style="text-align: center;" value="{{this.results[0].new_title}}" [(ngModel)]= "nTitle"  > 
                </div>
                 <br>    
                     <div style="text-align: center;">
                         <div *ngIf="show" style="text-align: center;">
-                           <h3> แก้ไขรูปภาพ </h3>  &nbsp;
+                            <label  style="background-color: rgb(243, 225, 60);">แก้ไขรูปภาพ</label> &nbsp;
                             <input type ="file" name="" id="" (change)="getFile($event.target.files)"  > 
                         </div>
                             <br>
@@ -61,12 +61,14 @@
                     <br><br>
                
                 <label >{{result.new_description}}</label> <br>
-               
-                   <h3 *ngIf="show" > แก้ไขเนื้อหาข่าว </h3>  &nbsp;
+               <div *ngIf="show" >
+                     <label style="background-color: rgb(243, 225, 60);">แก้ไขเนื้อหาข่าว</label>  &nbsp;
                   <textarea type="text" style="text-align: center;" value="{{this.results[0].new_description}}"  
-                  cols="30" rows="5" *ngIf="show" [(ngModel)]= "nDes" > {{result.new_description}}
+                  cols="30" rows="5" [(ngModel)]= "nDes" > {{result.new_description}}
                 </textarea>
                
+               </div>
+                 
               
                   <label >วันที่โพสต์ :
                   {{result.new_date.substring(8, 10)}}/
