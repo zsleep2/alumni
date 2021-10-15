@@ -26,6 +26,7 @@ export class NewListComponent implements OnInit {
   user_username;
   items: MenuItem[];
   public myValue;
+  
   public iPage:number[] = [];
   public iPageStart:number = 1;
   public prevPage:number;

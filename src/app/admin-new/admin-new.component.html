@@ -26,7 +26,8 @@
                             <a routerLink="/admin_album/{{this.user_username}}" style="color: blanchedalmond;">อัลบั้มรูปภาพ </a>
                             <a routerLink="/admin_new/{{this.user_username}}" style="color: blanchedalmond;">ข่าวประชาสัมพันธ์ </a> 
                             <a routerLink="/admin_web/{{this.user_username}}" style="color: blanchedalmond;">เว็บบอร์ด </a> 
-                                  
+                            <a routerLink="/admin_best/{{this.user_username}}" style="color: blanchedalmond;">ศิษย์เก่าดีเด่น </a> 
+                            <a routerLink="/admin_about/{{this.user_username}}" style="color: blanchedalmond;">เกี่ยวกับเว็บไซต์ </a>        
                 </p>
                 <table id="customers" >
                         
@@ -85,16 +86,16 @@
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                       <li class="page-item">
-                          <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: 1}"> First</a>
+                          <a class="page-link" [routerLink]="['/admin_new/'+this.user_username]"  [queryParams]="{page: 1}"> First</a>
                       </li>
                       <li class="page-item" [class.disabled]="activePage==1">
-                          <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: prevPage}"> Previous</a> 
+                          <a class="page-link" [routerLink]="['/admin_new/'+this.user_username]"  [queryParams]="{page: prevPage}"> Previous</a> 
                       </li>
                       <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i"> 
-                          <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: i}"> {{ i }} </a> 
+                          <a class="page-link" [routerLink]="['/admin_new/'+this.user_username]"  [queryParams]="{page: i}"> {{ i }} </a> 
                       </li>
                       <li class="page-item" [class.disabled]="activePage==totalPage"> 
-                          <a class="page-link" [routerLink]="['/new/'+this.user_username]"  
+                          <a class="page-link" [routerLink]="['/admin_new/'+this.user_username]"  
                                   [queryParams]="{page: nextPage}"> Next</a>
                       </li>
                       <li class="page-item">
@@ -102,7 +103,7 @@
                                 style="width:80px;" (input)="changePage(pageInput.value)" value="{{ activePage }}" />
                       </li>
                       <li class="page-item"> 
-                          <a class="page-link" [routerLink]="['/new/'+this.user_username]"  [queryParams]="{page: totalPage}"> Last</a> 
+                          <a class="page-link" [routerLink]="['/admin_new/'+this.user_username]"  [queryParams]="{page: totalPage}"> Last</a> 
                       </li>
                     </ul>
                   </nav>

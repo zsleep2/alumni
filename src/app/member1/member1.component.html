@@ -24,14 +24,14 @@
                     <table id="customers" >
                         <tbody>
                             <tr>
-                                <th><p>รุ่น</p></th>
+                                <th  style="text-align: center;">รุ่น</th>
                             </tr>
-                            <label for="fr">รุ่น:</label> &nbsp;
-                            <input type="text" size = "2" pInputText [(ngModel)]="text2"> &nbsp;
-                        
-                            <button pButton type="button" label="ค้นหา" class="ui-button-rounded ui-button-success" (click)='ser()'></button>
-                                &nbsp; 
-                            <button pButton type="button" label="all" class="ui-button-rounded ui-button-Primary" (click)='cl()'></button>
+                            &nbsp;&nbsp;<label for="fr">รุ่น:</label> &nbsp;
+                            <select id="year" [(ngModel)]="year" (click)="ser()"></select> &nbsp; &nbsp;
+                            <button pButton type="button" label="clear" class="ui-button-rounded ui-button-Primary" 
+                            (click)='cl()'></button> <br> <br>
+                            &nbsp; <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"
+                            placeholder="ค้นหาสมาขิก">
                             </tbody>
                         </table>
                    
@@ -65,6 +65,7 @@
                         </tr>
                </tbody>     
                 </table>
+                
           </div>
            </div>
         

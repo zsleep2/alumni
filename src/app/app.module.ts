@@ -27,14 +27,14 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FullCalendarModule} from 'primeng/fullcalendar';
-
 import { IgxDatePickerModule } from 'igniteui-angular';
-
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { WebboardModule} from './webboard/webboard.module';
 import { AlbumModule} from './album/album.module';
 import { FreeapiService } from './freeapi.service';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -89,6 +89,8 @@ import { AdminNewComponent } from './admin-new/admin-new.component';
 import { AdminWebComponent } from './admin-web/admin-web.component';
 import { AdminAlbumDetailComponent } from './admin_album/admin-album-detail.component';
 import { SettComponent } from './sett/sett.component';
+import { AdminBestComponent } from './admin-best/admin-best.component';
+import { AdminAboutComponent } from './admin-about/admin-about.component';
 
 
 const appRoust: Routes = [
@@ -112,6 +114,8 @@ const appRoust: Routes = [
   {path:'admin_album/:user_username',component: AdminAlbumComponent},
   {path:'admin_new/:user_username',component: AdminNewComponent},
   {path:'admin_web/:user_username',component: AdminWebComponent},
+  {path:'admin_best/:user_username',component: AdminBestComponent},
+  {path:'admin_about/:user_username',component: AdminAboutComponent},
   {path:'muneleft2',component:Menuleft2Component},
   {path:'album/:user_username',component:AlbumComponent},
   {path:'web',component:WebComponent},
@@ -178,6 +182,8 @@ const appRoust: Routes = [
     AdminWebComponent,
     AdminAlbumDetailComponent,
     SettComponent,
+    AdminBestComponent,
+    AdminAboutComponent,
     
   ],
   imports: [
@@ -217,7 +223,10 @@ const appRoust: Routes = [
     NgbAlertModule, AppRoutingModule,
     WebboardModule,
     AlbumModule,
-    NewModule
+    NewModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule
   ],
   exports: [
     RouterModule

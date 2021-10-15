@@ -26,10 +26,18 @@
                             <a routerLink="/admin_album/{{this.user_username}}" style="color: blanchedalmond;">อัลบั้มรูปภาพ </a>
                             <a routerLink="/admin_new/{{this.user_username}}" style="color: blanchedalmond;">ข่าวประชาสัมพันธ์ </a> 
                             <a routerLink="/admin_web/{{this.user_username}}" style="color: blanchedalmond;">เว็บบอร์ด </a> 
+                            <a routerLink="/admin_best/{{this.user_username}}" style="color: blanchedalmond;">ศิษย์เก่าดีเด่น </a> 
+                            <a routerLink="/admin_about/{{this.user_username}}" style="color: blanchedalmond;">เกี่ยวกับเว็บไซต์ </a>    
                                   
                 </p>
+                <label for="">ค้นหาปีที่จบ</label> &nbsp;
+                <select id="year" [(ngModel)]="year" (click)="searchGen()"></select> &nbsp; &nbsp;
+                <button pButton type="button"  style="height: 25px; width: 100px;" (click)="showGen()"
+                class="pui-button-rounded ui-button-success" > เว็บบอร์ดทั่วไป </button> &nbsp;
+                <button pButton type="button"  style="height: 25px; width: 100px;" (click)="clearWeb()"
+                class="pui-button-rounded ui-button-success" > เว็บบอร์ดทั้งหมด </button> &nbsp;
 
-        <table id="customers" >
+                <table id="customers" >
                     <tbody>
                         <tr >
                             <th style="width: 20%;text-align: center;">เจ้าของโพส</th>
@@ -48,7 +56,10 @@
                               {{ result.webboard_title }}
                               </a></td>
                             <td style="text-align: center;"> 
-                               {{result.webboard_gen}}
+                               <label *ngIf="result.webboard_gen != 00" >
+                                   {{result.webboard_gen}}
+                               </label>
+                               <label *ngIf="result.webboard_gen == 00">เว็บบอร์ดทั่วไป</label>
                             </td>
                             <td style="text-align: center;">
                                 <button (click)="webDelete(result.webboard_ID)">

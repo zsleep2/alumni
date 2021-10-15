@@ -20,7 +20,7 @@ interface Articles{
   styleUrls: ['./member1.component.css']
 })
 export class Member1Component implements OnInit {
- 
+ sName;
   text: string;
   text2: string;
   myValue;
@@ -31,6 +31,8 @@ export class Member1Component implements OnInit {
   spit;
   rUser;
   mArray:string[] = [];
+
+  year;
  
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
@@ -41,7 +43,15 @@ export class Member1Component implements OnInit {
      
     }
   ngOnInit(): void {
-    
+    this.myValue = this._auth.myData;
+    var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+    options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
+
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
               data => {
                 console.log(data);
@@ -60,7 +70,7 @@ ser(){
       
       this.rUser = data.filter( ruser => {
           
-        return ruser.user_username.substring(0,2) == this.text2;
+        return ruser.user_username.substring(0,2) == this.year;
 
       });;
     }, error => {
@@ -69,12 +79,22 @@ ser(){
     }); 
 }
 cl(){
-
+  this.year = '';
        this.http.get('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
         this.rUser = data;
        }, error => {
       }); 
+  }
+  SearchName(){
+    this.year = '';
+    if(this.sName == ""){
+        this.ngOnInit();
+    }else{
+      this.rUser = this.rUser.filter(res =>{
+        return res.user_name.toLocaleLowerCase().match(this.sName.toLocaleLowerCase());
+      })
+    }
   }
 }
 

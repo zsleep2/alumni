@@ -6,19 +6,36 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
+interface Articles{
+  user_username:string;
+  user_password:string;
+  user_user_name:string;
+  user_phone:string;
+  user_email:string;
+  user_facebook:string;
+  user_year:string;
+  user_workplace:string;
+  user_addwork:string;
+  user_job:string;
+  user_workphone:string;
+  user_role:number;
+  user_status:number;
+}
+
+
 @Component({
   selector: 'app-admin-user',
   templateUrl: './admin-user.component.html',
   styleUrls: ['./admin-user.component.css']
 })
 export class AdminUserComponent implements OnInit {
+  myValue;
   data: [][];
   data1: [][];
   user_username;
   rUser;
   userID;
   deuserID;
-
   username;
   password;
   name;
@@ -32,6 +49,22 @@ export class AdminUserComponent implements OnInit {
   workphone;
   role;
   status;
+  nrSelect:number;
+  results
+  sName:any;
+
+  public iPage:number[] = [];
+  public iPageStart:number = 1;
+  public prevPage:number;
+  public nextPage:number;
+  public activePage:number;
+  public totalItem:number = 100; // สมมติจำนวนรายการทั้งหมดเริ่มต้น หรือเป็น 0 ก็ได้
+  public perPage:number = 10; // จำนวนรายการที่แสดงต่อหน้า
+  public totalPage:number;
+  public maxShowPage:number;
+  public useShowPage:number = 5; // จำนวนปุ่มที่แสดง ใช้แค่ 5 ปุ่มตัวเลข
+  public pointStart:number = 0; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
+  public pointEnd:number; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
 
   public show:boolean = false;
   constructor(private http: HttpClient ,
@@ -41,13 +74,84 @@ export class AdminUserComponent implements OnInit {
       this.user_username = router.snapshot.params['user_username'];
     }
 
+    changePage(page:number){
+      this.activePage = page;
+      this.router1.navigate(['/admin_user/'+this.myValue[0].user_username], {queryParams:{page:page}});
+    }
+    pagination(){
+      if(this.activePage > this.useShowPage){
+        if(this.activePage+2 <= this.totalPage){
+          this.iPageStart = this.activePage-2;
+          this.maxShowPage = this.activePage+2;
+        }else{
+          if(this.activePage <= this.totalPage){
+            this.iPageStart = (this.totalPage+1)-this.useShowPage;
+            this.maxShowPage = (this.iPageStart-1)+this.useShowPage;
+          }
+        }
+        this.iPage = [];
+        for(let i=this.iPageStart;i<=this.maxShowPage;i++){
+          this.iPage.push(i);
+        }            
+      }else{
+        this.iPageStart = 1;
+        this.iPage = [];
+        for(let i=this.iPageStart;i<=this.useShowPage;i++){
+          this.iPage.push(i);
+        }              
+      }   
+       
+    }
+  
+
   ngOnInit(): void {
-    this.http.get('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+    this.myValue = this._auth.myData;
+    var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+    options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
+
+
+    this.activePage = 1;
+    this.nextPage = 2;
+    this.pointEnd = this.perPage*this.activePage;
+    this.totalPage = Math.ceil(this.totalItem/this.perPage);
+    if(this.totalPage>this.useShowPage){
+      this.useShowPage = 5;
+    }else{
+      this.useShowPage = this.totalPage;
+    }
+  
+    for(let i=this.iPageStart;i<=this.useShowPage;i++){
+      this.iPage.push(i);
+    }
+  
+    this.router
+    .queryParams
+    .subscribe((data: { page: any }) => {
+      if(data!=null && data.page!=null){
+        this.activePage = +data.page;   
+        this.prevPage = this.activePage-1;
+        this.nextPage = this.activePage+1;   
+        this.pointStart = (this.activePage-1)*this.perPage;
+        this.pointEnd = this.perPage*this.activePage;
+        this.pagination();
+      }   
+    });  
+    
+    this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
-        console.log(data);
         this.rUser = data;
+        this.results = data.filter( user => {
+          
+          return user.user_status == 0;
+        });
        }, error => {
       }); 
+     
   }
   
   onFileChange(evt: any) {
@@ -113,6 +217,7 @@ export class AdminUserComponent implements OnInit {
       toggle() {
        
         this.show = !this.show;
+        this.nrSelect = 0;
       }
 
       checkUser(value : string){
@@ -145,7 +250,7 @@ export class AdminUserComponent implements OnInit {
                 user_workname : this.workplace || '',
                 user_workaddress : this.addwork || '',
                 user_workphone : this.workphone || '',
-                user_status : 1
+                user_status : 0
                }
                console.log(json,this.username);
 
@@ -187,6 +292,73 @@ export class AdminUserComponent implements OnInit {
          });
      }
       }
+      
+      checkallUser(){
+      
+          for(let i in this.results){
+            let json = {user_username : this.results[i].user_username || '', 
+            user_password : this.results[i].user_password || '', 
+            user_name : this.results[i].user_name || '',
+            user_phone :  this.results[i].user_phone || '',
+            user_email : this.results[i].user_email || '',
+            user_facebook : this.results[i].user_facebook || '',
+            user_year : this.results[i].user_year || '',
+            user_job :this.results[i].user_job || '',
+            user_workname : this.results[i].user_workname|| '',
+            user_workaddress : this.results[i].user_workaddress || '',
+            user_workphone : this.results[i].user_workphone || '',
+            user_status : 1
+          }
+            console.log(json);
+            if(window.confirm('ต้องการเพิ่มสมาชิก ?')){
+            this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.results[i].user_username,
+            JSON.stringify(json)).toPromise().then(data => {
+                if(data == 1){
+                  this.nrSelect = 0;
+                  this.show = true;
+                  this.ngOnInit();
+                  console.log('ok');
+                }else{
+                  console.log(data);
+                }   
+                },
+                (error) => {
+                  console.log(error);
+                });    
+             } 
+        }
+      }
+    
+      searchYear(){
+          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+            data => {
+             
+              this.rUser = data.filter( user => {
+                return user.user_username.substring(0,2) == this.year;
+              });
+             }, error => {
+            }); 
+           
+      }
+
+      clearUser(){
+        this.year = '';
+        this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+          data => {  
+            this.rUser = data;
+           }, error => {
+          }); 
+      }
+      SearchName(){
+        console.log(this.rUser);
+        if(this.sName == ""){
+           /*  this.ngOnInit(); */
+        }else{
+          this.rUser = this.rUser.filter(res =>{
+            return res.user_name.toLocaleLowerCase().match(this.sName.toLocaleLowerCase());
+          })
+        }
+    }
 
 openForm() {
   document.getElementById("myForm").style.display = "block";

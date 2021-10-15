@@ -4,13 +4,22 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
+interface Articles{
+  'user_name':string,
+  'webboard_ID':number,
+  'webboard_date':string;
+  'webboard_title':string,
+  'webbaord_description':string,
+  'webboard_gen':string;
+}
+
 @Component({
   selector: 'app-admin-web',
   templateUrl: './admin-web.component.html',
   styleUrls: ['./admin-web.component.css']
 })
 export class AdminWebComponent implements OnInit {
-
+  public urlSource:string = "http://qpos.msuproject.net/AllNewService/webboard/webboardall";
   user_username;
   webboardId:number;
   public myValue;
@@ -28,6 +37,8 @@ export class AdminWebComponent implements OnInit {
   public pointEnd:number; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
   public highlightId:number; // สำหรับเก็บ id ที่เพิ่งเข้าดู
+  year;
+  public webGen:any;
 
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
@@ -37,7 +48,7 @@ export class AdminWebComponent implements OnInit {
     }
     changePage(page:number){
       this.activePage = page;
-      this.router1.navigate(['/album/'+this.user_username], {queryParams:{page:page}});
+      this.router1.navigate(['/admin_web/'+this.user_username], {queryParams:{page:page}});
     }
     pagination(){
       if(this.activePage > this.useShowPage){
@@ -68,6 +79,13 @@ export class AdminWebComponent implements OnInit {
   ngOnInit(): void {
     
     this.myValue = this._auth.myData;
+    var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+    options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
 
     this.activePage = 1;
     this.nextPage = 2;
@@ -97,7 +115,7 @@ export class AdminWebComponent implements OnInit {
       }
     }); 
 
-    this.http.get('http://qpos.msuproject.net/AllNewService/post/webboardall').subscribe(
+    this.http.get(this.urlSource).subscribe(
       data => {
         let json = JSON.stringify(data)
            // กรณี resuponse success
@@ -127,7 +145,34 @@ export class AdminWebComponent implements OnInit {
     }, error =>{
       alert('fail');
     });
-
   }
+  searchGen(){
+    this.http.get<Articles[]>(this.urlSource).subscribe(
+      data => {
+       
+        this.results = data.filter( web => {
+          return web.webboard_gen == this.year;
+        });
+       }, error => {
+      }); 
+    }
+    showGen(){
+      this.http.get<Articles[]>(this.urlSource).subscribe(
+        data => {
+         
+          this.results = data.filter( web => {
+            return web.webboard_gen == "00";
+          });
+         }, error => {
+        }); 
+      }
+    clearWeb(){
+      this.year = '';
+      this.http.get<Articles[]>(this.urlSource).subscribe(
+        data => {  
+          this.results = data;
+         }, error => {
+        }); 
+    }
 
 }
