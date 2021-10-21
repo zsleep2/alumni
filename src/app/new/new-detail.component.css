@@ -60,10 +60,12 @@
   }
   
   h1{
-    font-size: 3 rem;
+    font-size: 1.5rem;
     line-height: 1.4;
-    color:  rgba(27,31,34,0.85);;
-  }
+    text-align: center;
+    color: white;
+    margin-left: 30px;
+}
   
   h2{
     font-size: 1.5rem;
@@ -82,13 +84,11 @@
   
   p{
     font-size: 1 rem;
-  line-height: 1.4;
-  text-align: center;
-  color: white;
-  margin-left: 30px;
-  margin-top: -20px;
-  }
-  
-  
+    line-height: 1.4;
+    text-align: center;
+    color: white;
+    margin-left: 30px;
+    margin-top: -50px;
+}
   
   

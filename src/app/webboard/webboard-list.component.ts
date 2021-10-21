@@ -38,7 +38,7 @@ export class WebboardListComponent implements OnInit {
   public nextPage:number;
   public activePage:number;
   public totalItem:number = 100; // สมมติจำนวนรายการทั้งหมดเริ่มต้น หรือเป็น 0 ก็ได้
-  public perPage:number = 10; // จำนวนรายการที่แสดงต่อหน้า
+  public perPage:number = 15; // จำนวนรายการที่แสดงต่อหน้า
   public totalPage:number;
   public maxShowPage:number;
   public useShowPage:number = 5; // จำนวนปุ่มที่แสดง ใช้แค่ 5 ปุ่มตัวเลข
@@ -47,6 +47,9 @@ export class WebboardListComponent implements OnInit {
   webgen=0;
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
   public highlightId:number; // สำหรับเก็บ id ที่เพิ่งเข้าดู
+  public myGen;
+  public year;
+  public show:boolean = false;
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
@@ -94,7 +97,14 @@ export class WebboardListComponent implements OnInit {
   ngOnInit(){
     this.myValue = this._auth.myData;
     this.myrole = this.myValue[0].user_role;
-    console.log(this.myrole);
+    this.myGen = "0";
+    var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+    options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
   
       this.items = [
         {
@@ -164,7 +174,7 @@ export class WebboardListComponent implements OnInit {
 
          }else{
             this.results = data.filter( result => { 
-            return result.webboard_gen == "00";
+            return result.webboard_gen == "0";
 
         });;
          }
@@ -190,7 +200,7 @@ export class WebboardListComponent implements OnInit {
   }
 
   web(){
-     // ส่วนของการดึงข้อมูลด้วย HttpClient get() method
+    this.myGen = "0";
      this.http.get<Articles[]>(this.urlSource)
      .subscribe(
        data => {
@@ -201,7 +211,7 @@ export class WebboardListComponent implements OnInit {
          this.totalItem = json.length; 
          this.results = data.filter( result => {
           
-          return result.webboard_gen == "00";
+          return result.webboard_gen == "0";
 
         });;
        },
@@ -224,7 +234,7 @@ export class WebboardListComponent implements OnInit {
     }    
   }
   web1(){
-    
+    this.myGen = this.user_username2;
      // ส่วนของการดึงข้อมูลด้วย HttpClient get() method
      this.http.get<Articles[]>(this.urlSource)
      .subscribe(
@@ -266,6 +276,31 @@ export class WebboardListComponent implements OnInit {
     }    
     
   }
+
+  allWeb(){
+    
+    this.http.get(this.urlSource).subscribe(
+    data => {
+      let json = JSON.stringify(data)
+         this.totalItem = json.length; 
+         this.results = data;
+        }, error => {
+    });
+
+  }
+
+  searchYear(){
+    this.myGen = this.year;
+    this.http.get<Articles[]>(this.urlSource).subscribe(
+      data => {
+       
+        this.results = data.filter( res => {
+          return res.webboard_gen == this.year;
+        });
+       }, error => {
+      }); 
+     
+}
     
       
 }

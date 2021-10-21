@@ -15,38 +15,51 @@
     <body>
         
         <div class="wrapper">
-            <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+            <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
                 <app-header2></app-header2>
             </div>
             <div class="four"></div>   
             <div class="two">
                   <p> รหัสนิสิต {{this.myValue[0].user_username}}</p>
                   <div class="a">
-                    <label for="fname">รหัสผ่าน: </label><br>
-                    <label for="">เบอร์โทรศัพท์: </label><br>
-                    <label for=""> email : </label><br>
-                    <label for=""> facebook : </label><br>
-                    <label for=""> ปีที่จบ : </label><br>
-                    <label for=""> งานที่ทำ : </label><br>
-                    <label for=""> ชื่อบริษัท : </label><br>
-                    <label for=""> สถานที่ทำงาน : </label><br>
-                    <label for=""> เบอร์โทรศัพท์ที่ทำงาน : </label><br>
-                   
-                  </div>
+                    <label >รหัสผ่าน: </label>
+                    <label>{{this.myValue[0].user_password}}</label><br>
+                    <label for="">เบอร์โทรศัพท์: </label>
+                    <label>{{this.myValue[0].user_phone}}</label><br>
+                    <label for=""> email : </label>
+                    <label>{{this.myValue[0].user_email}}</label><br>
+                    <label for=""> facebook : </label>
+                    <label>{{this.myValue[0].user_facebook}}</label><br>
+                    <div *ngIf="myrole == 2">
+                    <label for=""> ปีที่จบ : </label>
+                    <label>{{this.myValue[0].user_year}}</label><br>
+                    <label for="" *ngIf="this.myrole == 2"> งานที่ทำ : </label>
+                    <label>{{this.myValue[0].user_job}}</label><br>
+                    <label for="" *ngIf="this.myrole == 2"> ชื่อบริษัท : </label>
+                    <label>{{this.myValue[0].user_workname}}</label><br>
+                    <label for=""  *ngIf="this.myrole == 2"> สถานที่ทำงาน : </label>
+                    <label>{{this.myValue[0].user_workaddress}}</label><br>
+                    <label for=""*ngIf="this.myrole == 2"> เบอร์โทรศัพท์ที่ทำงาน : </label>
+                    <label>{{this.myValue[0].user_workphone}}</label>
+                    </div> 
             </div>
-            <div class="three" >
+            </div>
+            <div class="three">
                  <p>ข้อมูลใหม่</p> <br>
-            <input type="password" value="{{this.myValue[0].user_password}}" size = "50" [(ngModel)]= "password" ><br>
+             <input type="password" value="{{this.myValue[0].user_password}}" size = "50" [(ngModel)]= "password" ><br>
                <input type="text"  value="{{this.myValue[0].user_phone}}"  size="50" [(ngModel)] = "phone" ><br>
                <input type="text"  value="{{this.myValue[0].user_email}}" size="50" [(ngModel)] = "email"  ><br>
                <input type="text"  value="{{this.myValue[0].user_facebook}}" size="50" [(ngModel)] = "facebook" ><br>
-               <select id="year" type = "text" value="{{this.myValue[0].user_year}}"
-               [(ngModel)]="year" style="text-align:justify;width: 100px;height: 35px;"></select> <br>
+               <div >
+                <select id="year" type = "text" value="{{this.myValue[0].user_year}}"
+               [(ngModel)]="year" style="text-align:justify;width: 100px;height: 35px;" ></select> <br>
                <input type="text"  value="{{this.myValue[0].user_job}}" size="50" [(ngModel)] = "job" ><br>
                <input type="text"  value="{{this.myValue[0].user_workname}}" size="50" [(ngModel)] = "workname" ><br>
                <input type="text"  value="{{this.myValue[0].user_workaddress}}" size="50" [(ngModel)] = "workaddress" ><br>
                <input type="text"  value="{{this.myValue[0].user_workphone}}" size="50" [(ngModel)] = "workphone" ><br>
 
+               </div>
+               
                                  <p>. .</p>
         <button pButton type="button" label="แก้ไขข้อมูลส่วนตัว" class="ui-button-rounded ui-button-success" (click)='eDit()'></button>
 

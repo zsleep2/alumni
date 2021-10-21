@@ -93,7 +93,7 @@ import { AdminBestComponent } from './admin-best/admin-best.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 
 
-const appRoust: Routes = [
+/* const appRoust: Routes = [
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
@@ -134,7 +134,7 @@ const appRoust: Routes = [
   {path: '**', component: PagenofoundComponent }
   
   
-];
+]; */
 
 @NgModule({
   declarations: [
@@ -199,7 +199,7 @@ const appRoust: Routes = [
     MegaMenuModule,
     MenubarModule,
     TabMenuModule,
-    RouterModule.forRoot(appRoust),
+   /*  RouterModule.forRoot(appRoust), */
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
@@ -229,7 +229,7 @@ const appRoust: Routes = [
     NgxPaginationModule
   ],
   exports: [
-    RouterModule
+   // RouterModule
   ],
   
   providers: [AuthService,FreeapiService],

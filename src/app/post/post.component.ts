@@ -40,8 +40,6 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
       this.myValue = this._auth.myData;
-     /*  console.log(this.myValue);
-      this.myUser = this._auth.myUser; */
 
       this.myrole = this.myValue[0].user_role;
   }

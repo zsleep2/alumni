@@ -56,6 +56,7 @@ export class WebboardDetailComponent implements OnInit {
   public myid;
   items: MenuItem[];
 
+
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 

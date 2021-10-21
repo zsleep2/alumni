@@ -68,8 +68,12 @@
                     <h3>เพิ่มอัลบั้ม</h3> <br>
                     ชื่ออัลบั้ม <br>
                     <input id="text" type="text" size = "50" pInputText  [(ngModel)]="nameAlbum"> <br> <br>
+                    <select id="country"  [(ngModel)]='nrSelect' >
+                        <option value="00">อัลบั้มทั่วไป</option>
+                        <option *ngIf = "this.myrole != 1" value={{user_username2}}>อัลบั้มรุ่น</option>  
+                    </select> <br> <br>
                     <button type="button" class="btn btn-success" (click)="addAlbum()" >เพิ่มอัลบั้ม</button> <br>
-                    <br><br>
+                    <br>
                    <!--  <h3>เพิ่มรูปภาพ
                     </h3>
                     <div style="margin: auto;width: 31%;border: 1px solid rgb(13, 0, 128);padding: 10px;">

@@ -161,7 +161,7 @@ export class AdminWebComponent implements OnInit {
         data => {
          
           this.results = data.filter( web => {
-            return web.webboard_gen == "00";
+            return web.webboard_gen == "0";
           });
          }, error => {
         }); 

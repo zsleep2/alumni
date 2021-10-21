@@ -30,10 +30,22 @@
     grid-row: 2 / 8;
     background-color: rgba(27,31,34,0.85);
   }
-p{
-  font-size: 2.0rem;
-  line-height: 1.4
+  .hear{
+    grid-column: 2 / 6;
+    grid-row: 2 ;
+    padding: 20px;
+    background-color: rgba(2, 0, 73, 0.85);
+  }
+
+  p{
+    font-size: 1 rem;
+     line-height: 1.4;
+     text-align: center;
+     color: white;
+     margin-left: 30px;
+     margin-top: -50px;
 }
+
 
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -54,7 +66,7 @@ p{
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: rgba(27,31,34,0.85);
+  background-color: rgba(96, 93, 185, 0.85);
   color: white;
 }
 
@@ -65,6 +77,13 @@ p{
   display: block;
   margin-left: 20px;
   margin-top: -100px;
+}
+h1{
+  font-size: 1.5rem;
+  line-height: 1.4;
+  text-align: center;
+  color: white;
+  margin-left: 30px;
 }
 
 h2{
@@ -82,4 +101,9 @@ font-size: 0.2 rem;
   color: white;
   margin-left: 30px;
   margin-top: -50px;
+}
+h4{
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: white;
 }

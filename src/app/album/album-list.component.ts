@@ -13,6 +13,9 @@ interface lstAlbum{
   'album_ID':number;
   'album_name':string;
   'album_date':string;
+  'album_gen' : number;
+  'user_name' : string;
+  'user_username' : string;
 }
 
 interface lstPhoto{
@@ -53,6 +56,10 @@ export class AlbumListComponent implements OnInit {
   allphoto;
   aPhoto;
   bPhoto;
+  mygen;
+  myrole;
+  public year;
+  public show:boolean = false;
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
@@ -101,8 +108,17 @@ export class AlbumListComponent implements OnInit {
 
     
     this.myValue = this._auth.myData;
+    this.mygen = "0";
+    this.myrole = this.myValue[0].user_role;
 
-   
+    var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+    options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
+    
       this.items = [
         {
           label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
@@ -163,6 +179,7 @@ export class AlbumListComponent implements OnInit {
 
   this.http.get('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
     data => {
+      console.log(data);
       let json = JSON.stringify(data)
          // กรณี resuponse success
          // เก็บจำนวนรายการทั้งหมด ไปคำนวณหน้าจำนวนหน้า
@@ -222,5 +239,50 @@ export class AlbumListComponent implements OnInit {
       }
     )
   }
+
+  showAlbum(){
+    this.mygen = "0";
+    this.http.get<lstAlbum[]>('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
+    data => {
+      console.log(data);
+      let json = JSON.stringify(data)
+         this.totalItem = json.length; 
+         this.results = data.filter( res => {
+          
+          return res.album_gen == 0;
+
+        });;
+        }, error => {
+    });
+  }
+
+  genAlbum(){
+    this.mygen = this.myValue[0].user_username.substring(0, 2);
+    this.http.get<lstAlbum[]>('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
+    data => {
+      console.log(data);
+      let json = JSON.stringify(data)
+         this.totalItem = json.length; 
+         this.results = data.filter( res => {
+          
+          return res.album_gen == this.mygen;
+
+        });;
+        }, error => {
+    });
+  }
+
+  searchYear(){
+    this.mygen = this.year;
+    this.http.get<lstAlbum[]>('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
+      data => {
+       
+        this.results = data.filter( res => {
+          return res.album_gen == this.year;
+        });
+       }, error => {
+      }); 
+     
+}
 
 }

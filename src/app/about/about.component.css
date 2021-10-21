@@ -16,24 +16,40 @@
   .t{
     grid-column: 1 / 2;
     grid-row: 2 / 8;
-    background-color: white;
-    border: 20px;
+    background-color: #f2f2f2;
+   
   }
   .two { 
-    grid-column: 1 / 8;
+    grid-column: 2 / 6;
     grid-row: 2 / 8;
    background-color: white;
   }
   .four{
     grid-column: 6 / 8;
     grid-row: 2 / 8;
-    background-color:white;
+    background-color: #f2f2f2;
   
+  }
+  .hear{
+    grid-column: 2 / 6;
+    grid-row: 2 ;
+    padding: 20px;
+    background-color: rgba(2, 0, 73, 0.85);
+  }
+  .des{
+    grid-column: 3 / 5;
+    grid-row: 2 / 8 ;
   }
   
   p{
     font-size: 1rem;
-    line-height: 1.4
+    line-height: 1.4;
+  }
+  
+  h3{
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: white;
   }
   
  

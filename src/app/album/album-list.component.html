@@ -41,18 +41,15 @@
     <body>
         
         <div class="wrapper">
-            <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+            <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
                 <div class="ui-g">
                     <div class="ui-g-6" >
-                        <br>
-                        <h2>
+                        <h1>
                             วิทยาการคอมพิวเตอร์
-                        </h2>
-                        <p style="color: white;">
+                        </h1>
+                        <p >
                             Informatics Mahasarakham University
                         </p>
-                            
-                        
                         <img src="../../assets/images/logo-it-x.png" class="img"> 
                         
                     </div>
@@ -65,19 +62,35 @@
                 </div>
             </div>
             <div class="t">
+                <div >
+                    
+                    <label >ค้นหาตามรุ่น</label> &nbsp;
+                    <select  id="year" [(ngModel)]="year" (click)="searchYear()" ></select> 
+                 </div>       
                  <h3 class="Css1">
-                    &nbsp;
-                     
-                    <button type="button" class="btn btn-success" [routerLink]="['/addalbum/'+this.user_username]" >เพิ่มอัลบั้ม</button> 
+                    
+                     <div style="text-align: center;">
+                    <button type="button" class="btn btn-success" 
+                    [routerLink]="['/addalbum/'+this.user_username]" >เพิ่มอัลบั้ม</button> <br>
 
-                     <br><br>
-                   
+                    <button *ngIf="this.myrole != 1" 
+                    type="button" class="btn btn-success"  (click) ="showAlbum()">
+                        อัลบั้มทั่วไป</button> <br>
+                        
+                    <button *ngIf="this.myrole != 1"
+                    type="button" class="btn btn-success" (click) ="genAlbum()"
+                     >อัลบั้มรุ่น</button> <br>
+                     </div> 
                 </h3>
-                
+                      
             </div>
             <div class="two">
-                <h1 class="Css">อัลบั้มรูปภาพ</h1> 
-
+                <div class="hear">
+                    <h3 *ngIf="this.mygen == 0" style="text-align: center;">อัลบั้มรูปภาพ</h3>
+                    <h3 *ngIf="this.mygen != 0" style="text-align: center;">อัลบั้มรูปภาพรุ่น {{this.mygen}}</h3>
+                </div>
+                
+                <br>
                 <!-- <div style="margin: auto;width: 31%;border: 3px solid green;padding: 10px;">
                         <select [(ngModel)]="AlbumSelected" (ngModelChange) = 'onAlbumSelected($event)'>
                             <option *ngFor="let album of lstAlbum" 
@@ -97,8 +110,8 @@
                     <table id="customers" >
                         <tbody>
                             <tr>
-                                <th style="width: 50%;"><p>ขื่ออัลบั้ม</p></th>
-                                <th style="width: 20%;"><p>วันที่โพสต์</p></th>
+                                <th style="width: 50%;">ขื่ออัลบั้ม</th>
+                                <th style="width: 20%;">วันที่โพสต์</th>
                               
                               </tr>
                             <tr [class.table-info]="highlightId == result.album_ID"

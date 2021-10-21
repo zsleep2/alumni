@@ -30,7 +30,11 @@ export class AddalbumComponent implements OnInit {
   AlbumSelected:Number;
   lstPhoto:lstPhoto[];
   img_file;
-
+  myValue;
+  myrole;
+  user_username2;
+  albumGen;
+  nrSelect;
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
@@ -39,10 +43,14 @@ export class AddalbumComponent implements OnInit {
     private _freeApi: FreeapiService) {
 
       this.user_username = router.snapshot.params['user_username'];
+      this.user_username2 = this.user_username.substring(0, 2);
 
      }
 
   ngOnInit(): void {
+
+    this.myValue = this._auth.myData;
+    this.myrole = this.myValue[0].user_role;
 
     this.items = [
       {
@@ -83,14 +91,20 @@ export class AddalbumComponent implements OnInit {
   
 
   addAlbum(){
-
-    let json = {album_name :this.nameAlbum}
+    this.albumGen = this.nrSelect;
+    let json = {album_name :this.nameAlbum,
+    album_gen : this.albumGen,
+    UID : this.myValue[0].UID}
     this.http.post('http://qpos.msuproject.net/AllNewService/album/addalbum',JSON.stringify(json)).toPromise().then(
       data =>{
-          
+          if(data ==1){
+              console.log(data);
+              console.log('ok');
+              this.router1.navigateByUrl('/album/'+this.user_username);
+          }else{
             console.log(data);
-            console.log('ok');
-            this.router1.navigateByUrl('/album/'+this.user_username);
+          }
+            
           
          
       }, error =>{

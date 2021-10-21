@@ -17,25 +17,8 @@ export class HeaderComponent implements OnInit {
         label: ' หน้าแรก ', routerLink:['/home']
       },
       {
-          label: ' นักศึกษาปัจจุบัน ', routerLink:['/login'],
-          items: [
-              [
-                  {
-                      items: [{label: 'รายชื่อนักศึกษา'}, {label: 'รูปภาพ'}]
-                  },
-          ] 
-        ]
-      },
-      {
-          label: 'ศิษย์เก่า', routerLink:['/login'],
-          items: [
-              [
-                  {
-                      items: [{label: 'รายชื่อศิษย์เก่า'}, {label: 'รูปภาพ'}]
-                  },
-                 
-              ]
-          ]
+          label: ' นักศึกษา ', routerLink:['/login'],
+         
       },
       {
         label: ' อัลบั้มรูปภาพ ', routerLink:['/album'],

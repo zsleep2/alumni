@@ -105,6 +105,7 @@ export class AdminUserComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.nrSelect = 0;
     this.myValue = this._auth.myData;
     var years = 70;
     var till = 50;

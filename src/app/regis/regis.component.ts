@@ -61,8 +61,7 @@ export class RegisComponent implements OnInit {
       user_status : '0' || ''
      }
 
-      console.log(this.regisData);
-      this._auth.regisData = this.regisData; 
+     
       
       this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
         
