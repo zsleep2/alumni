@@ -96,7 +96,8 @@ export class WebboardListComponent implements OnInit {
    
   ngOnInit(){
     this.myValue = this._auth.myData;
-    this.myrole = this.myValue[0].user_role;
+    if(this.myValue){ this.myrole = this.myValue[0].user_role;}
+   
     this.myGen = "0";
     var years = 70;
     var till = 50;

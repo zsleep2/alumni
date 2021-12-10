@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 interface Articles{
   user_username:string;
   user_password:string;
+  user_prefix:string;
   user_user_name:string;
   user_phone:string;
   user_email:string;
@@ -65,8 +66,8 @@ export class AdminUserComponent implements OnInit {
   public useShowPage:number = 5; // จำนวนปุ่มที่แสดง ใช้แค่ 5 ปุ่มตัวเลข
   public pointStart:number = 0; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
   public pointEnd:number; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
-
   public show:boolean = false;
+
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
     private router1: Router,
@@ -145,6 +146,7 @@ export class AdminUserComponent implements OnInit {
     
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
+        console.log(data);
         this.rUser = data;
         this.results = data.filter( user => {
           
@@ -251,7 +253,7 @@ export class AdminUserComponent implements OnInit {
                 user_workname : this.workplace || '',
                 user_workaddress : this.addwork || '',
                 user_workphone : this.workphone || '',
-                user_status : 0
+                user_status : 1
                }
                console.log(json,this.username);
 
@@ -259,7 +261,7 @@ export class AdminUserComponent implements OnInit {
                    this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
                   alert('เพิ่มสมาชิกเรียบร้อย');
-                  this.ngOnInit();
+                  window.location.reload()
                 }else{
                 
                   console.log(data);
@@ -275,6 +277,7 @@ export class AdminUserComponent implements OnInit {
 
       deleteUser(value : string){
           this.deuserID = value;
+          console.log(this.deuserID);
           let json = {
           user_username : this.deuserID
         }
@@ -284,7 +287,7 @@ export class AdminUserComponent implements OnInit {
           
          }else{
           alert('ลบสมาชิกเรียบร้อย');
-           this.ngOnInit();
+          window.location.reload()
            console.log(data);
          }   
          },
@@ -317,7 +320,7 @@ export class AdminUserComponent implements OnInit {
                 if(data == 1){
                   this.nrSelect = 0;
                   this.show = true;
-                  this.ngOnInit();
+                  window.location.reload()
                   console.log('ok');
                 }else{
                   console.log(data);
@@ -354,6 +357,7 @@ export class AdminUserComponent implements OnInit {
         console.log(this.rUser);
         if(this.sName == ""){
            /*  this.ngOnInit(); */
+           
         }else{
           this.rUser = this.rUser.filter(res =>{
             return res.user_name.toLocaleLowerCase().match(this.sName.toLocaleLowerCase());

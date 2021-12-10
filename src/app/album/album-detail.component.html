@@ -67,16 +67,17 @@
                    
                     <div  class="two">
                         <div class="hearder">
-                             <h3>{{results[0].album_name}}</h3>
+                            <br>
+                            <label style="font-size: x-large;font-weight: bold;">{{results[0].album_name}}</label>
                         </div>
                      
                       <div  *ngIf="show" >
-                          <label style="background-color: rgb(243, 225, 60);color: dimgrey;">แก้ไขชื่ออั้ลบั้ม</label>  &nbsp;
+                          <label style="background-color: rgb(243, 225, 60);color: dimgrey;font-size: medium;">แก้ไขชื่ออั้ลบั้ม</label>  &nbsp;
                          <input type="text" style="text-align: center;" 
                              value="{{results[0].album_name}}" [(ngModel)]= "albumName" > &nbsp;
                             <button pButton pRipple type="button" icon="pi pi-check"
                             class="p-button-rounded" (click)="save()" ></button> <br>
-                         <label style="background-color: rgb(243, 225, 60);color: dimgrey;">เลือกรูปภาพ</label>  &nbsp;
+                         <label style="background-color: rgb(243, 225, 60);color: dimgrey;font-size: medium;">เลือกรูปภาพ</label>  &nbsp;
                     <input type ="file" name="" id="" (change)="getFile($event.target.files)"  > <br>
                     <button *ngIf ="showup"
                     type="button" class="btn btn-success" (click)="addPhoto()"   >เพิ่มรูปภาพ</button>

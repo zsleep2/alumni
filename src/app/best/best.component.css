@@ -37,6 +37,7 @@
   grid-row: 2 ;
   padding: 5px;
   background-color: rgba(2, 0, 73, 0.85);
+  text-align: center;
 }
 h3{
   font-size: 1.5rem;

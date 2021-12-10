@@ -109,7 +109,10 @@ export class AlbumListComponent implements OnInit {
     
     this.myValue = this._auth.myData;
     this.mygen = "0";
-    this.myrole = this.myValue[0].user_role;
+    if(this.myValue){
+      this.myrole = this.myValue[0].user_role;
+    }
+   
 
     var years = 70;
     var till = 50;

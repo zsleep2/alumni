@@ -91,6 +91,7 @@ import { AdminAlbumDetailComponent } from './admin_album/admin-album-detail.comp
 import { SettComponent } from './sett/sett.component';
 import { AdminBestComponent } from './admin-best/admin-best.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
+import { AddbestComponent } from './addbest/addbest.component';
 
 
 /* const appRoust: Routes = [
@@ -184,6 +185,7 @@ import { AdminAboutComponent } from './admin-about/admin-about.component';
     SettComponent,
     AdminBestComponent,
     AdminAboutComponent,
+    AddbestComponent,
     
   ],
   imports: [

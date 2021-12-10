@@ -54,6 +54,7 @@
 
   }
   .hear{
+    text-align: center;
     grid-column: 2 / 6;
     grid-row: 2 ;
     padding: 5px;
@@ -131,6 +132,15 @@ p{
   text-align: left;
   background-color: rgba(96, 93, 185, 0.85);
   color: white;
+}
+
+.head{
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+}
+.content{
+  font-size: medium;
 }
 
   

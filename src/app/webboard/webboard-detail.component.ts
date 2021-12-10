@@ -46,7 +46,7 @@ export class WebboardDetailComponent implements OnInit {
   public show:boolean = false;
   public showcom:boolean = false;
   public editcom = [];
-
+  
   public webTitle:string;
   public webDes:string;
   public commentDes:string;
@@ -72,27 +72,30 @@ export class WebboardDetailComponent implements OnInit {
   ngOnInit(): void {
 
     this.myValue = this._auth.myData;
+    if(this.myValue){
     this.id = this.myValue[0].UID;
     this.user_username2 = this.myValue[0].user_username.substring(0, 2);
     this.myid = this.myValue[0].user_username;
+    }
+   
 
   
       this.items = [
         {
-          label: 'หน้าแรก', routerLink:['/home2/'+this.myValue[0].user_username]
+          label: 'หน้าแรก', routerLink:['/home2/'+this.myid]
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.myValue[0].user_username]
+            label: 'นักศึกษา', routerLink:['/member1/'+this.myid]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myValue[0].user_username]
+          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myid]
           
       },
         {
-            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myValue[0].user_username]
+            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myid]
         },
         {
           label:'ออกจากระบบ', routerLink:['/home']

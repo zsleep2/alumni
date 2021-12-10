@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 
+
 @Component({
   selector: 'app-best',
   templateUrl: './best.component.html',
@@ -24,7 +25,8 @@ export class BestComponent implements OnInit {
   ngOnInit(): void {
 
     this.myValue = this._auth.myData;
-    this.myrole = this.myValue[0].user_role;
+    if(this.myValue){this.myrole = this.myValue[0].user_role;}
+    
    
     this.http.get('http://qpos.msuproject.net/AllNewService/goodstudent/result').subscribe(
               data => {

@@ -119,12 +119,13 @@ export class AdminAlbumComponent implements OnInit {
   }
 
 
-      Update(value : string)
+  deleteAlbum(value : string)
     {
+      if(window.confirm('ต้องการลบอัลบั้ม ?')){
+          
         this.updateId = +value;
         let json = {album_ID:this.updateId}
         console.log(json);
-        
         this.http.post('http://qpos.msuproject.net/AllNewService/album/delete',JSON.stringify(json)).toPromise().then(
       data =>{
             if(data == 1){
@@ -139,6 +140,8 @@ export class AdminAlbumComponent implements OnInit {
         alert('fail');
       });
 
+    }
+       
     }
 
    

@@ -23,7 +23,7 @@
                 <div class="wa">
                   <!--   <p>{{myValue[0].user_name}}</p> -->
                     <div class="item1">
-                      <button  *ngIf="this.myrole == 1"
+                      <button  *ngIf="this.myrole && this.myrole == 1"
                       class= "button" [routerLink]="['/admin_user/'+this.user_username]">จัดการเว็บไซต์</button>
                       <button  class= "button" [routerLink]="['/set/'+this.user_username]">แก้ไขข้อมูลส่วนตัว</button>
                     </div>
@@ -51,7 +51,7 @@
                   
               <div class="wrapper2" >
                     <div class="a"   >
-                      <div *ngIf = "this.allnew[5] != undefined" >
+                      <div *ngIf = "this.allnew && this.allnew[5] != undefined" >
                         <img src={{this.allnew[5].new_image}} 
                        [routerLink]="['/new/'+this.user_username,this.allnew[5].new_ID]"
                        style="width: 550px;height: 300px">
@@ -60,7 +60,7 @@
                        
                     </div>
                     <div class="b" > 
-                      <div *ngIf = "this.allnew[6] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[6] != undefined">
                         <img src={{this.allnew[6].new_image}}  
                           [routerLink]="['/new/'+this.user_username,this.allnew[6].new_ID]"
                           style="width: 550px;height: 300px;"> <br>
@@ -69,7 +69,7 @@
                       
                     </div>
                     <div class="c"  >
-                      <div *ngIf = "this.allnew[7] != undefined" >
+                      <div *ngIf = "this.allnew && this.allnew[7] != undefined" >
                          <img src={{this.allnew[7].new_image}}  
                           [routerLink]="['/new/'+this.user_username,this.allnew[7].new_ID]"
                           style="width: 550px;height: 300px;">
@@ -78,7 +78,7 @@
                     
                     </div>
                     <div class="d"  >
-                      <div *ngIf = "this.allnew[8] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[8] != undefined">
                         <img src={{this.allnew[8].new_image}}  
                           [routerLink]="['/new/'+this.user_username,this.allnew[8].new_ID]"
                           style="width: 550px;height: 300px;">
@@ -88,7 +88,7 @@
                      
                     </div>
                     <div class="e"  >
-                      <div *ngIf = "this.allnew[9] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[9] != undefined">
                         <img src={{this.allnew[9].new_image}}  
                         [routerLink]="['/new/'+this.user_username,this.allnew[9].new_ID]"
                          style="width: 550px;height: 300px;"> 
@@ -96,7 +96,7 @@
                       </div>
                     </div>
                     <div class="f">
-                      <div *ngIf = "this.allnew[10] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[10] != undefined">
                         <img src={{this.allnew[10].new_image}}  
                         [routerLink]="['/new/'+this.user_username,this.allnew[10].new_ID]"
                          style="width: 550px;height: 300px;"> 
@@ -104,7 +104,7 @@
                       </div>
                     </div>
                     <div class="g">
-                      <div *ngIf = "this.allnew[11] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[11] != undefined">
                         <img src={{this.allnew[11].new_image}}  
                         [routerLink]="['/new/'+this.user_username,this.allnew[11].new_ID]"
                          style="width: 550px;height: 300px;"> 
@@ -112,7 +112,7 @@
                       </div>
                     </div>
                     <div class="h">
-                      <div *ngIf = "this.allnew[12] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[12] != undefined">
                         <img src={{this.allnew[12].new_image}}  
                         [routerLink]="['/new/'+this.user_username,this.allnew[12].new_ID]"
                          style="width: 550px;height: 300px;"> 
@@ -120,7 +120,7 @@
                       </div>
                     </div>
                     <div class="i">
-                      <div *ngIf = "this.allnew[13] != undefined">
+                      <div *ngIf = "this.allnew && this.allnew[13] != undefined">
                         <img src={{this.allnew[13].new_image}}  
                         [routerLink]="['/new/'+this.user_username,this.allnew[13].new_ID]"
                          style="width: 550px;height: 300px;"> 

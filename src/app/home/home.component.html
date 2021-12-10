@@ -51,7 +51,7 @@
                   </div>
                  </div>
                  <div class="c" >
-                  <div *ngIf = "this.allnew[7] != undefined" >
+                  <div *ngIf = "this.allnew && this.allnew[7] != undefined" >
                     <img src={{this.allnew[7].new_image}} 
                    [routerLink]="['/new/'+this.user_username,this.allnew[7].new_ID]"
                    style="width: 550px;height: 300px">
@@ -59,23 +59,15 @@
                   </div>
                  </div>
                  <div class="d" >
-                  <div *ngIf = "this.allnew && this.allnew[7] != undefined" >
-                    <img src={{this.allnew[7].new_image}} 
-                   [routerLink]="['/new/'+this.user_username,this.allnew[7].new_ID]"
-                   style="width: 550px;height: 300px">
-                   <p>{{this.allnew[7].new_title}}</p>
-                  </div>
-                  
-                 </div>
-                 <div class="e">
                   <div *ngIf = "this.allnew && this.allnew[8] != undefined" >
                     <img src={{this.allnew[8].new_image}} 
                    [routerLink]="['/new/'+this.user_username,this.allnew[8].new_ID]"
                    style="width: 550px;height: 300px">
                    <p>{{this.allnew[8].new_title}}</p>
                   </div>
+                  
                  </div>
-                 <div class="f">
+                 <div class="e">
                   <div *ngIf = "this.allnew && this.allnew[9] != undefined" >
                     <img src={{this.allnew[9].new_image}} 
                    [routerLink]="['/new/'+this.user_username,this.allnew[9].new_ID]"
@@ -83,28 +75,36 @@
                    <p>{{this.allnew[9].new_title}}</p>
                   </div>
                  </div>
-                 <div class="g">
-                  <div *ngIf = "this.allnew && this.allnew && this.allnew[10] != undefined" >
+                 <div class="f">
+                  <div *ngIf = "this.allnew && this.allnew[10] != undefined" >
                     <img src={{this.allnew[10].new_image}} 
                    [routerLink]="['/new/'+this.user_username,this.allnew[10].new_ID]"
                    style="width: 550px;height: 300px">
                    <p>{{this.allnew[10].new_title}}</p>
                   </div>
                  </div>
-                 <div class="h">
-                  <div *ngIf = "this.allnew && this.allnew[11] != undefined" >
+                 <div class="g">
+                  <div *ngIf = "this.allnew && this.allnew && this.allnew[11] != undefined" >
                     <img src={{this.allnew[11].new_image}} 
                    [routerLink]="['/new/'+this.user_username,this.allnew[11].new_ID]"
                    style="width: 550px;height: 300px">
                    <p>{{this.allnew[11].new_title}}</p>
                   </div>
                  </div>
-                 <div class="i">
+                 <div class="h">
                   <div *ngIf = "this.allnew && this.allnew[12] != undefined" >
                     <img src={{this.allnew[12].new_image}} 
                    [routerLink]="['/new/'+this.user_username,this.allnew[12].new_ID]"
                    style="width: 550px;height: 300px">
                    <p>{{this.allnew[12].new_title}}</p>
+                  </div>
+                 </div>
+                 <div class="i">
+                  <div *ngIf = "this.allnew && this.allnew[13] != undefined" >
+                    <img src={{this.allnew[13].new_image}} 
+                   [routerLink]="['/new/'+this.user_username,this.allnew[13].new_ID]"
+                   style="width: 550px;height: 300px">
+                   <p>{{this.allnew[13].new_title}}</p>
                   </div>
                  </div>
                   </div>

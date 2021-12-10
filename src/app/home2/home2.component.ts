@@ -115,7 +115,10 @@ export class Home2Component implements OnInit {
    ngOnInit(){
       this.myValue = this._auth.myData;
       console.log(this.myValue);
-      this.myrole = this.myValue[0].user_role;
+      if(this.myValue){
+        this.myrole = this.myValue[0].user_role;
+      }
+     
 
       this.http.get<lstNew[]>('http://qpos.msuproject.net/AllNewService/new/shownew').subscribe(
         data => {

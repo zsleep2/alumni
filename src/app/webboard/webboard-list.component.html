@@ -29,7 +29,7 @@
                     </div>
                     <div class="ui-g-6" >
                         <br>
-                        <p-menubar [model]="items ">
+                        <p-menubar style="font-size: medium;" [model]="items ">
                         </p-menubar>
                     </div>
                 </div>
@@ -37,32 +37,35 @@
             
             <div class="two" >
                 <div class="hear" style="text-align: center;">
-                        <h4 *ngIf="this.myGen == 0">เว็บบอร์ดทั่วไป</h4>
-                        <h4 *ngIf="this.myGen != 0">เว็บบอร์ดรุ่น {{this.myGen}}</h4>
+                    <label *ngIf="this.myGen == 0" class="head">เว็บบอร์ดทั่วไป</label>
+                    <label *ngIf="this.myGen != 0" class="head">เว็บบอร์ดรุ่น {{this.myGen}}</label>
                 </div>
                 <table id="customers" >
                     <tbody>
                         <tr>
-                            <th style="width: 50%;text-align: center;">โพสต์</th>
-                            <th style="width: 30%;text-align: center;">ชื่อผู้โพส</th>
-                            <th style="width: 20%;text-align: center;">วันที่โพสต์</th>
+                            <th style="width: 50%;text-align: center;font-size: medium;">โพสต์</th>
+                            <th style="width: 30%;text-align: center;font-size: medium;">ชื่อผู้โพส</th>
+                            <th style="width: 20%;text-align: center;font-size: medium;">วันที่โพสต์</th>
                           
                           </tr>
                         <tr [class.table-info]="highlightId == result.webboard_ID"
                         *ngFor="let result of results | slice:pointStart:pointEnd;let i=index">
                             <td style="text-align:left;"> <a class="text-secondary" [routerLink]="['/webboard/'+this.user_username,result.webboard_ID]"
-                              [queryParams]="{page: activePage}" >  
-                              {{ result.webboard_title }}
+                              [queryParams]="{page: activePage}" > 
+                              <label style="font-size: medium;"> {{ result.webboard_title }}</label>
+                             
                               </a></td>
                             <td style="text-align: center;"> 
-                               {{result.user_name}}
+                                <label style="font-size: medium;">{{result.user_prefix}} {{result.user_name}}</label>
+                               
                             </td>
                             <td style="text-align: center;">
-                              
+                              <label style="font-size: medium;">  
                                     {{result.webboard_date.substring(11, 16)}} น.
                                    {{result.webboard_date.substring(8, 10)}}/
                                    {{result.webboard_date.substring(5, 7)}}/
-                                   {{result.webboard_date.substring(0, 4)}}
+                                   {{result.webboard_date.substring(0, 4)}}</label>
+                                  
                                
                             </td>
                            
@@ -103,11 +106,14 @@
                     <table id="customers" >
                         <tbody>
                             <tr>
-                                <th>เว็บบอร์ด</th>
+                                <th style="font-size: medium;">เว็บบอร์ด</th>
                             </tr>
-                            <div>
-                                <label for="" >ค้นหาตามรุ่น</label> &nbsp;
-                                <select  id="year" [(ngModel)]="year" (click)="searchYear()" ></select> 
+                            <div >
+                                
+                                <label *ngIf="this.myrole == 1" style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
+                                <select  id="year" (click)="searchYear()" [(ngModel)]="year" >
+                                  
+                                </select> 
                             </div>
                              
                             <button pButton type="button" label="โพสต์เว็บบอร์ด" class="pui-button-rounded ui-button-warning" 

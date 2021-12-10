@@ -24,9 +24,9 @@
                     <table id="customers" >
                         <tbody>
                             <tr>
-                                <th  style="text-align: center;">รุ่น</th>
+                                <th  style="text-align: center;font-size: medium;">รุ่น</th>
                             </tr>
-                            &nbsp;&nbsp;<label for="fr">รุ่น:</label> &nbsp;
+                            &nbsp;&nbsp;<label for="fr" style="font-size: medium;">รุ่น:</label> &nbsp;
                             <select id="year" [(ngModel)]="year" (click)="ser()"></select> &nbsp; &nbsp;
                             <button pButton type="button" label="clear" class="ui-button-rounded ui-button-Primary" 
                             (click)='cl()'></button> <br> <br>
@@ -43,28 +43,54 @@
               <table id="customers">           
                     <thead>
                     <tr> 
-                        <th>รหัสนิสิต</th>
-                        <th>ชื่อ</th>
-                        <th>email</th>
-                        <th>เบอร์โทรศัพท์</th>
-                        <th>facebook</th>
-                        <th>role</th>
+                        <th style="font-size: medium;">รหัสนิสิต</th>
+                        <th style="font-size: medium;">ชื่อ</th>
+                        <th style="font-size: medium;">email</th>
+                        <th style="font-size: medium;">เบอร์โทรศัพท์</th>
+                        <th style="font-size: medium;">facebook</th>
+                        
                     </tr>
                     </thead>
                <tbody>
 
                            
-                        <tr li *ngFor="let user of rUser">
+                        <tr style="text-align: center;" [class.table-info]="highlightId == user.UID"
+                        *ngFor="let user of rUser | slice:pointStart:pointEnd;let i=index">
                        
-                        <td>{{user.user_username}}</td>
-                        <td> {{user.user_name}}</td>
-                        <td>{{user.user_email}}</td>
-                        <td>{{user.user_phone}}</td>
-                        <td>{{user.user_facebook}}</td>   
-                        <td>{{user.user_role}}</td>    
+                        <td style="font-size: medium;">{{user.user_username}}</td>
+                        <td style="font-size: medium;"> {{user.user_prefix}} {{user.user_name}}</td>
+                        <td style="font-size: medium;">{{user.user_email}}</td>
+                        <td style="font-size: medium;">{{user.user_phone}}</td>
+                        <td style="font-size: medium;">{{user.user_facebook}}</td>   
+                      
                         </tr>
                </tbody>     
-                </table>
+                </table>    
+                    <br>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <li class="page-item">
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: 1}"> First</a>
+                      </li>
+                      <li class="page-item" [class.disabled]="activePage==1">
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: prevPage}"> Previous</a> 
+                      </li>
+                      <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i"> 
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: i}"> {{ i }} </a> 
+                      </li>
+                      <li class="page-item" [class.disabled]="activePage==totalPage"> 
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  
+                                  [queryParams]="{page: nextPage}"> Next</a>
+                      </li>
+                      <li class="page-item">
+                        <input #pageInput type="number"class="form-control" min="1" max="{{ totalPage }}"
+                                style="width:80px;" (input)="changePage(pageInput.value)" value="{{ activePage }}" />
+                      </li>
+                      <li class="page-item"> 
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: totalPage}"> Last</a> 
+                      </li>
+                    </ul>
+                  </nav>
                 
           </div>
            </div>

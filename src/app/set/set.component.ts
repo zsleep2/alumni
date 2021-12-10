@@ -52,18 +52,21 @@ b = 1;
 
   ngOnInit(): void {
     this.myValue = this._auth.myData;
-    this.myrole = this.myValue[0].user_role;
+    if(this.myValue){
+        this.myrole = this.myValue[0].user_role;
 
-    console.log(this.myrole);
-    this.password = this.myValue[0].user_password;
-    this.phone = this.myValue[0].user_phone;
-    this.email = this.myValue[0].user_email;
-    this.facebook = this.myValue[0].user_facebook;
-    this.year = this.myValue[0].user_year;
-    this.job = this.myValue[0].user_job;
-    this.workname = this.myValue[0].user_workname;
-    this.workaddress = this.myValue[0].user_workaddress;
-    this.workphone = this.myValue[0].user_workphone;
+            console.log(this.myrole);
+            this.password = this.myValue[0].user_password;
+            this.phone = this.myValue[0].user_phone;
+            this.email = this.myValue[0].user_email;
+            this.facebook = this.myValue[0].user_facebook;
+            this.year = this.myValue[0].user_year;
+            this.job = this.myValue[0].user_job;
+            this.workname = this.myValue[0].user_workname;
+            this.workaddress = this.myValue[0].user_workaddress;
+            this.workphone = this.myValue[0].user_workphone;
+    }
+    
 
     var years = 2520;
     var till = 2580;

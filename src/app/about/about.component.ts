@@ -30,7 +30,8 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {  
 
     this.myValue = this._auth.myData;
-    this.myrole = this.myValue[0].user_role;
+    if(this.myValue){ this.myrole = this.myValue[0].user_role;}
+   
     console.log(this.myrole);
 
     this.http.get<lstAbout[]>('http://qpos.msuproject.net/AllNewService/about/showabout')

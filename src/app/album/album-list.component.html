@@ -64,7 +64,7 @@
             <div class="t">
                 <div >
                     
-                    <label >ค้นหาตามรุ่น</label> &nbsp;
+                    <label style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
                     <select  id="year" [(ngModel)]="year" (click)="searchYear()" ></select> 
                  </div>       
                  <h3 class="Css1">
@@ -86,8 +86,8 @@
             </div>
             <div class="two">
                 <div class="hear">
-                    <h3 *ngIf="this.mygen == 0" style="text-align: center;">อัลบั้มรูปภาพ</h3>
-                    <h3 *ngIf="this.mygen != 0" style="text-align: center;">อัลบั้มรูปภาพรุ่น {{this.mygen}}</h3>
+                    <h3 *ngIf="this.mygen == 0" style="text-align: center;font-size: x-large;font-weight: bold;">อัลบั้มรูปภาพ</h3>
+                    <h3 *ngIf="this.mygen != 0" style="text-align: center;font-size: x-large;font-weight: bold;">อัลบั้มรูปภาพรุ่น {{this.mygen}}</h3>
                 </div>
                 
                 <br>
@@ -110,18 +110,20 @@
                     <table id="customers" >
                         <tbody>
                             <tr>
-                                <th style="width: 50%;">ขื่ออัลบั้ม</th>
-                                <th style="width: 20%;">วันที่โพสต์</th>
+                                <th style="width: 50%;font-size: medium;">ขื่ออัลบั้ม</th>
+                                <th style="width: 20%;font-size: medium;">วันที่โพสต์</th>
                               
                               </tr>
                             <tr [class.table-info]="highlightId == result.album_ID"
                             *ngFor="let result of results | slice:pointStart:pointEnd;let i=index">
                                 <td> <a class="text-secondary" [routerLink]="['/album/'+this.user_username,result.album_ID]"
                                   [queryParams]="{page: activePage}" >  
-                                  {{ result.album_name }}
+                                  <label style="font-size: medium;">{{ result.album_name }}</label>
+                                  
                                   </a></td>
                                 <td style="text-align: center;"> 
-                                   {{result.album_date}}
+                                    <label style="font-size: medium;">{{result.album_date}}</label>
+                                   
                                 </td>
                                 </tr>
                             </tbody>

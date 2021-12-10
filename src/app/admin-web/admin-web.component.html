@@ -48,7 +48,7 @@
                         <tr [class.table-info]="highlightId == result.webboard_ID"
                         *ngFor="let result of results | slice:pointStart:pointEnd;let i=index">
                           <td style="text-align: center;">
-                            {{result.user_name}}
+                             {{result.user_prefix}} {{result.user_name}}
                           </td>
                             <td style="text-align: center;"> <a class="text-secondary" [routerLink]="['/webboard/'+this.user_username,result.webboard_ID]"
                               [queryParams]="{page: activePage}" >  

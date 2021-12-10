@@ -36,59 +36,66 @@
             </div>
 
             <div *ngFor="let result of results" class="two" >
-              <div style="text-align: right; ">
-                <button pButton type="button" style="height: 32px; width: 32px;" (click)="toggle()"
-                class="pui-button-rounded ui-button-warning" >
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 14 16" width="30px" height="30px">
-                    <path fill-rule="evenodd" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z">
-                    </path></svg>
-                </button> &nbsp; 
-                <button pButton pRipple type="button" icon="pi pi-check" (click) ="editWeb()"
-                 class="p-button-rounded" *ngIf="show"></button> <br> <br>
-
-                 <button pButton type="button" style="height: 32px; width: 32px;"  (click) ="deleteweb()"
-                 class="pui-button-rounded ui-button-danger" *ngIf="show"> 
-                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
-                     <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
-                   </svg>
-                 </button> 
-              </div>
+          
+             
               
-                <h3>
-                  {{ result.webboard_title }}
-                </h3> 
-                
-                <div  *ngIf="show" >
-                  <label style="background-color: rgb(243, 225, 60);">แก้ไขหัวข้อเว็บบอร์ด</label>  &nbsp;
+                <div class="headder"> 
+               
+                  <button pButton type="button" style="height: 32px; width: 32px;" (click)="toggle()"
+                  class="pui-button-rounded ui-button-warning" >
+                  <svg xmlns="http://www.w3.org/2000/svg" 
+                   viewBox="0 0 14 16" width="30px" height="30px">
+                  <path fill-rule="evenodd" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z">
+                    </path></svg>
+                    </button> &nbsp; 
+                  <button pButton pRipple type="button" icon="pi pi-check" (click) ="editWeb()"
+                     class="p-button-rounded" *ngIf="show"></button> &nbsp;
+
+                    <button pButton type="button" style="height: 32px; width: 32px;"  (click) ="deleteweb()"
+                        class="pui-button-rounded ui-button-danger" *ngIf="show"> 
+                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+                          <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
+                        </svg>
+                    </button>
+                    <div style="text-align: left;">
+                     <!--  <h3 style="text-align: left;color: white;font-size: 26;">
+                     {{ result.webboard_title }}
+                       </h3>   -->
+                       <label style="color: white;font-size:x-large;font-weight: bold;">  {{ result.webboard_title }}</label>
+                    </div>
+                <div  *ngIf="show" style="text-align: left;">
+                  <label style="background-color: rgb(243, 225, 60);color: white;">แก้ไขหัวข้อเว็บบอร์ด</label>  &nbsp;
                 <input type="text" style="text-align: center;" value="{{this.results[0].webboard_title}}"
                  [(ngModel)]= "webTitle"  >  <br>
                  </div> 
+                  <div style="text-align: left;">
+                      &nbsp;<label style="color: white;font-size: medium;">{{ result.webboard_description}}</label> 
+                  </div>
+                   
 
-            &nbsp;<label >{{ result.webboard_description}}</label> 
-
-                  <div  *ngIf="show" >
-                    <label style="background-color: rgb(243, 225, 60);">แก้ไขรายละเอียด</label>  &nbsp;
+                  <div  *ngIf="show" style="text-align: left;" >
+                    <label style="background-color: rgb(243, 225, 60);color: white;">แก้ไขรายละเอียด</label>  &nbsp;
                         <input type="text" style="text-align: center;" value="{{this.results[0].webboard_description}}" 
                             [(ngModel)]= "webDes"  > 
                   </div> 
-                  
-                  <br>
-                
 
-                  <label >วันที่โพสต์ :
+                     
+                <div>
+                   <label style="color: white;font-size: medium;">วันที่โพสต์ :
                   {{result.webboard_date.substring(8, 10)}}/
                   {{result.webboard_date.substring(5, 7)}}/
                   {{result.webboard_date.substring(0, 4)}} |
                   เวลา : {{result.webboard_date.substring(11, 16)}} น.
-                  | โดย : {{result.user_name}} </label>
+                  | โดย : {{result.user_prefix}} {{result.user_name}} </label>
+                </div>
+              </div>
+
+
+             
                
-                  <hr noshade="noshade">
-        
-              
-                  <div *ngFor="let com of comments"> 
-               
-                   {{ com.comment_description }} 
+                  <div *ngFor="let com of comments" class="top"> 
+                    <br>  
+                  <label style="color: white;font-size: medium;">{{ com.comment_description }}  </label> &nbsp;
 
                 <button *ngIf="com.user_username == this.myid" 
                  pButton type="button" style="height: 20px; width: 24px;" (click)="showCom(com.comment_ID)"
@@ -117,28 +124,27 @@
                         <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
                       </svg>
                     </button>  <br>
-                  โดย : {{ com?.user_name}} <br>
-                 วันที่ :  {{com?.comment_date.substring(8, 10)}}/
-                {{com?.comment_date.substring(5, 7)}}/
-                {{com?.comment_date.substring(0, 4)}} 
-                | เวลา : {{ com?.comment_date.substring(11, 16) }}
-                <br>       
+                    <div style="text-align: right;color: white;font-size: medium;">
+                          โดย : {{com.user_prefix}} {{ com.user_name}} <br>
+                          วันที่ :  {{com.comment_date.substring(8, 10)}}/
+                          {{com.comment_date.substring(5, 7)}}/
+                          {{com.comment_date.substring(0, 4)}} 
+                          | เวลา : {{ com.comment_date.substring(11, 16) }}
+                    </div>      
                </div>
-                
-                  ------------------------------------------------------------------------------------
-                  </div>
+              </div>
               
-                        
-              <hr noshade="noshade">
-             
-              <label for="comment">Comment:</label>
+            <div class="bot">
+          <label style="color: white;font-size: medium;" >Comment:</label>
               <textarea [rows]="5" [cols]="30" pInputTextarea [(ngModel)]="text"autoResize="autoResize"></textarea>
           <br>
-          <button pButton type="button" label="Sumit" class="ui-button-rounded ui-button-success" (click)='addComment()' ></button>
+          <button pButton type="button" label="คอมเมนท์" class="ui-button-rounded ui-button-success" (click)='addComment()' ></button>
           &nbsp; &nbsp; &nbsp;
           <button [routerLink]="['/webboard/'+this.myValue[0].user_username,{id:postID}]" 
-[queryParams]="{page: activePage}" class="btn btn-sm btn-warning"> Back</button>
+            [queryParams]="{page: activePage}" class="btn btn-sm btn-warning"> กลับหน้าเว็บบอร์ด</button>
             </div>
+            </div>
+              
             <div class="three"></div>
             <div class="four"></div>
           

@@ -60,7 +60,8 @@
                     <h3 class="Css1">
                        &nbsp;
                         
-                       <button type="button" class="btn btn-success" [routerLink]="['/addnew/'+this.user_username]" >เพิ่มข่าวประชาสัมพันธ์</button> 
+                       <button type="button" class="btn btn-success" style="font-size: medium;"
+                       [routerLink]="['/addnew/'+this.user_username]" >เพิ่มข่าวประชาสัมพันธ์</button> 
    
                         <br><br>
                       
@@ -69,16 +70,17 @@
                </div>
                 <div class="two">
                     <div class="hear">
-                          <h3 style="text-align: center;">ข่าวประชาสัมพันธ์</h3> 
+                        <label class="head">ข่าวประชาสัมพันธ์</label>
+                          
                     </div>
                   <br>
     
                         <table id="customers" >
                           
                                 <tr >
-                                    <th style="width: 20%;text-align: center;">หัวข้อข่าว</th>
-                                    <th style="width: 60;text-align: center;">รูปภาพข่าว</th>
-                                    <th style="width: 20%;text-align: center;">วันที่</th>
+                                    <th style="width: 20%;text-align: center;font-size: medium;">หัวข้อข่าว</th>
+                                    <th style="width: 60;text-align: center;font-size: medium;">รูปภาพข่าว</th>
+                                    <th style="width: 20%;text-align: center;font-size: medium;">วันที่</th>
                                     
                                   </tr>
                             
@@ -88,7 +90,8 @@
                                 *ngFor="let result of results | slice:pointStart:pointEnd;let i=index">
                                 <td *ngIf="result.new_status == 1"
                                 style="text-align: center;">
-                                    {{result.new_title}}
+                                <label class="content"> {{result.new_title}}</label>
+                                   
                                 </td>
                                     <td *ngIf="result.new_status == 1"> 
                                     <a class="text-secondary" [routerLink]="['/new/'+this.user_username,result.new_ID]"
@@ -99,7 +102,8 @@
                                       </a></td>
                                     <td *ngIf="result.new_status == 1"
                                     style="text-align: center;">
-                                        {{result.new_date}}
+                                    <label class="content"> {{result.new_date}}</label>
+                                       
                                     </td>
                                     </tr>
 

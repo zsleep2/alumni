@@ -9,59 +9,124 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-        }
-    
+        } 
+
+        .centerScreen{
+        position: absolute;
+        top: 50%;
+        margin-top: -150px;
+        left: 50%;
+        margin-left: -180px;
+    }
     </style>
 </head>
     <body>
         
         <div class="wrapper">
-            <div class="one" style=" background-color: rgba(27,31,34,0.85);">
+            <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
                 <app-header></app-header>
             </div>
-            <div class="t"></div>
+
             <div class="two">
-                <h2>สมัครสมาชิก</h2>
-                <div class="p-fluid p-formgrid p-grid">
-                       &nbsp; <label for="Username">Username</label> <br>
-                       &nbsp; <p-inputMask [(ngModel)]="username" mask="99999999999" placeholder="รหัสนิสิต"></p-inputMask> <br>
-                    
-                        &nbsp; <label for="Password">Password</label><br>
-                        &nbsp; <input  type="password" pInputText [(ngModel)]="password"> <br>
-                    
-                        &nbsp; <label for="firstname" >ชื่อ</label><br>
-                        &nbsp; <input id="firstname" type="text" pInputText [(ngModel)]="firstname"> <br>
-                        &nbsp; <label for="lastname" >นามสกุล</label><br>
-                        &nbsp; <input id="lastname" type="text" pInputText [(ngModel)]="lastname"> <br>
 
-                        &nbsp; <label for=tel >เบอร์โทรศัพท์</label><br>
-                        &nbsp; <p-inputMask [(ngModel)]="phone" mask="999-999-9999"></p-inputMask><br>
-                        &nbsp; <label for=email >Email</label><br>
-                        &nbsp; <input id="email" type="email" placeholder="Enter email" pInputText [(ngModel)]="email"><br>
-                        &nbsp; <label for=face >Facebook</label><br>
-                        &nbsp; <input id="face" type="text" placeholder="Enter facebook"pInputText [(ngModel)]="facebook"><br> <br>
+                <!-- Default form register -->
+    <form class="text-center border border-light p-5">
 
-                        <button pButton type="button" label="สมัครสมาชิก" 
-                        class="ui-button-rounded ui-button-success" (click)='regis()'></button>
+        <label style="font-size: x-large;">สมัครสมาชิก</label>
 
-                    </div>
-                </div>
-                <div class="three" >
-                    <div class="checkbox">
-                        <br>
-                        <label><input type="radio" name="optradio"  (click)="sinImputarHo();" checked> ศิษย์ปัจจุบัน</label> &nbsp;
-                        <label><input type="radio" name="optradio" (click)="sinImputarMes();"> ศิษย์เก่า</label>
-                      </div>
-                      
-                 
-                </div>
-                <div class="four"></div>
+        <input type="text" id="defaultRegisterFormUsername" class="form-control mb-4" placeholder="รหัสนิสิต"
+        pInputText [(ngModel)]="username">
+        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="รหัสผ่าน" 
+        aria-describedby="defaultRegisterFormPasswordHelpBlock" pInputText [(ngModel)]="password">
+        <br>
+        <div class="form-row mb-4">
+          <div class="col">
+            <!-- First name -->
+            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="ชื่อ" 
+            pInputText [(ngModel)]="firstname">
+          </div>
+          <div class="col">
+            <!-- Last name -->
+            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="นามสกุล"
+            pInputText [(ngModel)]="lastname">
+          </div>
+        </div>
+  
+        <!-- E-mail -->
+        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"
+        pInputText [(ngModel)]="email">
+  
+        <!-- Password -->
+      
+  
+        <!-- Phone number -->
+        <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" 
+        aria-describedby="defaultRegisterFormPhoneHelpBlock" pInputText [(ngModel)]="phone">
+      
+  
+        <!-- Newsletter -->
+        <div class="row">
+          <div class="col-md-6 mx-auto d-flex justify-content-center">
+           
+          </div>
+        </div>
+  
+        <!-- Sign up button -->
+        <button  color="info" block="true" class="my-4" type="submit">สมัครสมาชิก</button>
+  
+  
+        <hr>
+  
+      
+  
+      </form>
+      <!-- Default form register -->
+
             </div>
-            
-                  
-          
-             
+          </div>
+       
     </body>
 </html>
 
+    
 
+
+
+
+
+
+<!-- <div class="two">
+    <h2>สมัครสมาชิก</h2>
+    <div class="p-fluid p-formgrid p-grid">
+           &nbsp; <label for="Username">Username</label> <br>
+           &nbsp; <p-inputMask [(ngModel)]="username" mask="99999999999" placeholder="รหัสนิสิต"></p-inputMask> <br>
+        
+            &nbsp; <label for="Password">Password</label><br>
+            &nbsp; <input  type="password" pInputText [(ngModel)]="password"> <br>
+        
+            &nbsp; <label for="firstname" >ชื่อ</label><br>
+            &nbsp; <input id="firstname" type="text" pInputText [(ngModel)]="firstname"> <br>
+            &nbsp; <label for="lastname" >นามสกุล</label><br>
+            &nbsp; <input id="lastname" type="text" pInputText [(ngModel)]="lastname"> <br>
+
+            &nbsp; <label for=tel >เบอร์โทรศัพท์</label><br>
+            &nbsp; <p-inputMask [(ngModel)]="phone" mask="999-999-9999"></p-inputMask><br>
+            &nbsp; <label for=email >Email</label><br>
+            &nbsp; <input id="email" type="email" placeholder="Enter email" pInputText [(ngModel)]="email"><br>
+            &nbsp; <label for=face >Facebook</label><br>
+            &nbsp; <input id="face" type="text" placeholder="Enter facebook"pInputText [(ngModel)]="facebook"><br> <br>
+
+            <button pButton type="button" label="สมัครสมาชิก" 
+            class="ui-button-rounded ui-button-success" (click)='regis()'></button>
+
+        </div>
+    </div>
+    <div class="three" >
+        <div class="checkbox">
+            <br>
+            <label><input type="radio" name="optradio"  (click)="sinImputarHo();" checked> ศิษย์ปัจจุบัน</label> &nbsp;
+            <label><input type="radio" name="optradio" (click)="sinImputarMes();"> ศิษย์เก่า</label>
+          </div>
+          
+     
+    </div> -->

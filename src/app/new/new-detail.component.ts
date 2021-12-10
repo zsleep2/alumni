@@ -54,22 +54,24 @@ export class NewDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.myValue = this._auth.myData;
+    if(this.myValue){  this.myUser = this.myValue[0].user_username;}
+  
       this.items = [
         {
-          label: 'หน้าแรก', routerLink:['/home2/'+this.myValue[0].user_username]
+          label: 'หน้าแรก', routerLink:['/home2/'+this.myUser]
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.myValue[0].user_username]
+            label: 'นักศึกษา', routerLink:['/member1/'+this.myUser]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myValue[0].user_username]
+          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myUser]
           
       },
         {
-            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myValue[0].user_username]
+            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myUser]
         },
         {
           label:'ออกจากระบบ', routerLink:['/home']

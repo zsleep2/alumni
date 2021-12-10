@@ -36,16 +36,18 @@
             <div class="t"></div>
             <div class="two" *ngFor="let result of results" > 
                 <div class="hear">
-                    <h3 >เกี่ยวกับเว็บไซต์</h3>
+                    <label class="head">เกี่ยวกับเว็บไซต์</label>
+                   
                 </div> <br>
                 <div style="padding-left: 20px;">
-                     <label >{{result.about_title}}</label> 
-                    <p>{{result.about_description.substring(0, 80)}}</p>
-                   <label >{{result.about_description.substring(81, 96)}}</label> <br> <br> <br>     
+                     <label style="font-size: medium;font-weight: bold;">{{result.about_title}}</label> 
+                     <label style="font-size: medium;">{{result.about_description.substring(0, 80)}}</label> <br>
+                  
+                   <label style="font-size: medium;font-weight: bold;">{{result.about_description.substring(81, 96)}}</label> <br> <br> <br>     
                     <div style="text-align: center;">
                     <img src= {{result.about_image}} alt="" style="width: 400px;height: 300px; 
                     border: 1px solid rgb(27,31,34,0.85)">  <br>
-                    <label for="">ภาพแผนที่</label>
+                    <label style="font-size: medium;">ภาพแผนที่</label>
                     </div>   
                 </div>
                    
