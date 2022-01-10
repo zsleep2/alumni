@@ -28,7 +28,7 @@ export class BestComponent implements OnInit {
     if(this.myValue){this.myrole = this.myValue[0].user_role;}
     
    
-    this.http.get('http://qpos.msuproject.net/AllNewService/goodstudent/result').subscribe(
+    this.http.get('http://qpos.msuproject.net/AllNewService/best/result').subscribe(
               data => {
                 console.log(data);
                 this.bestStudent = data;

@@ -20,43 +20,113 @@
             </div>
             <div class="four"></div>   
             <div class="two">
-                  <p> รหัสนิสิต {{this.myValue[0].user_username}}</p>
-                  <div class="a">
-                    <label >รหัสผ่าน: </label><br>
-                    <label for="">เบอร์โทรศัพท์: </label><br>
-                    <label for=""> email : </label><br>
-                    <label for=""> facebook : </label><br>
-                  
-                    <label for=""> ปีที่จบ : </label><br>
-                    <label for="" > งานที่ทำ : </label><br>
-                    <label for="" > ชื่อบริษัท : </label><br>
-                    <label for=""  > สถานที่ทำงาน : </label><br>
-                    <label for=""> เบอร์โทรศัพท์ที่ทำงาน : </label>
-                   
-                    
+                <div *ngFor="let user of rUser ">
+                    <div *ngIf="this.user.user_role == 2">
+                        <!-- main app container -->
+                        <div class="card m-3">
+                            <h5 class="card-header">แก้ไขข้อมูลส่วนตัว</h5>
+                            <label class="card-header" style="font-size: large;"> 
+                                    รหัสนิสิต {{user.user_username}} |
+                                    {{user.user_prefix}} {{user.user_name}}
+                                </label>
+                            <div class="card-body">
+                                 
+                            <form [formGroup]="registerForm" (ngSubmit)="eDit()">
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label>เบอร์โทรศัพท์</label>
+                                        <input type="text" formControlName="phone" class="form-control" 
+                                        [ngClass]="{ 'is-invalid': submitted  }" />
+                                    <!--  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                            <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
+                                            <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
+                                        </div> -->
+                                    </div>
+                                    <div class="form-group col-12"> 
+                                        <label>Email</label>
+                                        <input type="text" formControlName="email" class="form-control" 
+                                        [ngClass]="{ 'is-invalid': submitted  }" />
+                                        <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
+                                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                        </div> -->
+                                    </div>
+                                    <div class="form-group col-12"> 
+                                        <label>Facebook</label>
+                                        <input type="text" formControlName="facebook" class="form-control" 
+                                        [ngClass]="{ 'is-invalid': submitted }" />
+                                    <!-- <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
+                                        <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
+                                        </div>  -->  
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>สถานะ</label>
+                                        <select formControlName="role" class="form-control" style="font-size: medium;"
+                                        [ngClass]="{ 'is-invalid': submitted  }">
+                                            <option value=""></option>
+                                            <option value="2">ศิษย์ปัจจุบัน</option>
+                                            <option value="3">ศิษย์เก่า</option>
+                                        </select>
+                                    </div>
+                                </div>    
+                            <div class="text-center">
+                                        <button class="btn btn-primary mr-1">แก้ไขข้อมูลส่วนตัว</button>
+                                        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                            </div>
+                                </form>
+                            </div>
+                        </div>
             </div>
-            </div>
-            <div class="three">
-                 <p>ข้อมูลใหม่</p> <br>
-             <input type="password" value="{{this.myValue[0].user_password}}" size = "50" [(ngModel)]= "password" ><br>
-               <input type="text"  value="{{this.myValue[0].user_phone}}"  size="50" [(ngModel)] = "phone" ><br>
-               <input type="text"  value="{{this.myValue[0].user_email}}" size="50" [(ngModel)] = "email"  ><br>
-               <input type="text"  value="{{this.myValue[0].user_facebook}}" size="50" [(ngModel)] = "facebook" ><br>
-               <div >
-                <select id="year" type = "text" value="{{this.myValue[0].user_year}}"
-               [(ngModel)]="year" style="text-align:justify;width: 100px;height: 35px;" ></select> <br>
-               <input type="text"  value="{{this.myValue[0].user_job}}" size="50" [(ngModel)] = "job" ><br>
-               <input type="text"  value="{{this.myValue[0].user_workname}}" size="50" [(ngModel)] = "workname" ><br>
-               <input type="text"  value="{{this.myValue[0].user_workaddress}}" size="50" [(ngModel)] = "workaddress" ><br>
-               <input type="text"  value="{{this.myValue[0].user_workphone}}" size="50" [(ngModel)] = "workphone" ><br>
-
-               </div>
-               
-                                 <p>. .</p>
-        <button pButton type="button" label="แก้ไขข้อมูลส่วนตัว" class="ui-button-rounded ui-button-success" (click)='eDit()'></button>
-
+            <div *ngIf="this.user.user_role == 3">
+                <!-- main app container -->
+                <div class="card m-3">
+                    <h5 class="card-header">แก้ไขข้อมูลส่วนตัว</h5>
+                    <label class="card-header" style="font-size: large;"> 
+                            รหัสนิสิต {{user.user_username}} |
+                            {{user.user_prefix}} {{user.user_name}}
+                        </label>
+                    <div class="card-body">
+                         
+                    <form [formGroup]="registerForm" (ngSubmit)="eDit()">
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label>เบอร์โทรศัพท์</label>
+                                <input type="text" formControlName="phone" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted  }" />
+                            <!--  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                    <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
+                                    <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-12"> 
+                                <label>Email</label>
+                                <input type="text" formControlName="email" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted  }" />
+                                <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-12"> 
+                                <label>Facebook</label>
+                                <input type="text" formControlName="facebook" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted }" />
+                            <!-- <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
+                                <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
+                                </div>  -->  
+                            </div>
+                        </div>    
+                    <div class="text-center">
+                                <button class="btn btn-primary mr-1">แก้ไขข้อมูลส่วนตัว</button>
+                                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                    </div>
+                        </form>
+                    </div>
                 </div>
-              
+
+    </div>
+        </div>            
+        </div>
                <div class="five"></div>
             </div>
              

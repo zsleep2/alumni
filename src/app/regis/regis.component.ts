@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 // Angular Forms Modules
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormBuilder , Validators} from '@angular/forms';
+
+
 
 interface Articles{
   'user_username':string,
@@ -38,22 +41,32 @@ export class RegisComponent implements OnInit {
   sinImputarValue;
   rUser;
   checkUser:number;
+  registerForm: FormGroup;
+  submitted = false;
+  mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  usernamePattern = "^((\\+91-?)|0)?[0-9]{11}$"; 
 
   regisData = [];
 
- /*  item = [{user_username:58011212283,
-           user_password:123456},
-  
-          {
-            user_username:58011212282,
-            user_password:123456
-          }
 
-]; */
-
-  constructor( private _auth: AuthService,private http: HttpClient,private router1: Router) { }
+  constructor( private _auth: AuthService,private http: HttpClient,private router1: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.pattern(this.usernamePattern)]],
+      title: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['',[ Validators.required, Validators.pattern(this.mobnumPattern)]],
+      facebook: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      role : ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+     
+  }, {
+  });
 
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
@@ -68,73 +81,72 @@ export class RegisComponent implements OnInit {
     
   }
 
-  regis(){
-
+  get f() { return this.registerForm.controls; }
+  onSubmit() {
+    this.submitted = true;
+    /* console.log(this.registerForm.value); */
+     // stop here if form is invalid
+    if (this.registerForm.invalid) {
+        return;
+    }
     this.checkUser = 0;
 
      for (var i in this.rUser) {  
-        if(this.username == this.rUser[i].user_username){
+        if(this.registerForm.value.username == this.rUser[i].user_username){
            this.checkUser = 1;
            break;
         }
       }
-    
+
       if(this.checkUser ==1){
-          alert('เป็นสมาชิกแล้ว');
-      }else{
-        if(window.confirm('ยืนยัน ?')){
-            let json = {user_username : this.username || '', 
-              user_password : this.password || '', 
-              user_name : this.firstname+' ' +this.lastname|| '',
-              user_phone : this.phone || '',
-              user_email : this.email || '',
-              user_facebook : this.facebook || '',
-              user_year : this.year || '',
-              user_job : this.job || '',
-              user_workname : this.workplace || '',
-              user_workaddress : this.addwork || '',
-              user_workphone : this.workphone || '',
-              user_role : '2' || '',
+        alert('เป็นสมาชิกแล้ว');
+    }else{
+      if(window.confirm('ยืนยัน ?')){
+        let json = {user_username : this.registerForm.value.username || '', 
+              user_password : this.registerForm.value.password || '',
+              user_prefix : this.registerForm.value.title ||'',
+              user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
+              user_phone : this.registerForm.value.phone || '',
+              user_email : this.registerForm.value.email || '',
+              user_facebook : this.registerForm.value.facebook || '',
+              user_year : this.registerForm.value.year || '',
+              user_job :this.registerForm.value.job || '',
+              user_workname : this.registerForm.value.workname  || '',
+              user_workaddress : this.registerForm.value.workaddress || '',
+              user_workphone :this.registerForm.value.workphone || '',
+              user_best : '0',
+              user_role : this.registerForm.value.role || '',
               user_status : '0' || ''
             }
+            console.log(json);
+            
+          /*   this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
+                if(data == 1){
+                  console.log('OK');
+                  alert('สมัครสมาชิกเรียบร้อย');
+                  this.router1.navigateByUrl('/login');
+                }else{
+                  alert('err');
+                  console.log(data);
+                }
+                  
+                },
+                (error) => {
+                  console.log(error);
+                });   */
+      }
+        
+     
+    } 
+   
+    
+}
+onReset() {
+  this.submitted = false;
+  this.registerForm.reset();
+}
 
-              this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
-                  if(data == 1){
-                    console.log('OK');
-                    alert('สมัครสมาชิกเรียบร้อย');
-                    this.router1.navigateByUrl('/login');
-                  }else{
-                    alert('err');
-                    console.log(data);
-                  }
-                    
-                  },
-                  (error) => {
-                    console.log(error);
-                  }); 
-        }
-          
-       
-      } 
-  }
-
-  test(){
-    let json = {user_username : this.username || '', 
-    user_password : this.password || '', 
-    user_name : this.firstname+' ' +this.lastname|| '',
-    user_phone : this.phone || '',
-    user_email : this.email || '',
-    user_facebook : this.facebook || '',
-    user_year : this.year || '',
-    user_job : this.job || '',
-    user_workname : this.workplace || '',
-    user_workaddress : this.addwork || '',
-    user_workphone : this.workphone || '',
-    user_role : '2' || '',
-    user_status : '0' || ''
-    }
-    console.log(json);
-  }
+ 
   sinImputarHo(){
     
     this.router1.navigateByUrl('/regis');

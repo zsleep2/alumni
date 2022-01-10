@@ -53,9 +53,10 @@
                                 <thead>
                                 <tr> 
                                     <th style="width: 20%; text-align: center;">รหัสนิสิต</th>
-                                    <th style="width: 60%; text-align: center;">ชื่อ</th>
+                                    <th style="width: 40%; text-align: center;">ชื่อ</th>
+                                    <th style="width:10%; text-align: center;">ปีที่</th>
+                                    <th style="width: 20%; text-align: center;">ความสำเร็จ</th>
                                     <th style="width: 10%; text-align: center;">ศิษย์เก่าดีเด่น</th>
-                                    
                                 </tr>
                                 </thead>
                            <tbody>
@@ -63,15 +64,43 @@
                                     <td>{{user.user_username}}</td>
                                     <td> {{user.user_prefix}} {{user.user_name}}</td>
                                     <td>
+
+                                        <div *ngIf="this.yearBest != undefined">
+                                            <div *ngIf="user.user_best == 1" >
+                                                <select id="country"  [(ngModel)]='yearBest'>
+                                                <option value=""> </option>
+                                                <option value="2564">2564</option>
+                                                <option value="2563">2563</option>  
+                                                <option value="2562">2562</option>
+                                                <option value="2561">2561</option>
+                                                <option value="2560">2560</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="this.achievement != undefined">
+                                            <div *ngIf="user.user_best == 1"  >
+                                                <select id="country"  [(ngModel)]='achievement'>
+                                                <option value=""> </option>
+                                                <option value="เกียรตินิยมอันดับ 1">เกียรตินิยมอันดับ 1</option>
+                                                <option value="เกียรตินิยมอันดับ 2">เกียรตินิยมอันดับ 2</option>
+                                                <option value="เกียรตินิยมอันดับ 3">เกียรตินิยมอันดับ 3</option>  
+                                                </select>
+                                            </div>
+                                        </div>
+                                     
+                                    </td>
+                                    <td>
                                         <button *ngIf="user.user_best == 1" 
-                                            pButton type="button"  style="height: 24px; width: 24px;" 
+                                            pButton type="button"  style="height: 24px; width: 24px;" (click) ="addBest(user.UID)"
                                             class="pui-button-rounded ui-button-success" > 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                             </svg>
                                         </button>
 
-                                        <button *ngIf="user.user_best == 0" 
+                                        <button *ngIf="user.user_best == 0" (click) ="checkBest(user.user_username)"
                                             pButton type="button" style="height: 24px; width: 24px;"  
                                             class="pui-button-rounded ui-button-danger" > 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -91,32 +120,26 @@
                             <thead>
                             <tr> 
                                 <th style="width: 20%; text-align: center;">รหัสนิสิต</th>
-                                <th style="width: 60%; text-align: center;">ชื่อ</th>
-                                <th style="width: 10%; text-align: center;">ศิษย์เก่าดีเด่น</th>
+                                <th style="width: 40%; text-align: center;">ชื่อ</th>
+                                <th style="width:10%; text-align: center;">ปีที่</th>
+                                <th style="width: 20%; text-align: center;">ความสำเร็จ</th>
+                                <th style="width: 10%; text-align: center;">ลบศิษย์เก่าดีเด่น</th>
                              
                             </tr>
                             </thead>
                        <tbody>
-                                <tr li *ngFor="let user of results | slice:pointStart:pointEnd;let i=index">
+                                <tr li *ngFor="let best of bestStudent | slice:pointStart:pointEnd;let i=index">
                                
-                                <td> {{user.user_username}}</td>
-                                <td> {{user.user_prefix}} {{user.user_name}}</td>
+                                <td> {{best.user_username}} </td>
+                                <td> {{best.user_prefix}} {{best.user_name}} </td>
+                                <td> {{best.best_year}} </td>
+                                <td> {{best.best_achievement}} </td>
                                 <td>
-                                    <button *ngIf="user.user_best == 1" 
-                                    pButton type="button"  style="height: 24px; width: 24px;" 
-                                    class="pui-button-rounded ui-button-success" > 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                    </svg>
+                                    <button (click) ="deleteBest(best.user_username)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16" width="30" 
+                                        height="30"><path fill-rule="evenodd" 
+                                        d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
                                     </button>
-
-                                    <button *ngIf="user.user_best == 0" 
-                                        pButton type="button" style="height: 24px; width: 24px;"  
-                                        class="pui-button-rounded ui-button-danger" > 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                            <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
-                                        </svg>
-                                    </button> 
                                 </td>
 
                                 </tr>

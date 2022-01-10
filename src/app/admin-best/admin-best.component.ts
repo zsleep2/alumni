@@ -35,6 +35,7 @@ export class AdminBestComponent implements OnInit {
   deuserID;
   username;
   password;
+  prefix;
   name;
   phone;
   email;
@@ -50,6 +51,7 @@ export class AdminBestComponent implements OnInit {
   results
   sName:any;
   
+  
   public yearBest;
   public achievement;
   bestStudent;
@@ -57,6 +59,7 @@ export class AdminBestComponent implements OnInit {
   myrole;
   public bestID;
   public show:boolean = false;
+
 
   public iPage:number[] = [];
   public iPageStart:number = 1;
@@ -109,6 +112,8 @@ export class AdminBestComponent implements OnInit {
 
   ngOnInit(): void {
     this.nrSelect = 0;
+    this.yearBest ="";
+    this.achievement = "" ;
     this.myValue = this._auth.myData;
     var years = 70;
     var till = 50;
@@ -117,6 +122,8 @@ export class AdminBestComponent implements OnInit {
     options += "<option>"+ y +"</option>";
     }
     document.getElementById("year").innerHTML = options;
+    
+    
 
 
     this.activePage = 1;
@@ -155,31 +162,196 @@ export class AdminBestComponent implements OnInit {
           return user.user_best == 1;
         });
        }, error => {
+      });
+      
+    this.http.get('http://qpos.msuproject.net/AllNewService/best/result').subscribe(
+      data => {
+        console.log(data);
+        this.bestStudent = data;
+       }, error => {
       }); 
   }
 
-  deleteBest(value : string){
-    if(window.confirm('ต้องการลบศิษเก่าดีเด่น ?')){
-      this.bestID = +value;
-      let json = {
-        goodstudent_ID : this.bestID
-      }
-      this.http.post('http://qpos.msuproject.net/AllNewService/goodstudent/delete',JSON.stringify(json)).toPromise().then(
-      data =>{
-            if(data == 1){
+  checkBest(value : string){
+    
+    this.userID = value;
+
+
+  for(let i = 0 ; i < this.rUser.length ; i++){
+      if(this.userID == this.rUser[i].user_username){
+
+          this.username = this.rUser[i].user_username;
+          this.password = this.rUser[i].user_password;
+          this.prefix = this.rUser[i].user_prefix;
+          this.name = this.rUser[i].user_name;
+          this.email = this.rUser[i].user_email;
+          this.phone = this.rUser[i].user_phone;
+          this.facebook = this.rUser[i].user_facebook;
+          this.year = this.rUser[i].user_year;
+          this.workplace = this.rUser[i].user_workplace;
+          this.addwork = this.rUser[i].user_workplace;
+          this.job = this.rUser[i].user_job;
+          this.workphone = this.rUser[i].user_workplace;
+          this.role = this.rUser[i].user_role;
+          this.status = this.rUser[i].user_status;
+
+          let json = {user_username : this.username || '', 
+          user_password : this.password || '', 
+          user_prefix : this.prefix || '',
+          user_name : this.name || '',
+          user_phone : this.phone || '',
+          user_email : this.email || '',
+          user_facebook : this.facebook || '',
+          user_year : this.year || '',
+          user_job : this.job || '',
+          user_workname : this.workplace || '',
+          user_workaddress : this.addwork || '',
+          user_workphone : this.workphone || '',
+          user_status : this.status || '',
+          user_role : this.role || '',
+          user_best : 1
+         }
+         console.log(json,this.username);
+
+         if(window.confirm('ต้องการเพิ่มศิษย์เก่าดีเด่น ?')){
+             this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
+          if(data == 1){
+            alert('เพิ่มศิษย์เก่าเรียบร้อย');
+            window.location.reload()
+          }else{
+          
             console.log(data);
-            }
-            else{
-              alert('เสร็จสิ้น');
-              this.show = !this.show;
-              this.ngOnInit();
-            }       
-        
-      }, error =>{
-        alert('fail');
-      });
-    }  
+          }   
+          },
+          (error) => {
+            console.log(error);
+          });
+      }
+  }    
   }
+
+}
+
+addBest(value : string){
+  console.log(value);
+  for(let i = 0 ;  i < this.rUser.length ; i++ ){
+      if(value == this.rUser[i].UID){
+          this.prefix = this.rUser[i].user_prefix;
+      }
+  }
+  console.log(this.prefix);
+ 
+  let json = {
+    best_achievement : this.achievement ,
+    best_year : this.yearBest ,
+    UID : value,
+    user_prefix : this.prefix
+  }
+  console.log(json);
+
+        if(window.confirm('ต้องการเพิ่มข้อมูล ?')){
+            this.http.post('http://qpos.msuproject.net/AllNewService/best/addbeststudent',JSON.stringify(json)).toPromise().then(data => {
+        if(data == 1){
+          alert('เพิ่มข้อมูลเรียบร้อย');
+          window.location.reload()
+        }else{
+        
+          console.log(data);
+        }   
+        },
+        (error) => {
+          console.log(error);
+        });
+        }
+
+
+}
+
+  deleteBest(value : string ){
+      this.userID = value;  
+      console.log(this.userID);
+
+  if(window.confirm('ต้องการลบเก่าดีเด่น ?')){
+    for(let i = 0 ; i < this.bestStudent.length ; i++){
+      if(this.userID == this.bestStudent[i].user_username){
+
+        
+          this.bestID = this.bestStudent[i].best_ID;
+          let json ={
+            best_ID : this.bestID
+          }
+          console.log(json);
+         this.http.post('http://qpos.msuproject.net/AllNewService/best/delete',JSON.stringify(json)).toPromise().then(
+                  data =>{
+                        if(data == 1){
+                        console.log(data);
+                        }
+                        else{          
+                        }       
+                  
+                }, error =>{
+                  alert('fail');
+                });
+        }
+
+        for(let i = 0 ; i < this.rUser.length ; i++){
+          if(this.userID == this.rUser[i].user_username){
+    
+              this.username = this.rUser[i].user_username;
+              this.password = this.rUser[i].user_password;
+              this.prefix = this.rUser[i].user_prefix;
+              this.name = this.rUser[i].user_name;
+              this.email = this.rUser[i].user_email;
+              this.phone = this.rUser[i].user_phone;
+              this.facebook = this.rUser[i].user_facebook;
+              this.year = this.rUser[i].user_year;
+              this.workplace = this.rUser[i].user_workplace;
+              this.addwork = this.rUser[i].user_workplace;
+              this.job = this.rUser[i].user_job;
+              this.workphone = this.rUser[i].user_workplace;
+              this.role = this.rUser[i].user_role;
+              this.status = this.rUser[i].user_status;
+    
+              let json = {user_username : this.username || '', 
+              user_password : this.password || '', 
+              user_prefix : this.prefix || '',
+              user_name : this.name || '',
+              user_phone : this.phone || '',
+              user_email : this.email || '',
+              user_facebook : this.facebook || '',
+              user_year : this.year || '',
+              user_job : this.job || '',
+              user_workname : this.workplace || '',
+              user_workaddress : this.addwork || '',
+              user_workphone : this.workphone || '',
+              user_status : this.status || '',
+              user_role : this.role || '',
+              user_best : 0
+             }
+             console.log(json,this.username);
+    
+           
+                 this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,
+                 JSON.stringify(json)).toPromise().then(data => {
+              if(data == 1){
+                alert('เรียบร้อย');
+                window.location.reload()
+              }else{
+              
+                console.log(data);
+              }   
+              },
+              (error) => {
+                console.log(error);
+              }); 
+        }    
+      }
+    }
+    
+
+
+  }
+}
 
   toggle() {
        
@@ -218,15 +390,5 @@ SearchName(){
     })
   }
 }
-
-  addBest(){
-    let json ={
-      goodstudent_year : this.year,
-      goodstudent_name : this.name,
-      goodstudent_username : this.username,
-      goodstudent_achievement : this.achievement
-    }
-    console.log(json);
-  }
 
 }

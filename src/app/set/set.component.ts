@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+// Angular Forms Modules
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormBuilder , Validators} from '@angular/forms';
 
 interface Articles{
   user_username:string,
@@ -13,7 +16,10 @@ interface Articles{
   user_job : string,
   user_workname : string,
   user_workaddress : string,
-  user_workphone : string
+  user_workphone : string,
+  user_status : number,
+  user_best : string,
+  user_role : string
 }
 
 
@@ -28,6 +34,11 @@ b = 1;
   myValue;
   user_username;
   newpassword;
+//old data
+  username; 
+  password;
+  prefix;
+  name;
   phone;
   email;
   facebook;
@@ -36,54 +47,108 @@ b = 1;
   addwork;
   job;
   workphone;
-  password;
-  workaddress
+  workaddress;
+  best;
+  role;
+  status;
+
   rUser;
   editData = {};
   public myrole;
+  registerForm: FormGroup;
+  submitted = false;
+  mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  usernamePattern = "^((\\+91-?)|0)?[0-9]{11}$"; 
+
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
     private _auth: AuthService,
-    private router1: Router) {
+    private router1: Router,
+    private formBuilder: FormBuilder) {
 
       this.user_username = router.snapshot.params['user_username'];
      }
 
   ngOnInit(): void {
-    this.myValue = this._auth.myData;
-    if(this.myValue){
-        this.myrole = this.myValue[0].user_role;
-
-            console.log(this.myrole);
-            this.password = this.myValue[0].user_password;
-            this.phone = this.myValue[0].user_phone;
-            this.email = this.myValue[0].user_email;
-            this.facebook = this.myValue[0].user_facebook;
-            this.year = this.myValue[0].user_year;
-            this.job = this.myValue[0].user_job;
-            this.workname = this.myValue[0].user_workname;
-            this.workaddress = this.myValue[0].user_workaddress;
-            this.workphone = this.myValue[0].user_workphone;
-    }
     
+    this.registerForm = this.formBuilder.group({
+      phone: ['',[  Validators.required ,Validators.pattern(this.mobnumPattern)]],
+      facebook: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      role : ['', Validators.required],
+     
+  }, {
+  });
+  
+  this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+    data => {
+      
+      this.rUser = data.filter( u => {  
+        return u.user_username == this.user_username;
 
-    var years = 2520;
+      });
+      
+     }, error => {
+    }); 
+  
+  /*   var years = 2520;
     var till = 2580;
     var options = "";
     for(var y=years; y<=till; y++){
     options += "<option>"+ y +"</option>";
     }
-    document.getElementById("year").innerHTML = options;  
+    document.getElementById("year").innerHTML = options;   */
        
   }
+  
+ get f() { return this.registerForm.controls; } 
 
   eDit(){
-  
+    this.submitted = true;
+    console.log(this.rUser);
+    if(this.rUser){
+      this.username = this.rUser[0].user_username;
+      this.password = this.rUser[0].user_password;
+      this.prefix = this.rUser[0].user_prefix;
+      this.name = this.rUser[0].user_name
+      this.phone = this.rUser[0].user_phone;
+      this.email = this.rUser[0].user_email;
+      this.facebook = this.rUser[0].user_facebook;
+      this.year = this.rUser[0].user_year;
+      this.job = this.rUser[0].user_job;
+      this.workname = this.rUser[0].user_workname;
+      this.workaddress = this.rUser[0].user_workaddress;
+      this.workphone = this.rUser[0].user_workphone;
+      this.best = this.rUser[0].user_best;
+      this.role = this.rUser[0].user_role;
+      this.status = this.rUser[0].user_status
+    }
+    console.log(this.registerForm.value);
+
+     // stop here if form is invalid
+   /*  if (this.registerForm.invalid) {
+        return;
+    } */
+
+    if(this.registerForm.value.phone){
+      this.phone = this.registerForm.value.phone
+    }
+    if(this.registerForm.value.email){
+      this.email = this.registerForm.value.email
+    }
+    if(this.registerForm.value.facebook){
+      this.facebook = this.registerForm.value.facebook
+    }
+    if(this.registerForm.value.role){
+      this.role = this.registerForm.value.role
+    }
+
     let json = {
     user_username : this.user_username,
-    user_password : this.password || '',
-    user_name : this.myValue[0].user_name,
+    user_password : this.password,
+    user_prefix : this.prefix ,
+    user_name : this.name,
     user_phone : this.phone || '',
     user_email : this.email || '',
     user_facebook : this.facebook || '',
@@ -92,37 +157,18 @@ b = 1;
     user_workname : this.workname || '',
     user_workaddress : this.workaddress || '',
     user_workphone : this.workphone || '',
-    user_status : 1
+    user_best : this.best || '',
+    user_status : this.status || '',
+    user_role : this.role || ''
   }
     console.log(json);
-
-    if(this.year == ''){
-       if(this.job != '' ||this.workname != '' || this.workaddress != '' || this.workphone != ''){
-          alert('กรุณากรอกปีที่จบ');
-       }else{
-        this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.user_username,JSON.stringify(json)).toPromise().then(data => {
-                
-          if(data == 1){
-            console.log("ok");
-            alert('แก้ไขข้อมูลเรียบร้อย');
-            this.router1.navigateByUrl('/set/'+this.user_username);
-          }else{
-          
-            console.log(data);
-          }
-            
-          },
-          (error) => {
-            console.log(error);
-      });
-       }
-    }else{
-      this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.user_username,JSON.stringify(json)).toPromise().then(data => {
-                
+  
+      this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.user_username,
+      JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
                   console.log("ok");
                   alert('แก้ไขข้อมูลเรียบร้อย');
-                  this.router1.navigateByUrl('/set/'+this.user_username);
+                 this.ngOnInit();
                 }else{
                 
                   console.log(data);
@@ -132,10 +178,11 @@ b = 1;
                 (error) => {
                   console.log(error);
             });
-  
-    }
-          
-    
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.registerForm.reset();
   }
 
 
