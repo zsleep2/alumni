@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   login(){
   
-     let json = {user_username:this.user_username , user_password:this.user_password}
+     let json = {user_username:this.user_username , user_password:this.user_password} 
     /*  console.log(json); */
      this.http.post('http://qpos.msuproject.net/AllNewService/user/login',JSON.stringify(json)).toPromise().then
      (data =>{

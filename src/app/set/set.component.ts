@@ -77,6 +77,11 @@ b = 1;
       facebook: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       role : ['', Validators.required],
+      year : ['', Validators.required],
+      workname : ['', Validators.required],
+      job : ['', Validators.required],
+      workaddress : ['', Validators.required],
+      workphone : ['', Validators.required],
      
   }, {
   });
@@ -139,11 +144,27 @@ b = 1;
     }
     if(this.registerForm.value.facebook){
       this.facebook = this.registerForm.value.facebook
+      
     }
-    if(this.registerForm.value.role){
+     if(this.registerForm.value.role){
       this.role = this.registerForm.value.role
     }
-
+    if(this.registerForm.value.year){
+      this.year = this.registerForm.value.year
+    }
+    if(this.registerForm.value.workname){
+      this.workname = this.registerForm.value.workname
+    }
+    if(this.registerForm.value.job){
+      this.job = this.registerForm.value.job
+    }
+    if(this.registerForm.value.workaddress){
+      this.workaddress = this.registerForm.value.workaddress
+    }
+    if(this.registerForm.value.workphone){
+      this.workphone = this.registerForm.value.workphone
+    }
+   
     let json = {
     user_username : this.user_username,
     user_password : this.password,
@@ -157,9 +178,9 @@ b = 1;
     user_workname : this.workname || '',
     user_workaddress : this.workaddress || '',
     user_workphone : this.workphone || '',
-    user_best : this.best || '',
-    user_status : this.status || '',
-    user_role : this.role || ''
+    user_best : this.best ,
+    user_status : this.status ,
+    user_role : this.role 
   }
     console.log(json);
   
@@ -168,6 +189,8 @@ b = 1;
                 if(data == 1){
                   console.log("ok");
                   alert('แก้ไขข้อมูลเรียบร้อย');
+                  this.submitted = false;
+                  this.registerForm.reset();
                  this.ngOnInit();
                 }else{
                 

@@ -21,7 +21,6 @@ user_name;
   ngOnInit(): void {
     
     this.myValue = this._auth.myUser;
-    console.log(this.user_username2);
    
       this.items = [
         {

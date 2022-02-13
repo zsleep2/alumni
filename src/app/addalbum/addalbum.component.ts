@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { FreeapiService } from '../freeapi.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 interface lstAlbum{
   'album_ID':number;
   'album_name':string;
@@ -35,12 +36,15 @@ export class AddalbumComponent implements OnInit {
   user_username2;
   albumGen;
   nrSelect;
-
+  gen;
+  addAlbumForm: FormGroup;
+  submitted = false;
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
     private _auth: AuthService,
-    private _freeApi: FreeapiService) {
+    private _freeApi: FreeapiService,
+    private formBuilder: FormBuilder) {
 
       this.user_username = router.snapshot.params['user_username'];
       this.user_username2 = this.user_username.substring(0, 2);
@@ -48,37 +52,19 @@ export class AddalbumComponent implements OnInit {
      }
 
   ngOnInit(): void {
-
-    this.myValue = this._auth.myData;
+     this.myValue = this._auth.myData;
+      if(this.myValue){
     this.myrole = this.myValue[0].user_role;
-
-    this.items = [
-      {
-          label: 'หน้าแรก', routerLink:['/home2/'+this.user_username],
-    
-      },
-      
-      {
-        label: 'นักศึกษาปัจจุบัน', routerLink:['/member1/'+this.user_username],
-       
-      },
-      {
-        label: 'ศิษย์เก่า', routerLink:['/member2/'+this.user_username],
-    },
-      {
-        label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username],
-      },
-      {
-        label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username],
-    },
-    {
-      label:'ออกจากระบบ', routerLink:['/home'],
     }
+      this.gen = this.user_username.substring(0, 2);
+    console.log(this.gen);
 
-
-      
-      /* {separator:true}, */
-  ];
+    this.addAlbumForm = this.formBuilder.group({
+      nameAlbum : ['', Validators.required],
+      gen : ['', Validators.required],
+     
+  }, {
+  });
 
   this._freeApi.getAlbum().subscribe
   (
@@ -88,13 +74,18 @@ export class AddalbumComponent implements OnInit {
   )
 }
 
+get f() { return this.addAlbumForm.controls; } 
+
   
 
   addAlbum(){
-    this.albumGen = this.nrSelect;
-    let json = {album_name :this.nameAlbum,
-    album_gen : this.albumGen,
+    this.submitted = true;
+   
+    let json = {album_name :this.addAlbumForm.value.nameAlbum,
+    album_gen : this.addAlbumForm.value.gen,
     UID : this.myValue[0].UID}
+    console.log(json);
+    
     this.http.post('http://qpos.msuproject.net/AllNewService/album/addalbum',JSON.stringify(json)).toPromise().then(
       data =>{
           if(data ==1){
@@ -125,35 +116,9 @@ export class AddalbumComponent implements OnInit {
     )
   }
 
-  getFile(files : FileList){
-    console.log(files.item(0).name);
-    let file = files.item(0);
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      /*   console.log(reader.result); */
-      this.img_file = reader.result;
-    };
-  } 
-  
-  addPhoto(){
-    let json = {
-      photo_file: this.img_file,
-      album_ID:this.AlbumSelected
-      
-    }
-
-    this.http.post('http://qpos.msuproject.net/AllNewService/photo/addphoto',JSON.stringify(json)).
-    toPromise().then(data => {
-      
-      console.log(data);
-          
-      },
-      (error) => {
-        console.log(error);
-      });  
-
-    console.log(json);
+  onReset() {
+    this.submitted = false;
+    this.addAlbumForm.reset();
   }
 
 

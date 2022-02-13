@@ -41,39 +41,57 @@
         <body>
             
             <div class="wrapper">
-                <div class="one" style=" background-color: rgba(27,31,34,0.85);">
-                    <div class="ui-g">
-                        <div class="ui-g-6" >
-                            <br>
-                            <h2>
-                                วิทยาการคอมพิวเตอร์
-                            </h2>
-                            <p style="color: white;">
-                                Informatics Mahasarakham University
-                            </p>
-                                
-                            
-                            <img src="../../assets/images/logo-it-x.png" class="img"> 
-                            
-                        </div>
-                        <div class="ui-g-6" >
-                            <br>
-                            <p-menubar [model]="items" ></p-menubar>
-                        </div>
-                    </div>
+                <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
+                    <app-header2></app-header2>
                 </div>
 
                 <div class="two">
-                    <br>
+
+                    <div class="card m-3">
+                        <h5 class="card-header">เพิ่มอัลบั้ม </h5>
+                        
+                        <div class="card-body">
+                             
+                        <form [formGroup]="addAlbumForm" (ngSubmit)="addAlbum()">
+                            <div class="form-row" >
+                                <div class="form-group col-12">
+                                    <label style="font-size: medium;">ชื่ออัลบั้ม</label>
+                                    <input type="text" formControlName="nameAlbum" class="form-control" style="font-size: medium;"
+                                    [ngClass]="{ 'is-invalid': submitted  }" />
+                                <!--  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                        <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
+                                        <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
+                                    </div> -->
+                                </div>
+                                <div class="form-group col-12">
+                                    <label>รุ่น</label>
+                                    <select formControlName="gen" class="form-control" style="font-size: medium;"
+                                    [ngClass]="{ 'is-invalid': submitted  }">
+                                        <option value=""></option>
+                                        <option value="0">อัลบั้มทั่วไป</option>
+                                        <option value={{this.gen}}>อัลบั้มรุ่น</option>
+                                    </select>
+                                </div>
+                            </div>    
+                        <div class="text-center">
+                                    <button class="btn btn-primary mr-1">เพิ่มอัลบั้ม</button>
+                                    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                        </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                 <!--    <br>
                     <h3>เพิ่มอัลบั้ม</h3> <br>
                     ชื่ออัลบั้ม <br>
                     <input id="text" type="text" size = "50" pInputText  [(ngModel)]="nameAlbum"> <br> <br>
                     <select id="country"  [(ngModel)]='nrSelect' >
                         <option value="00">อัลบั้มทั่วไป</option>
-                        <option *ngIf = "this.myrole != 1" value={{user_username2}}>อัลบั้มรุ่น</option>  
+                        <option *ngIf = "this.myrole != 1" value={{this.gen}}>อัลบั้มรุ่น</option>  
                     </select> <br> <br>
                     <button type="button" class="btn btn-success" (click)="addAlbum()" >เพิ่มอัลบั้ม</button> <br>
-                    <br>
+                    <br> -->
                    <!--  <h3>เพิ่มรูปภาพ
                     </h3>
                     <div style="margin: auto;width: 31%;border: 1px solid rgb(13, 0, 128);padding: 10px;">

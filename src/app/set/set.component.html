@@ -33,27 +33,27 @@
                                  
                             <form [formGroup]="registerForm" (ngSubmit)="eDit()">
                                 <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label>เบอร์โทรศัพท์</label>
-                                        <input type="text" formControlName="phone" class="form-control" 
+                                    <div class="form-group col-4">
+                                        <label style="font-size: medium;">เบอร์โทรศัพท์</label>
+                                        <input type="text" formControlName="phone" class="form-control" style="font-size: medium;"
                                         [ngClass]="{ 'is-invalid': submitted  }" />
                                     <!--  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
                                             <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
                                             <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
                                         </div> -->
                                     </div>
-                                    <div class="form-group col-12"> 
-                                        <label>Email</label>
-                                        <input type="text" formControlName="email" class="form-control" 
+                                    <div class="form-group col-4"> 
+                                        <label style="font-size: medium;">Email</label>
+                                        <input type="text" formControlName="email" class="form-control" style="font-size: medium;"
                                         [ngClass]="{ 'is-invalid': submitted  }" />
                                         <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                             <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
                                             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                                         </div> -->
                                     </div>
-                                    <div class="form-group col-12"> 
-                                        <label>Facebook</label>
-                                        <input type="text" formControlName="facebook" class="form-control" 
+                                    <div class="form-group col-4"> 
+                                        <label style="font-size: medium;">Facebook</label>
+                                        <input type="text" formControlName="facebook" class="form-control" style="font-size: medium;"
                                         [ngClass]="{ 'is-invalid': submitted }" />
                                     <!-- <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
                                         <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
             </div>
-            <div *ngIf="this.user.user_role == 3">
+            <div class="three" *ngIf="this.user.user_role == 3">
                 <!-- main app container -->
                 <div class="card m-3">
                     <h5 class="card-header">แก้ไขข้อมูลส่วนตัว</h5>
@@ -89,35 +89,68 @@
                          
                     <form [formGroup]="registerForm" (ngSubmit)="eDit()">
                         <div class="form-row">
-                            <div class="form-group col-12">
-                                <label>เบอร์โทรศัพท์</label>
-                                <input type="text" formControlName="phone" class="form-control" 
+                            <div class="form-group col-4">
+                                <label style="font-size: medium;">เบอร์โทรศัพท์</label>
+                                <input type="text" formControlName="phone" class="form-control" style="font-size: medium;"
                                 [ngClass]="{ 'is-invalid': submitted  }" />
-                            <!--  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                                    <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
-                                    <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
-                                </div> -->
+                             <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                    <!-- <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
+                                    <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div> -->
+                                </div>
                             </div>
-                            <div class="form-group col-12"> 
-                                <label>Email</label>
-                                <input type="text" formControlName="email" class="form-control" 
+                            <div class="form-group col-4"> 
+                                <label style="font-size: medium;">Email</label>
+                                <input type="text" formControlName="email" class="form-control" style="font-size: medium;"
                                 [ngClass]="{ 'is-invalid': submitted  }" />
-                                <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                    <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
-                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                                </div> -->
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <!-- <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div> -->
+                                </div>
                             </div>
-                            <div class="form-group col-12"> 
-                                <label>Facebook</label>
-                                <input type="text" formControlName="facebook" class="form-control" 
+                            <div class="form-group col-4"> 
+                                <label style="font-size: medium;">Facebook</label>
+                                <input type="text" formControlName="facebook" class="form-control" style="font-size: medium;"
                                 [ngClass]="{ 'is-invalid': submitted }" />
                             <!-- <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
                                 <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
                                 </div>  -->  
                             </div>
+                            <div class="form-group col-2">
+                                <label style="font-size: medium;" >ปีที่จบ</label>
+                                <select formControlName="year" class="form-control" style="font-size: medium;"
+                                [ngClass]="{ 'is-invalid': submitted  }">
+                                    <option value=""></option>
+                                    <option value="2564" style="font-size: medium;">2564</option>
+                                    <option value="2563" style="font-size: medium;" >2563</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-5">
+                                <label style="font-size: medium;" >บริษัท</label>
+                                <input type="text" formControlName="workname" class="form-control" style="font-size: medium;"
+                                [ngClass]="{ 'is-invalid': submitted  }" />
+                            </div>
+                            <div class="form-group col-5">
+                                <label style="font-size: medium;" >ตำแหน่งงาน</label>
+                                <select formControlName="job" class="form-control" style="font-size: medium;"
+                                [ngClass]="{ 'is-invalid': submitted  }">
+                                    <option value=""></option>
+                                    <option value="NetworkAdmin" style="font-size: medium;">NetworkAdmin</option>
+                                    <option value="Developer" style="font-size: medium;" >Developer</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label style="font-size: medium;" >ที่อยู่</label>
+                                <input type="textarea" formControlName="workaddress" class="form-control" style="font-size: medium;"
+                                [ngClass]="{ 'is-invalid': submitted  }" />
+                            </div>
+                            <div class="form-group col-6">
+                                <label style="font-size: medium;" >เบอร์โทรศัพท์ที่ทำงาน </label>
+                                <input type="textarea" formControlName="workphone" class="form-control" style="font-size: medium;"
+                                [ngClass]="{ 'is-invalid': submitted  }" />
+                            </div>
                         </div>    
                     <div class="text-center">
-                                <button class="btn btn-primary mr-1">แก้ไขข้อมูลส่วนตัว</button>
+                                <button class="btn btn-primary mr-1" style="font-size: medium;">แก้ไขข้อมูลส่วนตัว</button>
                                 <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
                     </div>
                         </form>

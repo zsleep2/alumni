@@ -32,28 +32,29 @@ export class PostComponent implements OnInit {
     private http: HttpClient, 
     private router1: Router, 
     private _auth: AuthService) { 
-
+ 
     this.user_username = router.snapshot.params['user_username'];
     this.user_username2 = this.user_username.substring(0, 2);
 
   }
 
   ngOnInit(): void {
-      this.myValue = this._auth.myData;
 
+      if(this.myValue){
+      this.myValue = this._auth.myData;
       this.myrole = this.myValue[0].user_role;
+      }
+     
   }
 
   post(){
     
       this.tag=this.nrSelect;
-      
       let json = {webboard_title:this.text, 
         webboard_description:this.text2,
         webboard_date: new Date(),
         webboard_gen:this.tag,
         UID:this.myValue[0].UID }
-
         console.log(json);
     
       this.http.post('http://qpos.msuproject.net/AllNewService/webboard/addwebboard',JSON.stringify(json)).toPromise().then(
