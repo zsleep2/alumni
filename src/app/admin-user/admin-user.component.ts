@@ -181,22 +181,24 @@ export class AdminUserComponent implements OnInit {
    }
 
    inputData() {
-    for (var i in this.data) {
-    //console.log(this.data[i]);
-    /*  let json ={
+   /*  for (var i in this.data) {
+  
+     let json ={
                 user_username : this.data[i].user_username || '',       
                 user_password : this.data[i].user_password || '',
+                user_prefix : this.data[i].user_prefix || '',
                 user_name : this.data[i].user_name || '',
                 user_email : this.data[i].user_email || '',
                 user_phone : this.data[i].user_phone || '',
                 user_facebook : this.data[i].user_facebook || '',
                 user_year : this.data[i].user_year || '',
                 user_workname : this.data[i].user_workname || '',
-                user_workaddress : this.data[i].user_addwork || '',
+                user_workaddress : this.data[i].user_workaddress || '',
                 user_job : this.data[i].user_job || '',
                 user_workphone : this.data[i].user_workphone || '',
                 user_role : this.data[i].user_role || '',
-                user_status : 1
+                user_best : 0 ,
+                user_status : 0
               }
      console.log(json) 
        this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
@@ -204,6 +206,7 @@ export class AdminUserComponent implements OnInit {
         if(data == 1){
           console.log('OK');
           alert('OK!!');
+          window.location.reload();
         }else{
         
           console.log(data);
@@ -212,8 +215,8 @@ export class AdminUserComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-        });  */
-          }   
+        }); 
+          }    */
       } 
 
       toggle() {

@@ -71,7 +71,8 @@ b = 1;
      }
 
   ngOnInit(): void {
-    
+    this.myrole = localStorage.getItem('role');
+    console.log(this.myrole);
     this.registerForm = this.formBuilder.group({
       phone: ['',[  Validators.required ,Validators.pattern(this.mobnumPattern)]],
       facebook: ['', Validators.required],

@@ -65,6 +65,10 @@ export class WebboardListComponent implements OnInit {
   public myGen;
   public year;
   public show:boolean = false;
+  rawData = [];
+  min:number;
+  max:number;
+  public testData:number[]=[];
 
   localUser;
 
@@ -130,12 +134,7 @@ export class WebboardListComponent implements OnInit {
           
          }, error => {
         }); 
-
-    
-   
-    this.myGen = "0";
-   
-  
+      this.myGen = "0";
       this.items = [
         {
           label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
@@ -184,27 +183,41 @@ export class WebboardListComponent implements OnInit {
       }
     });   
 
-     // ส่วนของการดึงข้อมูลด้วย HttpClient get() method
      this.http.get<Articles[]>(this.urlSource)
      .subscribe(
        data => {
         console.log(data);
-       let json = JSON.stringify(data)
-         // กรณี resuponse success
-         // เก็บจำนวนรายการทั้งหมด ไปคำนวณหน้าจำนวนหน้า
-         this.totalItem = json.length;
+        let json = JSON.stringify(data)  
+        this.totalItem = json.length;
         console.log(this.user_username);
-        
-         if(this.user_username.substring(0, 2) == "pi"){
-
-            this.results = data;
-
-         }else{
+       
             this.results = data.filter( result => { 
             return result.webboard_gen == "0";
-
         });;
-         }
+         
+        for(let i in data){
+          this.testData.push(+data[i].webboard_gen);
+        }
+        this.max = 0;
+        this.min = 100;
+        for(let i = 0 ; i < this.testData.length ; i++){
+              if(this.testData[i] !== 0){
+                 if(this.max < this.testData[i]){
+                    this.max = this.testData[i]
+                 }
+                 if(this.min > this.testData[i]){
+                    this.min = this.testData[i]
+                 }
+              }
+        }
+        for(var i=this.max+1; i>=this.min; i--){
+          if(i ==this.max+1){
+            this.rawData.push('');
+          }else{
+            this.rawData.push(i);
+          }
+        }
+          console.log(this.rawData);
         
        },
        ( err:HttpErrorResponse ) => {
@@ -315,39 +328,13 @@ export class WebboardListComponent implements OnInit {
     });
 
   }
-
-  contactMethods = [
-    { id: 1, label: "70" },
-    { id: 2, label: "69" },
-    { id: 3, label: "68" },
-    { id: 4, label: "67" },
-    { id: 5, label: "66" },
-    { id: 6, label: "65" },
-    { id: 7, label: "64" },
-    { id: 8, label: "63" },
-    { id: 9, label: "62" },
-    { id: 10, label: "61" },
-    { id: 11, label: "60" },
-    { id: 12, label: "59" },
-    { id: 13, label: "58" },
-    { id: 14, label: "57" },
-    { id: 15, label: "56" },
-    { id: 16, label: "55" },
-    { id: 17, label: "54" },
-    { id: 18, label: "53" },
-    { id: 19, label: "52" },
-  ]
-
   searchYear(){
-    /* var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-        options += "<option>"+ y +"</option>";
-    }
-    document.getElementById("year").innerHTML = options; */
-    
     this.myGen = this.year;
+
+    console.log(this.year);
+       
+   
+
     this.http.get<Articles[]>(this.urlSource).subscribe(
       data => {
        

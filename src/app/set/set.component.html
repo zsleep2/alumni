@@ -20,8 +20,8 @@
             </div>
             <div class="four"></div>   
             <div class="two">
-                <div *ngFor="let user of rUser ">
-                    <div *ngIf="this.user.user_role == 2">
+                <div  *ngFor="let user of rUser ">
+                    <div class="three" *ngIf="this.myrole == 2">
                         <!-- main app container -->
                         <div class="card m-3">
                             <h5 class="card-header">แก้ไขข้อมูลส่วนตัว</h5>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
             </div>
-            <div class="three" *ngIf="this.user.user_role == 3">
+            <div class="three" *ngIf="this.myrole == 3">
                 <!-- main app container -->
                 <div class="card m-3">
                     <h5 class="card-header">แก้ไขข้อมูลส่วนตัว</h5>

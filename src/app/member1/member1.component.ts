@@ -55,6 +55,7 @@ export class Member1Component implements OnInit {
   myrole;
   public show:boolean = false;
   public allyear;
+  rawData = [];
  
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
@@ -98,10 +99,9 @@ export class Member1Component implements OnInit {
      if(status !== '1'){
         this.router1.navigateByUrl('/login');
      }else{
-     
         this.myrole = localStorage.getItem('role');
-      
      }
+
     
     this.mygen="0";
     /* console.log(this.min,this.max); */
@@ -148,27 +148,31 @@ export class Member1Component implements OnInit {
         
                 });
                this.max = +data[0].user_username.substring(0,2)
-               this.min = +data[data.length-1].user_username.substring(0,2)  
+               this.min = +data[data.length-1].user_username.substring(0,2) 
+               for(var i=this.max+1; i>=this.min; i--){
+                if(i ==this.max+1){
+                  this.rawData.push('');
+                }else{
+                  this.rawData.push(i);
+                }
+                
+                }
+                console.log(this.rawData);
                }, error => {
               });  
+
             
 }
- 
-contactMethods = [
-  { id: 1, label: "59" },
-  { id: 2, label: "58" },
-  { id: 3, label: "57" },
-]
-ser(){
- 
-  /* var options = "";
-  for(var y=+this.max; y>=this.min; y--){
-    this.allyear = [{num:y}];
-    options += "<option>"+ y +"</option>";
+
+/* minMax(){
+  for(var y=this.max; y>=this.min; y--){
+    this.rawData.push(y);
+  
     }
-    console.log(this.allyear);
-    document.getElementById("year").innerHTML = options; */
-   
+    console.log(this.rawData);
+}
+ */
+ser(){
     this.mygen = this.year;
   
   this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(

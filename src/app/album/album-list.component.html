@@ -69,8 +69,7 @@
                     
                     <label  style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
                     <select  [(ngModel)]="year" (click)="searchYear()">
-                        <option label=" " disabled></option>
-                        <option *ngFor="let method of contactMethods" >{{ method.label }}</option>
+                        <option *ngFor="let method of rawData" >{{ method }}</option>
                     </select>
                  </div>       
                  <h3 class="Css1">

@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
          
       },
       {
-        label: ' อัลบั้มรูปภาพ ', routerLink:['/album'],
+        label: ' อัลบั้มรูปภาพ ', routerLink:['/login'],
         
     },
       {
