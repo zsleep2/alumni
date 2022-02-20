@@ -44,7 +44,7 @@ export class AdminWebComponent implements OnInit {
     private router: ActivatedRoute, 
     private router1: Router,
     private _auth: AuthService) { 
-      this.user_username = router.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
     }
     changePage(page:number){
       this.activePage = page;
@@ -77,8 +77,7 @@ export class AdminWebComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
-    this.myValue = this._auth.myData;
+
     var years = 70;
     var till = 50;
     var options = "";

@@ -37,7 +37,7 @@ export class AdminNewComponent implements OnInit {
     private router1: Router,
     private _auth: AuthService) { 
       
-      this.user_username = router.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
 
     }
 
@@ -73,7 +73,6 @@ export class AdminNewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.myValue = this._auth.myData;
 
     this.activePage = 1;
     this.nextPage = 2;

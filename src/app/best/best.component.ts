@@ -17,15 +17,17 @@ export class BestComponent implements OnInit {
   bestStudent;
   myValue;
   myrole;
+  user_username;
   public bestID;
   public show:boolean = false;
   constructor(private _auth: AuthService,
-    private http: HttpClient) { }
+    private http: HttpClient) {
+      this.user_username = localStorage.getItem('user_username');
+     }
 
   ngOnInit(): void {
 
-    this.myValue = this._auth.myData;
-    if(this.myValue){this.myrole = this.myValue[0].user_role;}
+    this.myrole = localStorage.getItem('role');
     
    
     this.http.get('http://qpos.msuproject.net/AllNewService/best/result').subscribe(

@@ -29,8 +29,12 @@
                 </div>
                 <div class="ui-g-6" >
                     <br>
-                    <p-menubar [model]="items ">
-                    </p-menubar>
+                    <p-menubar [model]="items "></p-menubar>
+                    <div style="text-align: right;">
+                      <button pButton (click) ="logOut()"
+                      type="button" label="ออกจากระบบ" 
+                      class="pui-button-rounded ui-button-danger"></button>
+                  </div>
                 </div>
             </div>
             </div>
@@ -140,7 +144,7 @@
           <br>
           <button pButton type="button" label="คอมเมนท์" class="ui-button-rounded ui-button-success" (click)='addComment()' ></button>
           &nbsp; &nbsp; &nbsp;
-          <button [routerLink]="['/webboard/'+this.myValue[0].user_username,{id:postID}]" 
+          <button [routerLink]="['/webboard/'+this.user_username,{id:postID}]" 
             [queryParams]="{page: activePage}" class="btn btn-sm btn-warning"> กลับหน้าเว็บบอร์ด</button>
             </div>
             </div>

@@ -52,7 +52,7 @@ export class NewListComponent implements OnInit {
     private router2: ActivatedRoute
   )  {
 
-    this.user_username = router2.snapshot.params['user_username'];
+    this.user_username = localStorage.getItem('user_username');
       
    }
 

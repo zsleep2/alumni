@@ -72,12 +72,12 @@ export class AdminUserComponent implements OnInit {
     private router: ActivatedRoute, 
     private router1: Router,
     private _auth: AuthService) { 
-      this.user_username = router.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
     }
 
     changePage(page:number){
       this.activePage = page;
-      this.router1.navigate(['/admin_user/'+this.myValue[0].user_username], {queryParams:{page:page}});
+      this.router1.navigate(['/admin_user/'+this.user_username], {queryParams:{page:page}});
     }
     pagination(){
       if(this.activePage > this.useShowPage){
@@ -107,7 +107,6 @@ export class AdminUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.nrSelect = 0;
-    this.myValue = this._auth.myData;
     var years = 70;
     var till = 50;
     var options = "";

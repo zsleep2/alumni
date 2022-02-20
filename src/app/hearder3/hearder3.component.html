@@ -14,6 +14,11 @@
         <div class="ui-g-6" >
             <br> <br>
             <p-megaMenu [model]="items" ></p-megaMenu>
+            <div style="text-align: right;">
+                <button pButton (click) ="logOut()"
+                type="button" label="ออกจากระบบ" 
+                class="pui-button-rounded ui-button-danger"></button>
+                </div>
         </div>
     </div>
     

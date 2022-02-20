@@ -30,6 +30,17 @@
     text-align: center
     
   }
+  .hear{
+    grid-column: 2 / 6;
+    grid-row: 2 ;
+    padding: 20px;
+    background-color: rgba(2, 0, 73, 0.85);
+  }
+  .head{
+    font-size: x-large;
+    color: white;
+    font-weight: bold;
+    }
 
   #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;

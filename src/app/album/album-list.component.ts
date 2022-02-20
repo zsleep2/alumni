@@ -69,13 +69,13 @@ export class AlbumListComponent implements OnInit {
     private router2: ActivatedRoute,
     ) { 
       
-      this.user_username = router2.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
       
     }
 
     changePage(page:number){
       this.activePage = page;
-      this.router1.navigate(['/album/'+this.myValue[0].user_username], {queryParams:{page:page}});
+      this.router1.navigate(['/album/'+this.user_username], {queryParams:{page:page}});
     }
 
     pagination(){
@@ -106,21 +106,14 @@ export class AlbumListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-    this.myValue = this._auth.myData;
-    this.mygen = "0";
-    if(this.myValue){
-      this.myrole = this.myValue[0].user_role;
-    }
+    const status = localStorage.getItem('status');
    
-
-    var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-    options += "<option>"+ y +"</option>";
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+    this.mygen = "0"; 
+    this.myrole = localStorage.getItem('role');
     }
-    document.getElementById("year").innerHTML = options;
     
       this.items = [
         {
@@ -139,9 +132,7 @@ export class AlbumListComponent implements OnInit {
         {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
         },
-        {
-          label:'ออกจากระบบ', routerLink:['/home']
-        }
+        
   ]
     
 
@@ -204,6 +195,12 @@ export class AlbumListComponent implements OnInit {
 
   }
 
+  logOut(){
+    this.router1.navigateByUrl('/home');
+    localStorage.removeItem('status');
+  
+  }
+
   addAlbum(){
 
     let json = {album_name :this.nameAlbum}
@@ -213,7 +210,7 @@ export class AlbumListComponent implements OnInit {
             if(data == 1){
             console.log(data);
             console.log('ok');
-            this.router1.navigateByUrl('/album/'+this.myValue[0].user_username);
+            this.router1.navigateByUrl('/album/'+this.user_username);
             }
             else{
               console.log('fail');
@@ -260,7 +257,7 @@ export class AlbumListComponent implements OnInit {
   }
 
   genAlbum(){
-    this.mygen = this.myValue[0].user_username.substring(0, 2);
+    this.mygen = this.user_username.substring(0, 2);
     this.http.get<lstAlbum[]>('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
     data => {
       console.log(data);
@@ -275,8 +272,38 @@ export class AlbumListComponent implements OnInit {
     });
   }
 
+  contactMethods = [
+    { id: 1, label: "70" },
+    { id: 2, label: "69" },
+    { id: 3, label: "68" },
+    { id: 4, label: "67" },
+    { id: 5, label: "66" },
+    { id: 6, label: "65" },
+    { id: 7, label: "64" },
+    { id: 8, label: "63" },
+    { id: 9, label: "62" },
+    { id: 10, label: "61" },
+    { id: 11, label: "60" },
+    { id: 12, label: "59" },
+    { id: 13, label: "58" },
+    { id: 14, label: "57" },
+    { id: 15, label: "56" },
+    { id: 16, label: "55" },
+    { id: 17, label: "54" },
+    { id: 18, label: "53" },
+    { id: 19, label: "52" },
+  ]
+  
   searchYear(){
+   /*  var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+    options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options; */
     this.mygen = this.year;
+    
     this.http.get<lstAlbum[]>('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
       data => {
        

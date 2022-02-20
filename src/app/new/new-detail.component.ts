@@ -37,6 +37,7 @@ export class NewDetailComponent implements OnInit {
   public nDes:string;
   public nTitle:string;
   base64;
+  myrole;
  
  
   items: MenuItem[];
@@ -48,30 +49,30 @@ export class NewDetailComponent implements OnInit {
     private router4: ActivatedRoute,
     ) {
 
-      this.user_username = router4.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');;
 
      }
 
   ngOnInit(): void {
-    this.myValue = this._auth.myData;
-    if(this.myValue){  this.myUser = this.myValue[0].user_username;}
+    this.myrole = localStorage.getItem('role');
+    
   
       this.items = [
         {
-          label: 'หน้าแรก', routerLink:['/home2/'+this.myUser]
+          label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.myUser]
+            label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myUser]
+          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
           
       },
         {
-            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myUser]
+            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
         },
         {
           label:'ออกจากระบบ', routerLink:['/home']
@@ -126,11 +127,11 @@ export class NewDetailComponent implements OnInit {
     this.nTitle = this.results[0].new_title;
     this.nDes = this.results[0].new_description;
     this.base64 = this.results[0].new_image;
-    console.log(this.results[0].user_username,this.myValue[0].user_username);
-    if(this.myValue[0].user_role == "1"){
+    console.log(this.results[0].user_username,this.user_username);
+    if(this.myrole == "1"){ 
     this.show = !this.show;
     }else{
-      if(this.results[0].user_username == this.myValue[0].user_username){
+      if(this.results[0].user_username == this.user_username){
         this.show = !this.show;
       }else{
         alert('ไม่สามารถแก้ไขได้');

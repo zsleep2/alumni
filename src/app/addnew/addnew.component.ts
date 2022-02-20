@@ -14,15 +14,17 @@ export class AddnewComponent implements OnInit {
   img_file;
   myValue;
   user_username;
+  uid;
   constructor( private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router,
     private _auth: AuthService) {
-    this.user_username = router.snapshot.params['user_username'];
+    this.user_username = localStorage.getItem('user_username');
    }
 
   ngOnInit(): void {
-    this.myValue = this._auth.myData;
+   
+    this.uid = localStorage.getItem('uid');
 
   }
 
@@ -32,7 +34,7 @@ export class AddnewComponent implements OnInit {
       new_description : this.description,
       new_image : this.img_file,
       new_status: 0,
-      UID : this.myValue[0].UID
+      UID : this.uid
     }
     console.log(json);
 

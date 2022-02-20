@@ -55,6 +55,7 @@ export class WebboardDetailComponent implements OnInit {
   public deleteid;
   public myid;
   items: MenuItem[];
+  myrole;
 
 
   constructor(private router: ActivatedRoute,
@@ -63,7 +64,7 @@ export class WebboardDetailComponent implements OnInit {
     private _auth: AuthService,
     private router4: ActivatedRoute) { 
 
-      this.user_username = router4.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');;
     
       /* console.log('detail'+this.user_username); */
 
@@ -71,35 +72,30 @@ export class WebboardDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.myValue = this._auth.myData;
-    if(this.myValue){
-    this.id = this.myValue[0].UID;
-    this.user_username2 = this.myValue[0].user_username.substring(0, 2);
-    this.myid = this.myValue[0].user_username;
-    }
+    
+    this.id = localStorage.getItem('uid');
+    this.user_username2 = this.user_username.substring(0, 2);
+    this.myrole = localStorage.getItem('role');
    
 
   
       this.items = [
         {
-          label: 'หน้าแรก', routerLink:['/home2/'+this.myid]
+          label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.myid]
+            label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myid]
-          
-      },
-        {
-            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myid]
+          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
         },
         {
-          label:'ออกจากระบบ', routerLink:['/home']
-        }
+            label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
+        },
+        
   ]
     
     
@@ -209,12 +205,12 @@ addComment(){
 
       this.webTitle = this.results[0].webboard_title;
       this.webDes = this.results[0].webboard_description;
-      console.log(this.results[0].user_username,this.myValue[0].user_username);
-      if(this.myValue[0].user_role == "1"){
+      console.log(this.results[0].user_username,this.user_username);
+      if(this.myrole == "1"){
       
       this.show = !this.show;
       }else{
-        if(this.results[0].user_username == this.myValue[0].user_username){
+        if(this.results[0].user_username == this.user_username){
           this.show = !this.show;
           
         }else{
@@ -233,7 +229,7 @@ addComment(){
       for (let i = 0; i < this.comments.length; i++) {
           if(this.comid == this.comments[i].comment_ID){
               console.log(this.comments[i].comment_description);
-              if(this.comments[i].user_username == this.myValue[0].user_username){
+              if(this.comments[i].user_username == this.user_username){
                     this.showcom = !this.showcom
                    
               }else{
@@ -287,7 +283,7 @@ addComment(){
                 }
                 else{
                   console.log(data);
-                  this.router1.navigateByUrl('/webboard/'+this.myValue[0].user_username);
+                  this.router1.navigateByUrl('/webboard/'+this.user_username);
                 }       
             
           }, error =>{
@@ -305,7 +301,7 @@ addComment(){
         for (let i = 0; i < this.comments.length; i++) {
           if(this.editid == this.comments[i].comment_ID){
               
-              if(this.comments[i].user_username == this.myValue[0].user_username){
+              if(this.comments[i].user_username == this.user_username){
                   console.log('ok');
                    if(window.confirm('ยืนยันแก้ไขข้อความ ?')){
                       let json = {
@@ -339,7 +335,7 @@ addComment(){
           console.log('ลบได้');
           for (let i = 0; i < this.comments.length; i++) {
             if(this.deleteid == this.comments[i].comment_ID){       
-                if(this.comments[i].user_username == this.myValue[0].user_username){
+                if(this.comments[i].user_username == this.user_username){
                     console.log('ok');
                      if(window.confirm('ยืนยันการลบคอมเม้น ?')){
                         let json = {
@@ -374,6 +370,12 @@ addComment(){
       
       closeForm() {
         document.getElementById("myForm").style.display = "none";
+      }
+
+      logOut(){
+        this.router1.navigateByUrl('/home');
+        localStorage.removeItem('status');
+      
       }
  
 }

@@ -29,8 +29,13 @@
                     </div>
                     <div class="ui-g-6" >
                         <br>
-                        <p-menubar style="font-size: medium;" [model]="items ">
-                        </p-menubar>
+                        <p-menubar [model]="items "></p-menubar>
+                        <div style="text-align: right;">
+                            <button pButton (click) ="logOut()"
+                            type="button" label="ออกจากระบบ" 
+                            class="pui-button-rounded ui-button-danger"></button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -108,30 +113,28 @@
                             <tr>
                                 <th style="font-size: medium;">เว็บบอร์ด</th>
                             </tr>
-                            <div >
-                                
-                                <label *ngIf="this.myrole == 1" style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
-                                <select  id="year" (click)="searchYear()" [(ngModel)]="year" >
-                                  
-                                </select> 
-                            </div>
-                             
+                            <div *ngIf="this.myrole == 1" style="text-align: center;">
+                                <label  style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
+                                <select  [(ngModel)]="year" (click)="searchYear()">
+                                    <option label=" " disabled></option>
+                                    <option *ngFor="let method of contactMethods" >{{ method.label }}</option>
+                                </select>
+                             </div>       
+                           
                             <button pButton type="button" label="โพสต์เว็บบอร์ด" class="pui-button-rounded ui-button-warning" 
                             [routerLink]="['/post/'+this.user_username]"></button>
-                             <br><br>
-                            <button *ngIf="this.myrole != 1" 
+                             <br> <br>
+                            <!-- <button *ngIf="this.myrole == 1"   
+                            pButton type="button" label="เว็บบอร์ดทั้งหมด" class="ui-button-rounded ui-button-success" 
+                            (click)='allWeb()'></button> <br> <br> -->
+                            <button  
                             pButton type="button" label="เว็บบอร์ดทั่วไป" class="ui-button-rounded ui-button-success" 
                             (click)='web()'></button>
-                           <br> <br> 
+                           <br> <br>  <br>
                             <button *ngIf="this.myrole != 1"   
                             pButton type="button" label="เว็บบอร์ดรุ่น" class="ui-button-rounded ui-button-success" 
-                            (click)='web1()'></button> <br>
-                            <button *ngIf="this.myrole == 1"   
-                            pButton type="button" label="ทั้งหมด" class="ui-button-rounded ui-button-success" 
-                            (click)='allWeb()'></button> <br>
-
-                            
-                         
+                            (click)='web1()'></button>
+                                                       
                             </tbody>
                         </table>
                    

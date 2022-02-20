@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
             });  */
 
             if(this.myStatus == 1){
+              localStorage.setItem('status','1');
+              localStorage.setItem('user_username',this._auth.myData[0].user_username);
+              localStorage.setItem('uid',this._auth.myData[0].UID);
+              localStorage.setItem('role',this._auth.myData[0].user_role);
                 this.router.navigateByUrl('/home2/'+this.user_username);
             }else{
                 alert('รอรับการอนุมัติจากระบบ');

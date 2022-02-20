@@ -15,6 +15,21 @@ interface Articles{
   'webbaord_description':string,
   'webboard_gen':string;
 }
+interface localUser{
+  'user_username':string,
+  'user_password ':string ,
+  'user_phone ':string,
+  'user_email ':string,
+  'user_facebook' :string,
+  'user_year ': string,
+  'user_job' : string,
+  'user_workname' : string,
+  'user_workaddress' : string,
+  'user_workphone' : string,
+  'user_status' : number,
+  'user_best' : string,
+  'user_role' : string
+}
 
 @Component({
   selector: 'app-webboard-list',
@@ -51,13 +66,15 @@ export class WebboardListComponent implements OnInit {
   public year;
   public show:boolean = false;
 
+  localUser;
+
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
     private _auth: AuthService,
     private router2: ActivatedRoute) {
 
-      this.user_username = router2.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
       this.user_username2 = this.user_username.substring(0, 2);
       this.webgen = this.user_username2.toString();
 
@@ -95,17 +112,29 @@ export class WebboardListComponent implements OnInit {
     }
    
   ngOnInit(){
-    this.myValue = this._auth.myData;
-    if(this.myValue){ this.myrole = this.myValue[0].user_role;}
+
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+      this.myrole = localStorage.getItem('role');
+    }
+
+    this.http.get<localUser[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+        data => {
+          
+          this.localUser = data.filter(  u => {  
+            return  u.user_username == this.user_username;
+    
+          });
+          
+         }, error => {
+        }); 
+
+    
    
     this.myGen = "0";
-    var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-    options += "<option>"+ y +"</option>";
-    }
-    document.getElementById("year").innerHTML = options;
+   
   
       this.items = [
         {
@@ -124,9 +153,6 @@ export class WebboardListComponent implements OnInit {
         {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
         },
-        {
-          label:'ออกจากระบบ', routerLink:['/home']
-        }
   ]
     
 
@@ -290,7 +316,37 @@ export class WebboardListComponent implements OnInit {
 
   }
 
+  contactMethods = [
+    { id: 1, label: "70" },
+    { id: 2, label: "69" },
+    { id: 3, label: "68" },
+    { id: 4, label: "67" },
+    { id: 5, label: "66" },
+    { id: 6, label: "65" },
+    { id: 7, label: "64" },
+    { id: 8, label: "63" },
+    { id: 9, label: "62" },
+    { id: 10, label: "61" },
+    { id: 11, label: "60" },
+    { id: 12, label: "59" },
+    { id: 13, label: "58" },
+    { id: 14, label: "57" },
+    { id: 15, label: "56" },
+    { id: 16, label: "55" },
+    { id: 17, label: "54" },
+    { id: 18, label: "53" },
+    { id: 19, label: "52" },
+  ]
+
   searchYear(){
+    /* var years = 70;
+    var till = 50;
+    var options = "";
+    for(var y=years; y>=till; y--){
+        options += "<option>"+ y +"</option>";
+    }
+    document.getElementById("year").innerHTML = options; */
+    
     this.myGen = this.year;
     this.http.get<Articles[]>(this.urlSource).subscribe(
       data => {
@@ -300,7 +356,13 @@ export class WebboardListComponent implements OnInit {
         });
        }, error => {
       }); 
-     
+      /* this.ngOnInit(); */
+}
+
+logOut(){
+  this.router1.navigateByUrl('/home');
+  localStorage.removeItem('status');
+
 }
     
       

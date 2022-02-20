@@ -33,7 +33,7 @@ export class AdminAlbumComponent implements OnInit {
     private router2: ActivatedRoute, 
     private _auth: AuthService) {
 
-      this.user_username = router2.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
 
      }
 
@@ -70,9 +70,8 @@ export class AdminAlbumComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.myValue = this._auth.myData;
 
-  this.activePage = 1;
+    this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
  

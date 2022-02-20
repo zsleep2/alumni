@@ -28,11 +28,10 @@ export class AdminAboutComponent implements OnInit {
   constructor(private _auth: AuthService,
     private http: HttpClient,
     private router: ActivatedRoute,) { 
-    this.user_username = router.snapshot.params['user_username'];
+    this.user_username = localStorage.getItem('user_username');
   }
 
   ngOnInit(): void {
-    this.myValue = this._auth.myData;
 
     this.http.get<lstAbout[]>('http://qpos.msuproject.net/AllNewService/about/showabout')
     .subscribe(

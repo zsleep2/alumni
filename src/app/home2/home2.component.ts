@@ -57,8 +57,10 @@ export class Home2Component implements OnInit {
     private router2: ActivatedRoute,
     private router1: Router,) { 
 
-    this.user_username = router2.snapshot.params['user_username'];
+    /* this.user_username = router2.snapshot.params['user_username']; */
   /*   console.log(this.user_username); */
+
+  this.user_username = localStorage.getItem('user_username');
     
   }
 
@@ -113,11 +115,24 @@ export class Home2Component implements OnInit {
 
 
    ngOnInit(){
+
+     const status = localStorage.getItem('status');
+     if(status !== '1'){
+        this.router1.navigateByUrl('/login');
+     }else{
       this.myValue = this._auth.myData;
       console.log(this.myValue);
+      console.log(this.user_username);
       if(this.myValue){
         this.myrole = this.myValue[0].user_role;
+
+       /*  if(this.user_username !== this.myValue[0].user_username){
+        this.router1.navigateByUrl('/login');
+        localStorage.removeItem('status')
+          } */
       }
+     }
+    
      
 
       this.http.get<lstNew[]>('http://qpos.msuproject.net/AllNewService/new/shownew').subscribe(

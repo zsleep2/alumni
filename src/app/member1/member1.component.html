@@ -24,14 +24,20 @@
                     <table id="customers" >
                         <tbody>
                             <tr>
-                                <th  style="text-align: center;font-size: medium;">รุ่น</th>
+                                <th  style="text-align: center;font-size: medium;"></th>
                             </tr>
-                            &nbsp;&nbsp;<label for="fr" style="font-size: medium;">รุ่น:</label> &nbsp;
-                            <select id="year" [(ngModel)]="year" (click)="ser()"></select> &nbsp; &nbsp;
-                            <button pButton type="button" label="clear" class="ui-button-rounded ui-button-Primary" 
-                            (click)='cl()'></button> <br> <br>
-                            &nbsp; <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"
-                            placeholder="ค้นหาสมาขิก">
+                            <div style="text-align: center;">
+                                <label for="fr" style="font-size: medium;">ค้นหารุ่น:</label> 
+                                <select  [(ngModel)]="year" (click)="ser()">
+                                <option label=" " disabled></option>
+                                <option *ngFor="let method of contactMethods" >{{ method.label }}</option>
+                                </select> <br>
+                                <button pButton type="button" label="สมาชิกทั้งหมด" class="ui-button-rounded ui-button-Primary" 
+                                (click)='cl()'></button> <br> <br>
+                                &nbsp; <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"
+                                placeholder="ค้นหาสมาขิก">
+                            </div>
+                            
                             </tbody>
                         </table>
                    
@@ -40,6 +46,10 @@
 
            
             <div class="two" align="center" >
+                <div class="hear" style="text-align: center;">
+                    <label *ngIf="this.mygen == 0" class="head">สมาชิกทั้งหมด</label>
+                    <label *ngIf="this.mygen != 0" class="head">รุ่น {{this.mygen}}</label>
+                </div>
               <table id="customers">           
                     <thead>
                     <tr> 

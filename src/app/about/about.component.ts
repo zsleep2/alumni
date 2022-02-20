@@ -25,12 +25,13 @@ export class AboutComponent implements OnInit {
   results;
   constructor( private _auth: AuthService,
     private http: HttpClient,
-    private router: ActivatedRoute,) { }
+    private router: ActivatedRoute,) {
+      
+     }
 
   ngOnInit(): void {  
 
-    this.myValue = this._auth.myData;
-    if(this.myValue){ this.myrole = this.myValue[0].user_role;}
+    this.myrole = localStorage.getItem('role');
    
     console.log(this.myrole);
 

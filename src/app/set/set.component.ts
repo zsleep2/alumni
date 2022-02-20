@@ -67,7 +67,7 @@ b = 1;
     private router1: Router,
     private formBuilder: FormBuilder) {
 
-      this.user_username = router.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
      }
 
   ngOnInit(): void {

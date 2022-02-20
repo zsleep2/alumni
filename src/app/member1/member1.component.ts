@@ -33,7 +33,8 @@ export class Member1Component implements OnInit {
   spit;
   rUser;
   mArray:string[] = [];
-
+  public min;
+  public max;
   public iPage:number[] = [];
   public iPageStart:number = 1;
   public prevPage:number;
@@ -49,20 +50,23 @@ export class Member1Component implements OnInit {
 
   public results:any;// กำหนดตัวแปร เพื่อรับค่า
   public highlightId:number; // สำหรับเก็บ id ที่เพิ่งเข้าดู
-
+  mygen;
   year;
+  myrole;
+  public show:boolean = false;
+  public allyear;
  
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
     private _auth: AuthService ,
     private router1: Router) { 
-      this.user_username = router.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
     this.user_username2 =  this.user_username.substring(0, 2);
      
     }
     changePage(page:number){
       this.activePage = page;
-      this.router1.navigate(['/member1/'+this.myValue[0].user_username], {queryParams:{page:page}});
+      this.router1.navigate(['/member1/'+this.user_username], {queryParams:{page:page}});
     }
     pagination(){
       if(this.activePage > this.useShowPage){
@@ -90,15 +94,24 @@ export class Member1Component implements OnInit {
     }
 
   ngOnInit(): void {
-    this.myValue = this._auth.myData;
-    var years = 70;
+    const status = localStorage.getItem('status');
+     if(status !== '1'){
+        this.router1.navigateByUrl('/login');
+     }else{
+     
+        this.myrole = localStorage.getItem('role');
+      
+     }
+    
+    this.mygen="0";
+    /* console.log(this.min,this.max); */
+  /*   var years = 70;
     var till = 50;
     var options = "";
     for(var y=years; y>=till; y--){
     options += "<option>"+ y +"</option>";
     }
-    document.getElementById("year").innerHTML = options;
-
+    document.getElementById("year").innerHTML = options; */
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
@@ -129,17 +142,35 @@ export class Member1Component implements OnInit {
 
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
               data => {
-                console.log(data);
+              
                 this.rUser = data.filter( u => {  
                   return u.user_status == 1;
         
                 });
+               this.max = +data[0].user_username.substring(0,2)
+               this.min = +data[data.length-1].user_username.substring(0,2)  
                }, error => {
-              }); 
-  }
-
+              });  
+            
+}
+ 
+contactMethods = [
+  { id: 1, label: "59" },
+  { id: 2, label: "58" },
+  { id: 3, label: "57" },
+]
 ser(){
-
+ 
+  /* var options = "";
+  for(var y=+this.max; y>=this.min; y--){
+    this.allyear = [{num:y}];
+    options += "<option>"+ y +"</option>";
+    }
+    console.log(this.allyear);
+    document.getElementById("year").innerHTML = options; */
+   
+    this.mygen = this.year;
+  
   this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
     data => {
       
@@ -153,18 +184,21 @@ ser(){
       alert('No data!');
     }); 
 }
+
 cl(){
+  this.mygen = "0";
   this.year = '';
        this.http.get('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
         this.rUser = data;
        }, error => {
       }); 
+      console.log(this.rUser);
   }
   SearchName(){
     this.year = '';
     if(this.sName == ""){
-        this.ngOnInit();
+      window.location.reload()
     }else{
       this.rUser = this.rUser.filter(res =>{
         return res.user_name.toLocaleLowerCase().match(this.sName.toLocaleLowerCase());

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MegaMenuItem,MenuItem} from 'primeng/api';
 import { AuthService } from '../auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-hearder3',
@@ -11,8 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class Hearder3Component implements OnInit {
   user_username;
   myValue;
-  constructor(private router: ActivatedRoute) {
-    this.user_username = router.snapshot.params['user_username'];
+  constructor(private router: ActivatedRoute,private router1: Router) {
+    this.user_username = localStorage.getItem('user_username');
    }
   items: MegaMenuItem[];
   ngOnInit(): void {
@@ -33,11 +33,14 @@ export class Hearder3Component implements OnInit {
       {
           label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username],
       },
-      {
-        label:'ออกจากระบบ', routerLink:['/home'],
-      }
   ]
 
+  }
+
+  logOut(){
+    this.router1.navigateByUrl('/home');
+    localStorage.removeItem('status');
+  
   }
 
 }

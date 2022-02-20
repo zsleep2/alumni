@@ -45,6 +45,7 @@ export class AlbumDetailComponent implements OnInit {
   public show:boolean = false;
   albumName:string;
   public showup:boolean =false;
+  myrole;
 
   constructor(private http: HttpClient,
     private router: ActivatedRoute,
@@ -53,40 +54,37 @@ export class AlbumDetailComponent implements OnInit {
     private router4: ActivatedRoute,
   ) {
       
-      this.user_username = router4.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
     
   }
 
   ngOnInit(): void { 
    
-      this.myValue = this._auth.myData;
-      if(this.myValue){
-        this.myUser = this.myValue[0].user_username
-      }
+    
+        this.myrole = localStorage.getItem('role');
+      
      
 
     
   
         this.items = [
                 {
-                  label: 'หน้าแรก', routerLink:['/home2/'+this.myUser]
+                  label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
                 },
                 {
                     
-                    label: 'นักศึกษา', routerLink:['/member1/'+this.myUser]
+                    label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
                   
                 },
                 
                 {
-                  label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.myUser]
+                  label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
                   
               },
                 {
-                    label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.myUser]
+                    label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
                 },
-                {
-                  label:'ออกจากระบบ', routerLink:['/home']
-                }
+              
           ]
    
 
@@ -171,12 +169,12 @@ export class AlbumDetailComponent implements OnInit {
 
   toggle() {
     
-    console.log(this.results[0].user_username,this.myValue[0].user_username);
-    if(this.myValue[0].user_role == "1"){
+    console.log(this.results[0].user_username,this.user_username);
+    if(this.myrole== "1"){
     
     this.show = !this.show;
     }else{
-      if(this.results[0].user_username == this.myValue[0].user_username){
+      if(this.results[0].user_username == this.user_username){
       
         this.show = !this.show;
       }else{
@@ -188,11 +186,11 @@ export class AlbumDetailComponent implements OnInit {
   }
   
 /* enable(){
-  console.log(this.results[0].user_username,this.myValue[0].user_username);
-  if(this.myValue[0].user_role == "1"){
+  console.log(this.results[0].user_username,this.user_username);
+  if(this.user_role == "1"){
   this.toggleButton = false
   }else{
-    if(this.results[0].user_username == this.myValue[0].user_username){
+    if(this.results[0].user_username == this.user_username){
       this.toggleButton = false
     }else{
       alert('ไม่สามารถแก้ไขได้');
@@ -288,6 +286,12 @@ export class AlbumDetailComponent implements OnInit {
       });  
 
     console.log(json);
+  }
+
+  logOut(){
+    this.router1.navigateByUrl('/home');
+    localStorage.removeItem('status');
+  
   }
 
 

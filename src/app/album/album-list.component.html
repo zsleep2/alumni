@@ -55,17 +55,23 @@
                     </div>
                     <div class="ui-g-6" >
                         <br>
-                        <p-menubar [model]="items" >
-                           
-                        </p-menubar>
+                        <p-menubar [model]="items" ></p-menubar>
+                        <div style="text-align: right;">
+                            <button pButton (click) ="logOut()"
+                            type="button" label="ออกจากระบบ" 
+                            class="pui-button-rounded ui-button-danger"></button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="t">
-                <div >
+                <div *ngIf="this.myrole == 1" style="text-align: center;">
                     
-                    <label style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
-                    <select  id="year" [(ngModel)]="year" (click)="searchYear()" ></select> 
+                    <label  style="font-size: medium;">ค้นหาตามรุ่น</label> &nbsp;
+                    <select  [(ngModel)]="year" (click)="searchYear()">
+                        <option label=" " disabled></option>
+                        <option *ngFor="let method of contactMethods" >{{ method.label }}</option>
+                    </select>
                  </div>       
                  <h3 class="Css1">
                     
