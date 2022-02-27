@@ -35,7 +35,9 @@
                         <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"
                         placeholder="ค้นหาชื่อสมาขิก"> &nbsp;
                         <label for="">ค้นหาตามรุ่น</label> &nbsp;
-                        <select id="year" [(ngModel)]="year" (click)="searchYear()"></select> &nbsp; &nbsp;
+                        <select  [(ngModel)]="year" (click)="searchYear()">
+                            <option *ngFor="let method of rawData" >{{ method }}</option>
+                            </select>  &nbsp; &nbsp;
 
                         <!-- <button pButton type="button"  style="height: 25px; width: 100px;" (click)="clearUser()"
                         class="pui-button-rounded ui-button-success" > สมาชิกทั้งหมด </button> &nbsp; -->

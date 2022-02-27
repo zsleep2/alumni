@@ -39,6 +39,12 @@ export class AdminWebComponent implements OnInit {
   public highlightId:number; // สำหรับเก็บ id ที่เพิ่งเข้าดู
   year;
   public webGen:any;
+  rawData = [];
+  min:number;
+  max:number;
+  public testData:number[]=[];
+  myGen;
+
 
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
@@ -78,14 +84,14 @@ export class AdminWebComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var years = 70;
+   /*  var years = 70;
     var till = 50;
     var options = "";
     for(var y=years; y>=till; y--){
     options += "<option>"+ y +"</option>";
     }
-    document.getElementById("year").innerHTML = options;
-
+    document.getElementById("year").innerHTML = options; */
+    this.myGen = "0";
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
@@ -117,10 +123,33 @@ export class AdminWebComponent implements OnInit {
     this.http.get(this.urlSource).subscribe(
       data => {
         let json = JSON.stringify(data)
-           // กรณี resuponse success
-           // เก็บจำนวนรายการทั้งหมด ไปคำนวณหน้าจำนวนหน้า
            this.totalItem = json.length; 
            this.results = data;
+
+           for(let i in data){
+            this.testData.push(+data[i].webboard_gen);
+          }
+          this.max = 0;
+          this.min = 100;
+          for(let i = 0 ; i < this.testData.length ; i++){
+                if(this.testData[i] !== 0){
+                   if(this.max < this.testData[i]){
+                      this.max = this.testData[i]
+                   }
+                   if(this.min > this.testData[i]){
+                      this.min = this.testData[i]
+                   }
+                }
+          }
+          for(var i=this.max+1; i>=this.min; i--){
+            if(i ==this.max+1){
+              this.rawData.push('');
+            }else{
+              this.rawData.push(i);
+            }
+          }
+            console.log(this.rawData);
+
           }, error => {
       });
   }
@@ -146,6 +175,7 @@ export class AdminWebComponent implements OnInit {
     });
   }
   searchGen(){
+    this.myGen = this.year;
     this.http.get<Articles[]>(this.urlSource).subscribe(
       data => {
        

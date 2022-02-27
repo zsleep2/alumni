@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-// Angular Forms Modules
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormBuilder , Validators} from '@angular/forms';
 

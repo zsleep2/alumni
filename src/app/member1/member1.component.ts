@@ -142,7 +142,7 @@ export class Member1Component implements OnInit {
 
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
               data => {
-              
+                console.log(data);
                 this.rUser = data.filter( u => {  
                   return u.user_status == 1;
         

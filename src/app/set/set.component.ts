@@ -74,37 +74,50 @@ b = 1;
     this.myrole = localStorage.getItem('role');
     console.log(this.myrole);
     this.registerForm = this.formBuilder.group({
-      phone: ['',[  Validators.required ,Validators.pattern(this.mobnumPattern)]],
-      facebook: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      role : ['', Validators.required],
-      year : ['', Validators.required],
-      workname : ['', Validators.required],
-      job : ['', Validators.required],
-      workaddress : ['', Validators.required],
-      workphone : ['', Validators.required],
+      phone: [''],
+      prefix: [''],
+      firstName: [''],
+      lastName: [''],
+      facebook: [''],
+      email: ['', [Validators.email]],
+      role : [''],
+      year : [''],
+      workname : [''],
+      job : [''],
+      workaddress : [''],
+      workphone : [''],
      
   }, {
   });
   
-  this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+  if(this.myrole == "1"){
+      console.log("g");
+      this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/teacher').subscribe(
+        data => {
+          console.log(data);
+          this.rUser = data.filter( u => {  
+            return u.user_username == this.user_username;
+           
+          });
+          
+         }, error => {
+        }); 
+  }else{
+    this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
     data => {
-      
+      console.log(data);
       this.rUser = data.filter( u => {  
         return u.user_username == this.user_username;
-
+       
       });
       
      }, error => {
     }); 
+  }
+
+
   
-  /*   var years = 2520;
-    var till = 2580;
-    var options = "";
-    for(var y=years; y<=till; y++){
-    options += "<option>"+ y +"</option>";
-    }
-    document.getElementById("year").innerHTML = options;   */
+   console.log(this.user_username);
        
   }
   
@@ -137,40 +150,43 @@ b = 1;
         return;
     } */
 
+    if(this.registerForm.value.firstName && this.registerForm.value.lastName ){
+      this.name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
+    }
     if(this.registerForm.value.phone){
-      this.phone = this.registerForm.value.phone
+      this.phone = this.registerForm.value.phone;
     }
     if(this.registerForm.value.email){
-      this.email = this.registerForm.value.email
+      this.email = this.registerForm.value.email;
     }
     if(this.registerForm.value.facebook){
-      this.facebook = this.registerForm.value.facebook
+      this.facebook = this.registerForm.value.facebook;
       
     }
      if(this.registerForm.value.role){
-      this.role = this.registerForm.value.role
+      this.role = this.registerForm.value.role;
     }
     if(this.registerForm.value.year){
-      this.year = this.registerForm.value.year
+      this.year = this.registerForm.value.year;
     }
     if(this.registerForm.value.workname){
-      this.workname = this.registerForm.value.workname
+      this.workname = this.registerForm.value.workname;
     }
     if(this.registerForm.value.job){
-      this.job = this.registerForm.value.job
+      this.job = this.registerForm.value.job;
     }
     if(this.registerForm.value.workaddress){
-      this.workaddress = this.registerForm.value.workaddress
+      this.workaddress = this.registerForm.value.workaddress;
     }
     if(this.registerForm.value.workphone){
-      this.workphone = this.registerForm.value.workphone
+      this.workphone = this.registerForm.value.workphone;
     }
    
     let json = {
     user_username : this.user_username,
     user_password : this.password,
-    user_prefix : this.prefix ,
-    user_name : this.name,
+    user_prefix : this.prefix || '',
+    user_name : this.name || '',
     user_phone : this.phone || '',
     user_email : this.email || '',
     user_facebook : this.facebook || '',

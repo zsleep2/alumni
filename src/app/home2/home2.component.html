@@ -23,9 +23,12 @@
                 <div class="wa">
                   <!--   <p>{{myValue[0].user_name}}</p> -->
                     <div class="item1">
-                      <button  *ngIf="this.myrole && this.myrole == 1"
+                      <button  *ngIf="this.myrole == 1"
                       class= "button" [routerLink]="['/admin_user/'+this.user_username]">จัดการเว็บไซต์</button>
                       <button  class= "button" [routerLink]="['/set/'+this.user_username]">แก้ไขข้อมูลส่วนตัว</button>
+                    </div>
+                    <div class="item2"> 
+                      <button  class= "button"   [routerLink]="['/resetpass/'+this.user_username]">เปลี่ยนรหัสผ่าน</button> 
                     </div>
                     <div class="item2"> 
                       <button  class= "button"   [routerLink]="['/best/'+this.user_username]">ศิษย์เก่าดีเด่น</button> 

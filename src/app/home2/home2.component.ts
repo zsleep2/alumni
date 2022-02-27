@@ -66,7 +66,7 @@ export class Home2Component implements OnInit {
 
   changePage(page:number){
     this.activePage = page;
-    this.router1.navigate(['/new/'+this.myValue[0].user_username], {queryParams:{page:page}});
+    this.router1.navigate(['/new/'+this.user_username], {queryParams:{page:page}});
   }
 
   pagination(){
@@ -120,17 +120,7 @@ export class Home2Component implements OnInit {
      if(status !== '1'){
         this.router1.navigateByUrl('/login');
      }else{
-      this.myValue = this._auth.myData;
-      console.log(this.myValue);
-      console.log(this.user_username);
-      if(this.myValue){
-        this.myrole = this.myValue[0].user_role;
-
-       /*  if(this.user_username !== this.myValue[0].user_username){
-        this.router1.navigateByUrl('/login');
-        localStorage.removeItem('status')
-          } */
-      }
+      this.myrole = localStorage.getItem('role');
      }
     
      

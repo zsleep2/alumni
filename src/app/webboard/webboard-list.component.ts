@@ -330,11 +330,7 @@ export class WebboardListComponent implements OnInit {
   }
   searchYear(){
     this.myGen = this.year;
-
     console.log(this.year);
-       
-   
-
     this.http.get<Articles[]>(this.urlSource).subscribe(
       data => {
        

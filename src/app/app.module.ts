@@ -94,6 +94,7 @@ import { SettComponent } from './sett/sett.component';
 import { AdminBestComponent } from './admin-best/admin-best.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { AddbestComponent } from './addbest/addbest.component';
+import { ResetpassComponent } from './resetpass/resetpass.component';
 
 
 /* const appRoust: Routes = [
@@ -188,6 +189,7 @@ import { AddbestComponent } from './addbest/addbest.component';
     AdminBestComponent,
     AdminAboutComponent,
     AddbestComponent,
+    ResetpassComponent,
     
   ],
   imports: [

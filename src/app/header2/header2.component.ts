@@ -41,7 +41,7 @@ user_name;
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
+          label: ' อัลบั้มรูป ', routerLink:['/album/'+this.user_username]
           
       },
         {

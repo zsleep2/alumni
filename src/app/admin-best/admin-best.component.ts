@@ -55,8 +55,11 @@ export class AdminBestComponent implements OnInit {
   public yearBest;
   public achievement;
   bestStudent;
-  myValue;
+  mygen;
+  rawData = [];
   myrole;
+  public min;
+  public max;
   public bestID;
   public show:boolean = false;
 
@@ -114,13 +117,16 @@ export class AdminBestComponent implements OnInit {
     this.nrSelect = 0;
     this.yearBest ="";
     this.achievement = "" ;
-    var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-    options += "<option>"+ y +"</option>";
-    }
-    document.getElementById("year").innerHTML = options;
+    
+    const status = localStorage.getItem('status');
+     if(status !== '1'){
+        this.router1.navigateByUrl('/login');
+     }else{
+        this.myrole = localStorage.getItem('role');
+     }
+
+    
+    this.mygen="0";
     
     
 
@@ -160,6 +166,17 @@ export class AdminBestComponent implements OnInit {
           
           return user.user_best == 1;
         });
+        this.max = +data[0].user_username.substring(0,2)
+        this.min = +data[data.length-1].user_username.substring(0,2) 
+        for(var i=this.max+1; i>=this.min; i--){
+         if(i ==this.max+1){
+           this.rawData.push('');
+         }else{
+           this.rawData.push(i);
+         }
+         
+         }
+         console.log(this.rawData);
        }, error => {
       });
       
@@ -359,6 +376,8 @@ addBest(value : string){
   }
 
   searchYear(){
+    this.mygen = this.year;
+    this.nrSelect = 0;
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
        
@@ -371,7 +390,9 @@ addBest(value : string){
 }
 
 clearUser(){
+  this.mygen = "0";
   this.year = '';
+  this.nrSelect = 0;
   this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
     data => {  
       this.rUser = data;

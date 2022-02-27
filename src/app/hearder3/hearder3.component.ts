@@ -27,7 +27,7 @@ export class Hearder3Component implements OnInit {
       },
       
       {
-        label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username],
+        label: ' อัลบั้มรูป ', routerLink:['/album/'+this.user_username],
         
     },
       {

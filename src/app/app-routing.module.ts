@@ -36,6 +36,7 @@ import { Webboard2Component } from './webboard2/webboard2.component';
 import { WebboardModule } from './webboard/webboard.module';
 import { AlbumModule } from './album/album.module';
 import { NewModule } from './new/new.module';
+import { ResetpassComponent } from './resetpass/resetpass.component';
 
 const appRoust: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -72,6 +73,7 @@ const appRoust: Routes = [
   { path: 'addnew/:user_username', component: AddnewComponent },
   { path: 'home3/:user_username', component: Home3Component },
   { path: 'new/:user_username', component: NewComponent },
+  { path: 'resetpass/:user_username', component: ResetpassComponent },
   // {path: '**', component: PagenofoundComponent }
 ];
 

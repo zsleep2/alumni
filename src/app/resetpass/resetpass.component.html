@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+       body{
+            background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        } 
+
+        .centerScreen{
+        position: absolute;
+        top: 50%;
+        margin-top: -150px;
+        left: 50%;
+        margin-left: -180px;
+    }
+    </style>
+</head>
+    <body>
+        
+        <div class="wrapper">
+            <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
+                <app-header2></app-header2>
+            </div>
+            <div class="two">
+                <!-- main app container -->
+                    <div class="card m-3">
+                      <h5 class="card-header">แก้ไขรหัสผ่าน</h5>
+                      <div class="card-body">
+                        <form [formGroup]="myForm" (ngSubmit)="updatePassword()">
+                            <div class="form-group col-6">
+                                 <label>รหัสผ่านเดิม</label>
+                            <input required type="password" formControlName="currentpassword" > 
+                            <label *ngIf="isCurrentPass == false" style="color: red;" class="error"> 
+                               รหัสเดิมไม่ถูกต้อง
+                            </label> 
+                            <label *ngIf="isCurrentPass == true" style="color:rgb(62, 104, 0);" class="error">
+                               รหัสผ่านเดิมถูกต้อง
+                            </label> 
+                            </div>
+                            <div class="form-group col-5">
+                                   <label>รหัสผ่านใหม่</label> &nbsp;
+                                <input required type="password" formControlName="password" >
+                            </div>
+                            <div class="form-group col-5">
+                            <label >ยืนยันรหัสผ่านใหม่</label>
+                                <input required type="password" formControlName="confirmPassword" > 
+                                <label *ngIf="isPasswordSame == false" style="color: red;" class="error"> 
+                                   รหัสไม่ตรงกัน
+                                </label> 
+                                <label *ngIf="isPasswordSame" style="color: rgb(62, 104, 0);" class="error"> 
+                                    รหัสผ่านใหม่ตรงกัน
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary mr-1">เปลี่ยนรหัสผ่าน</button>
+                                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                            </div>
+                          </form>
+                      </div>
+                    </div>
+              </div>
+            
+         </div>
+    </body>
+</html>
+
+  
