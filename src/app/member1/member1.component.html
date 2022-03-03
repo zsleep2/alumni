@@ -32,9 +32,13 @@
                                 <option *ngFor="let method of rawData" >{{ method }}</option>
                                 </select> <br>
                                 <button pButton type="button" label="สมาชิกทั้งหมด" class="ui-button-rounded ui-button-Primary" 
-                                (click)='cl()'></button> <br> <br>
-                                &nbsp; <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"
-                                placeholder="ค้นหาสมาขิก">
+                                (click)='cl()'></button> <br> <br> &nbsp; 
+                                <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"
+                                placeholder="ค้นหาชื่อสมาขิก"> <br> <br> &nbsp; 
+                                <input type="text" name="sJob" [(ngModel)]= "sJob" (ngModelChange)="SearchJob()"
+                                placeholder="ค้นหาชื่อตำแหน่งงาน"> <br> <br> &nbsp; 
+                                <input type="text" name="sAddress" [(ngModel)]= "sAddress" (ngModelChange)="SearchAddress()"
+                                placeholder="ค้นหาจังหวัด">
                             </div>
                             
                             </tbody>
@@ -70,7 +74,7 @@
                         <td style="font-size: medium;"> {{user.user_prefix}} {{user.user_name}}</td>
                         <td style="font-size: medium;">{{user.user_email}}</td>
                         <td style="font-size: medium;">{{user.user_phone}}</td>
-                        <td style="font-size: medium;"> <a href="">{{user.user_facebook}}</a> </td>   
+                        <td style="font-size: medium;"> <a href="{{user.user_facebook}}">{{user.user_facebook}}</a> </td>   
                       
                         </tr>
                </tbody>     

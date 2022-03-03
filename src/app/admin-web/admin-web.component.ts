@@ -83,14 +83,11 @@ export class AdminWebComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-   /*  var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-    options += "<option>"+ y +"</option>";
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
     }
-    document.getElementById("year").innerHTML = options; */
+
     this.myGen = "0";
     this.activePage = 1;
     this.nextPage = 2;

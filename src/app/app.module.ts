@@ -36,7 +36,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {Ng2OrderModule} from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {DataViewModule} from 'primeng/dataview';
 
 
 
@@ -89,7 +89,6 @@ import { AdminDeComponent } from './admin-de/admin-de.component';
 import { NewModule } from './new/new.module';
 import { AdminNewComponent } from './admin-new/admin-new.component';
 import { AdminWebComponent } from './admin-web/admin-web.component';
-import { AdminAlbumDetailComponent } from './admin_album/admin-album-detail.component';
 import { SettComponent } from './sett/sett.component';
 import { AdminBestComponent } from './admin-best/admin-best.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
@@ -184,7 +183,6 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
     AdminDeComponent,
     AdminNewComponent,
     AdminWebComponent,
-    AdminAlbumDetailComponent,
     SettComponent,
     AdminBestComponent,
     AdminAboutComponent,
@@ -233,7 +231,8 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
     Ng2SearchPipeModule,
     Ng2OrderModule,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataViewModule,
   ],
   exports: [
    // RouterModule

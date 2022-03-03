@@ -23,8 +23,14 @@ export class AddnewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   
-    this.uid = localStorage.getItem('uid');
+
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+      this.uid = localStorage.getItem('uid');
+    }
+    
 
   }
 

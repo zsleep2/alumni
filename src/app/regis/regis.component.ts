@@ -119,7 +119,7 @@ export class RegisComponent implements OnInit {
             }
             console.log(json);
             
-          /*   this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
+            this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
                   console.log('OK');
                   alert('สมัครสมาชิกเรียบร้อย');
@@ -132,7 +132,7 @@ export class RegisComponent implements OnInit {
                 },
                 (error) => {
                   console.log(error);
-                });   */
+                });  
       }
         
      

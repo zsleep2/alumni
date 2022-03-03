@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 
@@ -21,13 +22,19 @@ export class BestComponent implements OnInit {
   public bestID;
   public show:boolean = false;
   constructor(private _auth: AuthService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private router1: Router,) {
       this.user_username = localStorage.getItem('user_username');
      }
 
   ngOnInit(): void {
 
-    this.myrole = localStorage.getItem('role');
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+     this.myrole = localStorage.getItem('role');
+    }
     
    
     this.http.get('http://qpos.msuproject.net/AllNewService/best/result').subscribe(

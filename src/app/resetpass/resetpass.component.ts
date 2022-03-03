@@ -66,9 +66,14 @@ export class ResetpassComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.myrole = localStorage.getItem('role');
-    this.oPassword = localStorage.getItem('password');
-
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+      this.myrole = localStorage.getItem('role');
+      this.oPassword = localStorage.getItem('password');
+    }
+   
     if(this.myrole == "1"){
       console.log("g");
       this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/teacher').subscribe(

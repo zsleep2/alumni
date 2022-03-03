@@ -39,6 +39,7 @@ export class AddalbumComponent implements OnInit {
   gen;
   addAlbumForm: FormGroup;
   submitted = false;
+  uid;
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
@@ -46,17 +47,20 @@ export class AddalbumComponent implements OnInit {
     private _freeApi: FreeapiService,
     private formBuilder: FormBuilder) {
 
-      this.user_username = router.snapshot.params['user_username'];
+      this.user_username = localStorage.getItem('user_username');
       this.user_username2 = this.user_username.substring(0, 2);
 
      }
 
   ngOnInit(): void {
-     this.myValue = this._auth.myData;
-      if(this.myValue){
-    this.myrole = this.myValue[0].user_role;
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+     this.myrole = localStorage.getItem('role');
+     this.uid = localStorage.getItem('uid');
     }
-      this.gen = this.user_username.substring(0, 2);
+    this.gen = this.user_username.substring(0, 2);
     console.log(this.gen);
 
     this.addAlbumForm = this.formBuilder.group({
@@ -83,7 +87,7 @@ get f() { return this.addAlbumForm.controls; }
    
     let json = {album_name :this.addAlbumForm.value.nameAlbum,
     album_gen : this.addAlbumForm.value.gen,
-    UID : this.myValue[0].UID}
+    UID : this.uid}
     console.log(json);
     
     this.http.post('http://qpos.msuproject.net/AllNewService/album/addalbum',JSON.stringify(json)).toPromise().then(

@@ -22,7 +22,9 @@ interface Articles{
   styleUrls: ['./member1.component.css']
 })
 export class Member1Component implements OnInit {
- sName;
+  sName;
+  sJob;
+  sAddress
   text: string;
   text2: string;
   myValue;
@@ -206,6 +208,26 @@ cl(){
     }else{
       this.rUser = this.rUser.filter(res =>{
         return res.user_name.toLocaleLowerCase().match(this.sName.toLocaleLowerCase());
+      })
+    }
+  }
+  SearchJob(){
+    this.year = '';
+    if(this.sJob == ""){
+      window.location.reload()
+    }else{
+      this.rUser = this.rUser.filter(res =>{
+        return res.user_job.toLocaleLowerCase().match(this.sJob.toLocaleLowerCase());
+      })
+    }
+  }
+  SearchAddress(){
+    this.year = '';
+    if(this.sAddress == ""){
+      window.location.reload()
+    }else{
+      this.rUser = this.rUser.filter(res =>{
+        return res.user_workaddress.toLocaleLowerCase().match(this.sAddress.toLocaleLowerCase());
       })
     }
   }

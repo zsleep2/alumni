@@ -71,11 +71,16 @@ b = 1;
      }
 
   ngOnInit(): void {
-    this.myrole = localStorage.getItem('role');
+
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+     this.myrole = localStorage.getItem('role');
+    }
     console.log(this.myrole);
     this.registerForm = this.formBuilder.group({
       phone: [''],
-      prefix: [''],
       firstName: [''],
       lastName: [''],
       facebook: [''],
@@ -84,7 +89,13 @@ b = 1;
       year : [''],
       workname : [''],
       job : [''],
-      workaddress : [''],
+      no : [''],
+      swine : [''],
+      road : [''],
+      subdistrict : [''],
+      district : [''],
+      county : [''],
+      zipcode : [''],
       workphone : [''],
      
   }, {
@@ -149,7 +160,6 @@ b = 1;
    /*  if (this.registerForm.invalid) {
         return;
     } */
-
     if(this.registerForm.value.firstName && this.registerForm.value.lastName ){
       this.name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
     }
@@ -175,12 +185,19 @@ b = 1;
     if(this.registerForm.value.job){
       this.job = this.registerForm.value.job;
     }
-    if(this.registerForm.value.workaddress){
+   /*  if(this.registerForm.value.workaddress){
       this.workaddress = this.registerForm.value.workaddress;
-    }
+    } */
     if(this.registerForm.value.workphone){
       this.workphone = this.registerForm.value.workphone;
     }
+    this.workaddress = "บ้านเลขที่ "+this.registerForm.value.no+" "+
+    "หมู่ "+this.registerForm.value.swine+" "+
+    "ถนน "+this.registerForm.value.road+" "+
+    "ตำบล"+this.registerForm.value.subdistrict+" "+
+    "อำเภอ"+this.registerForm.value.district+" "+
+    "จังหวัด"+this.registerForm.value.county+" "+
+    "รหัสไปรษณี "+this.registerForm.value.zipcode
    
     let json = {
     user_username : this.user_username,
@@ -200,7 +217,7 @@ b = 1;
     user_role : this.role 
   }
     console.log(json);
-  
+   /*  if(window.confirm('คุณต้องการเปลี่ยนข้อมูลส่วนตัว ? ')){
       this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.user_username,
       JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
@@ -218,6 +235,7 @@ b = 1;
                 (error) => {
                   console.log(error);
             });
+    } */
   }
 
   onReset() {

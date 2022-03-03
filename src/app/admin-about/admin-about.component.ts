@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 interface lstAbout{
@@ -27,11 +27,19 @@ export class AdminAboutComponent implements OnInit {
   show:boolean = false;
   constructor(private _auth: AuthService,
     private http: HttpClient,
-    private router: ActivatedRoute,) { 
+    private router: ActivatedRoute,
+    private router1: Router,) { 
     this.user_username = localStorage.getItem('user_username');
   }
 
   ngOnInit(): void {
+
+
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+    }
 
     this.http.get<lstAbout[]>('http://qpos.msuproject.net/AllNewService/about/showabout')
     .subscribe(

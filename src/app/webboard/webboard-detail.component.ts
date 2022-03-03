@@ -72,25 +72,26 @@ export class WebboardDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-    this.id = localStorage.getItem('uid');
-    this.user_username2 = this.user_username.substring(0, 2);
-    this.myrole = localStorage.getItem('role');
-   
-
-  
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+      this.id = localStorage.getItem('uid');
+      this.user_username2 = this.user_username.substring(0, 2);
+      this.myrole = localStorage.getItem('role');
+    }
       this.items = [
         {
           label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
+            label: 'สมาชิก', routerLink:['/member1/'+this.user_username]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
+          label: ' อัลบั้ม ', routerLink:['/album/'+this.user_username]
         },
         {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
@@ -231,7 +232,7 @@ addComment(){
               console.log(this.comments[i].comment_description);
               if(this.comments[i].user_username == this.user_username){
                     this.showcom = !this.showcom
-                   
+                   console.log('ok');
               }else{
                 alert('ไม่สามารถแก้ไขได้');
               }

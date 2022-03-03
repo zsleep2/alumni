@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 interface lstAbout{
@@ -25,14 +25,19 @@ export class AboutComponent implements OnInit {
   results;
   constructor( private _auth: AuthService,
     private http: HttpClient,
-    private router: ActivatedRoute,) {
+    private router: ActivatedRoute,
+    private router1: Router) {
       
      }
 
   ngOnInit(): void {  
 
-    this.myrole = localStorage.getItem('role');
-   
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+     this.myrole = localStorage.getItem('role');
+    }
     console.log(this.myrole);
 
     this.http.get<lstAbout[]>('http://qpos.msuproject.net/AllNewService/about/showabout')

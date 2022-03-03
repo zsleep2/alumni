@@ -45,18 +45,20 @@
               
                 <div class="headder"> 
                
-                  <button pButton type="button" style="height: 32px; width: 32px;" (click)="toggle()"
-                  class="pui-button-rounded ui-button-warning" >
+                  <button pButton type="button" style="height: 32px; width: 32px;background-color: rgb(241, 173, 26);" 
+                  (click)="toggle()" class="showpopup" data-title="แก้ไขเว็บบอร์ด" >
                   <svg xmlns="http://www.w3.org/2000/svg" 
                    viewBox="0 0 14 16" width="30px" height="30px">
                   <path fill-rule="evenodd" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z">
                     </path></svg>
                     </button> &nbsp; 
                   <button pButton pRipple type="button" icon="pi pi-check" (click) ="editWeb()"
-                     class="p-button-rounded" *ngIf="show"></button> &nbsp;
+                     class="showpopup" style="background-color: rgb(28, 66, 235);" 
+                     data-title="ยืนยัน" *ngIf="show">
+                    </button> &nbsp;
 
-                    <button pButton type="button" style="height: 32px; width: 32px;"  (click) ="deleteweb()"
-                        class="pui-button-rounded ui-button-danger" *ngIf="show"> 
+                   <button pButton type="button" style="height: 32px; width: 32px;background-color: red;"  (click) ="deleteweb()"
+                        class="showpopup" data-title="ลบเว็บบอร์ด" *ngIf="show"> 
                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
                           <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
                         </svg>
@@ -101,33 +103,35 @@
                     <br>  
                   <label style="color: white;font-size: medium;">{{ com.comment_description }}  </label> &nbsp;
 
-                <button *ngIf="com.user_username == this.myid" 
-                 pButton type="button" style="height: 20px; width: 24px;" (click)="showCom(com.comment_ID)"
-                class="pui-button-rounded ui-button-warning" >
+                <button *ngIf="com.user_username == this.user_username" 
+                 pButton type="button" style="height: 24px; width: 24px;background-color: rgb(241, 173, 26);" (click)="showCom(com.comment_ID)"
+                class="showpopup" data-title="แก้ไขคอมเมนท์">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
                 </svg>
                 </button> &nbsp; 
-
+                <button *ngIf="com.user_username == this.user_username" 
+                pButton type="button" style="height: 24px; width: 24px;background-color: red;"  
+                (click) ="deleteComment(com.comment_ID)" class="showpopup" data-title="ลบคอมเมนท์"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+                    <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
+                  </svg>
+                </button>
                <div *ngIf ="showCom">
+                 <br>
                 <span class="ui-float-label">
                 <input *ngIf="com.comment_ID == this.comid" type="text" [(ngModel)]= "commentDes" id="float-input" >
-                <label *ngIf="com.comment_ID == this.comid" for="float-input">แก้ไขความคิดเห็น</label> &nbsp;
-                </span>
+                <label *ngIf="com.comment_ID == this.comid" for="float-input">แก้ไขคอมเมนท์</label> &nbsp;
                 <button *ngIf="com.comment_ID == this.comid"  
-                  pButton type="button" style="height: 24px; width: 24px;"  (click) ="editComment(com.comment_ID)"
-                  class="pui-button-rounded ui-button-success" > 
+                  pButton type="button" style="height: 24px; width: 24px;background-color:rgb(51, 235, 34);"  
+                  (click) ="editComment(com.comment_ID)"class="showpopup" data-title="ยืนยัน"> 
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
                     <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                   </svg>
-                  </button> &nbsp;
-                    <button *ngIf="com.comment_ID == this.comid" 
-                    pButton type="button" style="height: 24px; width: 24px;"  (click) ="deleteComment(com.comment_ID)"
-                    class="pui-button-rounded ui-button-danger" > 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
-                        <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
-                      </svg>
-                    </button>  <br>
+                  </button>
+                </span>
+                
+                    <br>
                     <div style="text-align: right;color: white;font-size: medium;">
                           โดย : {{com.user_prefix}} {{ com.user_name}} <br>
                           วันที่ :  {{com.comment_date.substring(8, 10)}}/

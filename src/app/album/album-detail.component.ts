@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { AuthService } from '../auth.service';
 import {ButtonModule} from 'primeng/button';
+import { NgxPaginationModule } from 'ngx-pagination';
+ 
 
 interface Articles{
   'album_ID':number;
@@ -20,17 +22,21 @@ interface lstPhoto{
 
 @Component({
   selector: 'app-album-detail',
-  templateUrl: './album-detail.component.html',
+  templateUrl: './album-detail.component.html', 
   styleUrls: ['./album-detail.component.css']
 })
 export class AlbumDetailComponent implements OnInit {
+
+  page: Number = 1;
+  count: Number = 0; 
+  tableSize: number = 5;
   public con:number;
   public results:any;
   public toggleButton: boolean = true;
   public photoID:number;
   public activePage:number;
   public pho;
-  public photo = [];
+  public photo : lstPhoto[];
   public myUser;
   imageDate:string;
   base64;
@@ -46,7 +52,8 @@ export class AlbumDetailComponent implements OnInit {
   albumName:string;
   public showup:boolean =false;
   myrole;
-
+  changeText:boolean=false;
+  config: any;
   constructor(private http: HttpClient,
     private router: ActivatedRoute,
     private _auth: AuthService,
@@ -55,30 +62,34 @@ export class AlbumDetailComponent implements OnInit {
   ) {
       
       this.user_username = localStorage.getItem('user_username');
+      this.config = {
+        itemsPerPage: 5,
+        currentPage: 1
+      };
     
   }
 
   ngOnInit(): void { 
    
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+     this.myrole = localStorage.getItem('role');
+    }
     
-        this.myrole = localStorage.getItem('role');
-      
-     
-
-    
-  
         this.items = [
                 {
                   label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
                 },
                 {
                     
-                    label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
+                    label: 'สมาชิก', routerLink:['/member1/'+this.user_username]
                   
                 },
                 
                 {
-                  label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
+                  label: ' อัลบั้ม ', routerLink:['/album/'+this.user_username]
                   
               },
                 {
@@ -166,7 +177,10 @@ export class AlbumDetailComponent implements OnInit {
 
    
   }
-
+  
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
   toggle() {
     
     console.log(this.results[0].user_username,this.user_username);

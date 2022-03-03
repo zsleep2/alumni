@@ -141,12 +141,12 @@ export class WebboardListComponent implements OnInit {
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
+            label: 'สมาชิก', routerLink:['/member1/'+this.user_username]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
+          label: ' อัลบั้ม ', routerLink:['/album/'+this.user_username]
           
       },
         {

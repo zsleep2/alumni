@@ -137,3 +137,29 @@ margin-top: -20px;
   border-color: white;
 }
 
+.showpopup{
+  position: relative;
+}
+.showpopup::after{
+  content: attr(data-title);
+  position: absolute;
+  background: #444;
+  color: #fff;
+  left: 0;
+  top: 100%;
+  font-size: 12px;
+  width: 100px;
+  padding: 5px;
+  border-radius: 4px;
+  transition: 300ms;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(15px);
+}
+.showpopup:hover::after{
+  opacity: 1;
+  transform: translateY(50px);
+  transform: translateX(-20px);
+}
+
+

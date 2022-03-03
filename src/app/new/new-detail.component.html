@@ -30,24 +30,41 @@
                 <div class="ui-g-6" >
                     <br>
                     <p-menubar [model]="items" ></p-menubar>
+                    <div style="text-align: right;">
+                        <button pButton (click) ="logOut()"
+                        type="button" label="ออกจากระบบ" 
+                        class="pui-button-rounded ui-button-danger"></button>
+                    </div>
                 </div>
             </div>
-
-
-
             </div>
             <div *ngFor="let result of results" class="two"  style="text-align: center;" >
                 <div class="headder" >
                     <label style="font-size: x-large;color: white;font-weight: bold;">{{ result.new_title }}</label>
                    
                 </div>
-               
+                <br>
                 <div class="top">
                     <div  *ngIf="show" >
-                   <label style="background-color: rgb(243, 225, 60);font-size: medium;">แก้ไขหัวข้อข่าว</label>   &nbsp;
-                  <input type="text" style="text-align: center;" value="{{this.results[0].new_title}}" [(ngModel)]= "nTitle"  > 
-               </div>
-                <br>    
+                        <div style="text-align: right;">
+                            <button pButton type="button"  style="height: 32px; width: 32px; background-color: rgb(26, 153, 14);" 
+                            (click)="save()" class="showpopup" data-title="ยืนยัน"> 
+                           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                               <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                             </svg>
+                           </button> 
+                           &nbsp;
+                           <button pButton type="button" style="height: 32px; width: 32px; background-color: red;"  
+                           (click)="deletenew()" class="showpopup" data-title="ลบข่าว"> 
+                           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+                               <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
+                             </svg>
+                           </button> 
+                        </div>
+                        <label style="background-color: rgb(243, 225, 60);font-size: medium;">แก้ไขหัวข้อข่าว</label>   &nbsp;
+                        <input type="text" style="text-align: center;" value="{{this.results[0].new_title}}" [(ngModel)]= "nTitle"  > 
+                    </div>
+                    <br>    
                     <div style="text-align: center;">
                         <div *ngIf="show" style="text-align: center;">
                             <label  style="background-color: rgb(243, 225, 60);font-size: medium;">แก้ไขรูปภาพ</label> &nbsp;
@@ -88,28 +105,16 @@
             </div>
             <div class="three"></div>
             <div class="four" style="text-align: right; ">
-               
-                    <button pButton type="button" style="height: 32px; width: 32px;" (click)="toggle()"
-                    class="pui-button-rounded ui-button-warning" >
+                        <br>
+                    <button pButton type="button" style="height: 32px; width: 32px; background-color: rgb(241, 173, 26);" 
+                    (click)="toggle()" class="showpopup" data-title="แก้ไขข่าว" >
                         <svg xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 14 16" width="30px" height="30px">
                         <path fill-rule="evenodd" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z">
                         </path></svg>
                         </button> 
                     <div  *ngIf="show">
-                        <label >แก้ไข</label> &nbsp;
-                         <button pButton type="button"  style="height: 32px; width: 32px;" (click)="save()"
-                        class="pui-button-rounded ui-button-success" > 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                          </svg>
-                        </button> <br>
-                        <label >ลบข่าว</label> &nbsp;
-                        <button pButton type="button" style="height: 32px; width: 32px;"  (click)="deletenew()"
-                        class="pui-button-rounded ui-button-danger" > <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
-                            <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
-                          </svg>
-                        </button> 
+                       
                     </div>
                    
                    

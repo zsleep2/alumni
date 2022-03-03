@@ -9,6 +9,8 @@ import {MenubarModule} from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import {DataViewModule} from 'primeng/dataview';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AlbumListComponent, AlbumDetailComponent],
@@ -17,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     AlbumRoutingModule,
     MenubarModule,
     ButtonModule,
-    FormsModule 
+    FormsModule,
+    DataViewModule,
+    NgxPaginationModule
   ]
 })
 export class AlbumModule { }

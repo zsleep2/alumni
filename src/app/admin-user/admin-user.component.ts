@@ -53,6 +53,9 @@ export class AdminUserComponent implements OnInit {
   nrSelect:number;
   results
   sName:any;
+  min;
+  max;
+  rawData = [];
 
   public iPage:number[] = [];
   public iPageStart:number = 1;
@@ -67,6 +70,11 @@ export class AdminUserComponent implements OnInit {
   public pointStart:number = 0; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
   public pointEnd:number; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
   public show:boolean = false;
+  mygen: any;
+  prefix: any;
+  best: any;
+  workname: any;
+  workaddress: any;
 
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
@@ -107,13 +115,12 @@ export class AdminUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.nrSelect = 0;
-    var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-    options += "<option>"+ y +"</option>";
-    }
-    document.getElementById("year").innerHTML = options;
+    this.mygen = "0";
+    const status = localStorage.getItem('status');
+     if(status !== '1'){
+        this.router1.navigateByUrl('/login');
+     }else{
+     }
 
 
     this.activePage = 1;
@@ -151,6 +158,19 @@ export class AdminUserComponent implements OnInit {
           
           return user.user_status == 0;
         });
+        this.max = +data[0].user_username.substring(0,2)
+        this.min = +data[data.length-1].user_username.substring(0,2) 
+        for(var i=this.max+1; i>=this.min; i--){
+         if(i ==this.max+1){
+           this.rawData.push('');
+         }else{
+           this.rawData.push(i);
+         }
+         
+         }
+         console.log(this.rawData);
+        
+
        }, error => {
       }); 
      
@@ -232,50 +252,95 @@ export class AdminUserComponent implements OnInit {
 
                 this.username = this.rUser[i].user_username;
                 this.password = this.rUser[i].user_password;
+                this.prefix = this.rUser[i].user_prefix;
                 this.name = this.rUser[i].user_name;
                 this.email = this.rUser[i].user_email;
                 this.phone = this.rUser[i].user_phone;
                 this.facebook = this.rUser[i].user_facebook;
                 this.year = this.rUser[i].user_year;
-                this.workplace = this.rUser[i].user_workplace;
-                this.addwork = this.rUser[i].user_workplace;
                 this.job = this.rUser[i].user_job;
-                this.workphone = this.rUser[i].user_workplace;
+                this.workname = this.rUser[i].user_workname;
+                this.workaddress = this.rUser[i].user_workaddress;
+                this.workphone = this.rUser[i].user_workphone;
+                this.best = this.rUser[0].user_best;
                 this.role = this.rUser[i].user_role;
-               
 
-                let json = {user_username : this.username || '', 
-                user_password : this.password || '', 
-                user_name : this.name || '',
-                user_phone : this.phone || '',
-                user_email : this.email || '',
-                user_facebook : this.facebook || '',
-                user_year : this.year || '',
-                user_job : this.job || '',
-                user_workname : this.workplace || '',
-                user_workaddress : this.addwork || '',
-                user_workphone : this.workphone || '',
-                user_status : 1
-               }
-               console.log(json,this.username);
+                console.log(this.rUser[i].user_status);
 
-               if(window.confirm('ต้องการเพิ่มสมาชิก ?')){
-                   this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
-                if(data == 1){
-                  alert('เพิ่มสมาชิกเรียบร้อย');
-                  window.location.reload()
+                if(this.rUser[i].user_status == 0){
+                      let json = {user_username : this.username || '', 
+                      user_password : this.password || '', 
+                      user_prefux : this.prefix || '',
+                      user_name : this.name || '',
+                      user_phone : this.phone || '',
+                      user_email : this.email || '',
+                      user_facebook : this.facebook || '',
+                      user_year : this.year || '',
+                      user_job : this.job || '',
+                      user_workname : this.workname || '',
+                      user_workaddress : this.workaddress || '',
+                      user_workphone : this.workphone || '',
+                      user_best : this.best || '',
+                      user_role : this.role || '',
+                      user_status : 1
+                    }
+                    console.log(json,this.username);
+                    if(window.confirm('คุณต้องการเปิดสถานะของ '+this.name+' ?')){
+                        this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'
+                        +this.username,JSON.stringify(json)).toPromise().then(data => {
+                      if(data == 1){
+                        alert('เปิดสถานะของ '+this.name+' เรียบร้อย' );
+                        window.location.reload()
+                      }else{
+                      
+                        console.log(data);
+                      }   
+                      },
+                      (error) => {
+                        console.log(error);
+                      });
+                  }
                 }else{
-                
-                  console.log(data);
-                }   
-                },
-                (error) => {
-                  console.log(error);
-                });
-            }
+                   let json = {user_username : this.username || '', 
+                    user_password : this.password || '', 
+                    user_prefux : this.prefix || '',
+                    user_name : this.name || '',
+                    user_phone : this.phone || '',
+                    user_email : this.email || '',
+                    user_facebook : this.facebook || '',
+                    user_year : this.year || '',
+                    user_job : this.job || '',
+                    user_workname : this.workname || '',
+                    user_workaddress : this.workaddress || '',
+                    user_workphone : this.workphone || '',
+                    user_best : this.best || '',
+                    user_role : this.role || '',
+                    user_status : 0
+                  }
+                  console.log(json,this.username);
+                  if(window.confirm('คุณต้องการปิดสถานะของ '+this.name+' ?')){
+                      this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
+                    if(data == 1){
+                      alert('ปิดสถานะของ '+this.name+' เรียบร้อย' );
+                      window.location.reload()
+                    }else{
+                    
+                      console.log(data);
+                    }   
+                    },
+                    (error) => {
+                      console.log(error);
+                    });
+                 }
+                }
+
+                   
+
+                  
+
         }    
-        }
-      }
+    }
+  }
 
       deleteUser(value : string){
           this.deuserID = value;
@@ -336,6 +401,7 @@ export class AdminUserComponent implements OnInit {
       }
     
       searchYear(){
+        this.mygen = this.year;
           this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
             data => {
              

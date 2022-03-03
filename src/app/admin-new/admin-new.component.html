@@ -22,7 +22,7 @@
             <div class="two">
                 <p> &nbsp;
                     <a routerLink="/admin_user/{{this.user_username}}" style="color: white;">| สมาชิก </a>
-                    <a routerLink="/admin_album/{{this.user_username}}" style="color: white;">| อัลบั้มรูปภาพ </a> 
+                    <a routerLink="/admin_album/{{this.user_username}}" style="color: white;">| อัลบั้ม </a> 
                     <a routerLink="/admin_new/{{this.user_username}}" style="color: white;">| ข่าวประชาสัมพันธ์ </a> 
                     <a routerLink="/admin_web/{{this.user_username}}" style="color: white;">| เว็บบอร์ด </a>
                     <a routerLink="/admin_best/{{this.user_username}}" style="color: white;">| ศิษย์เก่าดีเด่น  </a>  
@@ -53,26 +53,27 @@
                           
                           </a></td>
                           <td>
-                            <button *ngIf="result.new_status == 1"
-                                pButton type="button"  style="height: 24px; width: 24px;" 
-                                class="pui-button-rounded ui-button-success" > 
+                            <button *ngIf="result.new_status == 1"  (click) ="checkNew(result.new_ID)"
+                                pButton type="button"  style="height: 24px; width: 24px;background-color:rgb(26, 153, 14) ;" 
+                                class="showpopup" data-title="ปิดสถานะข่าว" > 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                 </svg>
                             </button>
 
                             <button *ngIf="result.new_status == 0" 
-                                pButton type="button" style="height: 24px; width: 24px;"  (click) ="checkNew(result.new_ID)"
-                                class="pui-button-rounded ui-button-danger" > 
+                                pButton type="button" style="height: 24px; width: 24px;background-color: red;"  
+                                (click) ="checkNew(result.new_ID)" class="showpopup" data-title="เปิดสถานะข่าว"> 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
                                 </svg>
                             </button> 
                           </td>
                         <td style="text-align: center;">
-                            <button (click) ="deletenew(result.new_ID)">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16" width="30" 
-                                height="30"><path fill-rule="evenodd" 
+                            <button (click) ="deletenew(result.new_ID)" style="height: 24;width: 24;background-color: red;"
+                            class="showpopup" data-title="ลบข่าว">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16" width="16" 
+                                height="16"><path fill-rule="evenodd" 
                                 d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
                             </button>
                         </td>

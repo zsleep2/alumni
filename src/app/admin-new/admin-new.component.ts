@@ -72,7 +72,12 @@ export class AdminNewComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    const status = localStorage.getItem('status');
+    if(status !== '1'){
+       this.router1.navigateByUrl('/login');
+    }else{
+   
+    }
 
     this.activePage = 1;
     this.nextPage = 2;
@@ -123,30 +128,57 @@ checkNew(value : string){
       this.nTitle = this.results[i].new_title;
       this.nDes = this.results[i].new_description;
       this.base64 = this.results[i].new_image;
-      let json = {
-        new_title : this.nTitle ,
-        new_description : this.nDes,
-        new_image : this.base64,
-        new_status : "1"
-        }
-      console.log(json); 
-      if(window.confirm('ต้องการเพิ่มข่าว ?')){
-     this.http.post('http://qpos.msuproject.net/AllNewService/new/edit/'+this.checkid,JSON.stringify(json)).toPromise().then(data => {
-                  
-          if(data == 1){
-           
-          }else{
-            alert('เสร็จสิ้น');
-            this.ngOnInit();
-            console.log(data);
+
+      if(this.results[i].new_status == 0){
+          let json = {
+          new_title : this.nTitle ,
+          new_description : this.nDes,
+          new_image : this.base64,
+          new_status : 1
           }
-            
-          },
-          (error) => {
-            console.log(error);
-      });
-            }
-    }
+          console.log(json);  
+          if(window.confirm('คุณต้องการเปิดสถานะของข่าว '+this.nTitle+' ?')){
+          this.http.post('http://qpos.msuproject.net/AllNewService/new/edit/'+this.checkid,JSON.stringify(json)).toPromise().then(data => {
+                      
+              if(data == 1){
+              
+              }else{
+                alert('เสร็จสิ้น');
+                window.location.reload()
+                console.log(data);
+              }
+                
+              },
+              (error) => {
+                console.log(error);
+          });
+        }
+      }else{
+        let json = {
+          new_title : this.nTitle ,
+          new_description : this.nDes,
+          new_image : this.base64,
+          new_status : 0
+          }
+          console.log(json);  
+          if(window.confirm('คุณต้องการปิดสถานะของข่าว '+this.nTitle+' ?')){
+          this.http.post('http://qpos.msuproject.net/AllNewService/new/edit/'+this.checkid,JSON.stringify(json)).toPromise().then(data => {
+                      
+              if(data == 1){
+              
+              }else{
+                alert('เสร็จสิ้น');
+                window.location.reload()
+                console.log(data);
+              }
+                
+              },
+              (error) => {
+                console.log(error);
+          });
+        }
+      }
+      }
     }
   }
   deletenew(value : string){

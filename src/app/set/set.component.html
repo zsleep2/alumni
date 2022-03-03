@@ -154,64 +154,88 @@
                          
                     <form [formGroup]="registerForm" (ngSubmit)="eDit()">
                         <div class="form-row">
+                            <div class="form-group col-6">
+                                <label style="font-size: medium;">ชื่อ</label>
+                                <input type="text" formControlName="firstName" class="form-control" style="font-size: medium;"/>
+                          
+                            </div>
+                            <div class="form-group col-6">
+                                <label style="font-size: medium;">นามสกุล</label>
+                                <input type="text" formControlName="lastName" class="form-control" style="font-size: medium;"/>
+                          
+                            </div>
                             <div class="form-group col-4">
                                 <label style="font-size: medium;">เบอร์โทรศัพท์</label>
-                                <input type="text" formControlName="phone" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }" />
-                             <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                                    <!-- <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
-                                    <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div> -->
-                                </div>
+                                <input type="text" formControlName="phone" class="form-control" style="font-size: medium;"/>
                             </div>
                             <div class="form-group col-4"> 
                                 <label style="font-size: medium;">Email</label>
-                                <input type="text" formControlName="email" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }" />
-                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                    <!-- <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
-                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div> -->
-                                </div>
+                                <input type="text" formControlName="email" class="form-control" style="font-size: medium;"/>
                             </div>
                             <div class="form-group col-4"> 
                                 <label style="font-size: medium;">Facebook</label>
-                                <input type="text" formControlName="facebook" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted }" />
-                            <!-- <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
-                                <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
-                                </div>  -->  
+                                <input type="text" formControlName="facebook" class="form-control" style="font-size: medium;"/>
                             </div>
                             <div class="form-group col-2">
                                 <label style="font-size: medium;" >ปีที่จบ</label>
-                                <select formControlName="year" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }">
+                                <select formControlName="year" class="form-control" style="font-size: medium;">
                                     <option value=""></option>
                                     <option value="2564" style="font-size: medium;">2564</option>
                                     <option value="2563" style="font-size: medium;" >2563</option>
                                 </select>
                             </div>
                             <div class="form-group col-5">
-                                <label style="font-size: medium;" >บริษัท</label>
-                                <input type="text" formControlName="workname" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }" />
+                                <label style="font-size: medium;" >สถานที่ทำงาน</label>
+                                <input type="text" formControlName="workname" class="form-control" style="font-size: medium;"/>
                             </div>
                             <div class="form-group col-5">
                                 <label style="font-size: medium;" >ตำแหน่งงาน</label>
-                                <select formControlName="job" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }">
+                                <select formControlName="job" class="form-control" style="font-size: medium;">
                                     <option value=""></option>
                                     <option value="NetworkAdmin" style="font-size: medium;">NetworkAdmin</option>
                                     <option value="Developer" style="font-size: medium;" >Developer</option>
                                 </select>
+                            </div> 
+                            <label style="font-size: medium;" >ที่อยู่</label>
+                            <div class="form-group col-1">
+                                 <br>
+                                <label style="font-size: medium;">เลขที่</label>
+                                <input type="text" formControlName="no" class="form-control" style="font-size: medium;">  
                             </div>
-                            <div class="form-group col-6">
-                                <label style="font-size: medium;" >ที่อยู่</label>
-                                <input type="textarea" formControlName="workaddress" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }" />
+                            <div class="form-group col-1">
+                                <br>
+                                <label style="font-size: medium;">หมู่</label>
+                                <input type="text" formControlName="swine" class="form-control" style="font-size: medium;">  
+                            </div> 
+                            <div class="form-group col-2">
+                                <br>
+                                <label style="font-size: medium;">ถนน</label>
+                                <input type="text" formControlName="road" class="form-control" style="font-size: medium;">  
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-2">
+                                <br>
+                                <label style="font-size: medium;">ตำบล</label>
+                                <input type="text" formControlName="subdistrict" class="form-control" style="font-size: medium;">  
+                            </div> 
+                            <div class="form-group col-3">
+                                <br>
+                                <label style="font-size: medium;">อำเภอ</label>
+                                <input type="text" formControlName="district" class="form-control" style="font-size: medium;">  
+                            </div>
+                            <div class="form-group col-2">
+                                <br>
+                                <label style="font-size: medium;">จังหวัด</label>
+                                <input type="text" formControlName="county" class="form-control" style="font-size: medium;">  
+                            </div> 
+
+                            <div class="form-group col-2"> 
+                                &nbsp;&nbsp;
+                                <label style="font-size: medium;">รหัสไปรษณี</label>
+                                <input type="text" formControlName="zipcode" class="form-control" style="font-size: medium;">  
+                            </div>
+                            <div class="form-group col-2">
                                 <label style="font-size: medium;" >เบอร์โทรศัพท์ที่ทำงาน </label>
-                                <input type="textarea" formControlName="workphone" class="form-control" style="font-size: medium;"
-                                [ngClass]="{ 'is-invalid': submitted  }" />
+                                <input type="textarea" formControlName="workphone" class="form-control" style="font-size: medium;"/>
                             </div>
                         </div>    
                     <div class="text-center">

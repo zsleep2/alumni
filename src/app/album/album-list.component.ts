@@ -125,12 +125,12 @@ export class AlbumListComponent implements OnInit {
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
+            label: 'สมาชิก', routerLink:['/member1/'+this.user_username]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
+          label: ' อัลบั้ม ', routerLink:['/album/'+this.user_username]
           
       },
         {
@@ -140,7 +140,7 @@ export class AlbumListComponent implements OnInit {
   ]
     
 
-  this.activePage = 1;
+    this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
  
@@ -175,14 +175,18 @@ export class AlbumListComponent implements OnInit {
     }
   )
 
-  this.http.get('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
+  this.http.get<lstAlbum[]>('http://qpos.msuproject.net/AllNewService/album/showalbum').subscribe(
     data => {
       console.log(data);
       let json = JSON.stringify(data)
          // กรณี resuponse success
          // เก็บจำนวนรายการทั้งหมด ไปคำนวณหน้าจำนวนหน้า
          this.totalItem = json.length; 
-         this.results = data;
+         this.results = data.filter( res => {
+          
+          return res.album_gen == 0;
+
+        });;
        
           for(let i in data){
             this.testData.push(+data[i].album_gen);

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminAlbumComponent } from './admin-album.component';
-import { AdminAlbumDetailComponent } from '../admin_album/admin-album-detail.component';
+
 
 
 const adminalbumRoutes: Routes = [
@@ -12,7 +12,7 @@ const adminalbumRoutes: Routes = [
      
       {
         path:':album_ID',
-        component:AdminAlbumDetailComponent
+      
       }
     ]
   }
