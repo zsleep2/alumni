@@ -51,7 +51,7 @@ b = 1;
   best;
   role;
   status;
-
+  test:string;
   rUser;
   editData = {};
   public myrole;
@@ -81,6 +81,7 @@ b = 1;
     console.log(this.myrole);
     this.registerForm = this.formBuilder.group({
       phone: [''],
+      prefix:[''],
       firstName: [''],
       lastName: [''],
       facebook: [''],
@@ -160,8 +161,13 @@ b = 1;
    /*  if (this.registerForm.invalid) {
         return;
     } */
-    if(this.registerForm.value.firstName && this.registerForm.value.lastName ){
-      this.name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
+    this.test = this.name.split(" ")
+    console.log(this.test[0]);
+    if(this.registerForm.value.firstName ){
+      this.name = this.registerForm.value.firstName + " " + this.test[1];
+    }
+    if(this.registerForm.value.lastName){
+      this.name = this.test[0]+" "+ this.registerForm.value.lastName;
     }
     if(this.registerForm.value.phone){
       this.phone = this.registerForm.value.phone;

@@ -34,7 +34,7 @@
                             <form [formGroup]="registerForm" (ngSubmit)="eDit()">
                                 <div class="form-row">
                                     <div class="form-group col-2">
-                                        <label style="font-size: medium;">คำนำหน้าชื่อ</label>
+                                        <label style="font-size: medium;">ตำแหน่งทางวิชาการ</label>
                                         <input type="text" formControlName="prefix" class="form-control" style="font-size: medium;"
                                         [ngClass]="{ 'is-invalid': submitted  }" />
                                   
@@ -190,11 +190,19 @@
                             </div>
                             <div class="form-group col-5">
                                 <label style="font-size: medium;" >ตำแหน่งงาน</label>
-                                <select formControlName="job" class="form-control" style="font-size: medium;">
-                                    <option value=""></option>
-                                    <option value="NetworkAdmin" style="font-size: medium;">NetworkAdmin</option>
-                                    <option value="Developer" style="font-size: medium;" >Developer</option>
-                                </select>
+                                <input list="job" formControlName="job" class="form-control" style="font-size: medium;" />
+                                <datalist id="job">
+                                    <option value="Sytem Analysit">
+                                    <option value="System Engineer">
+                                    <option value="Tester">
+                                    <option value="Project Manger">
+                                    <option value="IT consulting">
+                                    <option value="IT support / Administrator">
+                                    <option value="NetworkAdmin">
+                                    <option value="Developer">
+                                    <option value="ธุรกิจส่วนตัว">
+                                    <option value="ว่างงาน">
+                                </datalist> 
                             </div> 
                             <label style="font-size: medium;" >ที่อยู่</label>
                             <div class="form-group col-1">

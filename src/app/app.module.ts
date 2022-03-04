@@ -37,7 +37,7 @@ import {Ng2OrderModule} from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import {DataViewModule} from 'primeng/dataview';
-
+import { Member1Module } from './member1/member1.module';
 
 
 
@@ -233,6 +233,7 @@ import { ResetpassComponent } from './resetpass/resetpass.component';
     NgxPaginationModule,
     ReactiveFormsModule,
     DataViewModule,
+    Member1Module 
   ],
   exports: [
    // RouterModule

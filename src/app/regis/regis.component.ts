@@ -44,7 +44,7 @@ export class RegisComponent implements OnInit {
   submitted = false;
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
   usernamePattern = "^((\\+91-?)|0)?[0-9]{11}$"; 
-
+  hide;
   regisData = [];
 
 
@@ -52,8 +52,10 @@ export class RegisComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.hide = 0;
 
-    this.registerForm = this.formBuilder.group({
+    if(this.hide = 0){
+     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.pattern(this.usernamePattern)]],
       title: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -63,9 +65,25 @@ export class RegisComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       role : ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-     
-  }, {
-  });
+      }, {
+      });
+    }else{
+      this.registerForm = this.formBuilder.group({
+        username: ['', [Validators.required]],
+        title: ['', Validators.required],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        phone: ['',[ Validators.required, Validators.pattern(this.mobnumPattern)]],
+        facebook: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        role : ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        }, {
+        });
+      
+    }
+
+   
 
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
@@ -83,6 +101,7 @@ export class RegisComponent implements OnInit {
   get f() { return this.registerForm.controls; }
   onSubmit() {
     this.submitted = true;
+    console.log(this.registerForm.value);
     /* console.log(this.registerForm.value); */
      // stop here if form is invalid
     if (this.registerForm.invalid) {
@@ -101,7 +120,26 @@ export class RegisComponent implements OnInit {
         alert('เป็นสมาชิกแล้ว');
     }else{
       if(window.confirm('ยืนยัน ?')){
-        let json = {user_username : this.registerForm.value.username || '', 
+        if(this.hide == 0){
+          let json = {user_username : this.registerForm.value.username || '', 
+          user_password : this.registerForm.value.password || '',
+          user_prefix : this.registerForm.value.title ||'',
+          user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
+          user_phone : this.registerForm.value.phone || '',
+          user_email : this.registerForm.value.email || '',
+          user_facebook : this.registerForm.value.facebook || '',
+          user_year : this.registerForm.value.year || '',
+          user_job :this.registerForm.value.job || '',
+          user_workname : this.registerForm.value.workname  || '',
+          user_workaddress : this.registerForm.value.workaddress || '',
+          user_workphone :this.registerForm.value.workphone || '',
+          user_best : '0',
+          user_role : this.registerForm.value.role || '',
+          user_status : 0
+        }
+      
+        }else{
+              let json = {user_username : this.registerForm.value.username || '', 
               user_password : this.registerForm.value.password || '',
               user_prefix : this.registerForm.value.title ||'',
               user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
@@ -115,10 +153,8 @@ export class RegisComponent implements OnInit {
               user_workphone :this.registerForm.value.workphone || '',
               user_best : '0',
               user_role : this.registerForm.value.role || '',
-              user_status : '0' || ''
-            }
-            console.log(json);
-            
+              user_status : 0
+        }
             this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
                   console.log('OK');
@@ -133,8 +169,9 @@ export class RegisComponent implements OnInit {
                 (error) => {
                   console.log(error);
                 });  
-      }
-        
+      
+              }
+            }
      
     } 
    
@@ -152,6 +189,15 @@ onReset() {
   }
   sinImputarMes(){
     this.router1.navigateByUrl('/regiss');
+  }
+
+  nisit(){
+    this.hide = 0;
+      console.log('0');
+  }
+  teacher(){
+    this.hide = 1;
+      console.log('1');
   }
   
 

@@ -37,6 +37,7 @@ import { WebboardModule } from './webboard/webboard.module';
 import { AlbumModule } from './album/album.module';
 import { NewModule } from './new/new.module';
 import { ResetpassComponent } from './resetpass/resetpass.component';
+import { Member1Module } from './member1/member1.module';
 
 const appRoust: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -85,6 +86,7 @@ const appRoust: Routes = [
     WebboardModule,
     AlbumModule,
     NewModule,
+    Member1Module
   ],
   exports: [
     RouterModule

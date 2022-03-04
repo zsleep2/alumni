@@ -11,7 +11,8 @@ interface Articles{
   'user_email':string,
   'user_phone':string,
   'user_facebook':string,
-  'user_status':number
+  'user_status':number,
+  'UID':number
 }
 
 
@@ -106,14 +107,6 @@ export class Member1Component implements OnInit {
 
     
     this.mygen="0";
-    /* console.log(this.min,this.max); */
-  /*   var years = 70;
-    var till = 50;
-    var options = "";
-    for(var y=years; y>=till; y--){
-    options += "<option>"+ y +"</option>";
-    }
-    document.getElementById("year").innerHTML = options; */
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;

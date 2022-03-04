@@ -29,18 +29,33 @@
             <div class="two">
               <!-- main app container -->
                   <div class="card m-3">
-                    <h5 class="card-header">สมัครสมาชิก</h5>
+                    <h5 class="card-header">สมัครสมาชิก | 
+                        <a  [routerLink]="" style="font-size: medium;" (click)="nisit()">นิสิต</a> &nbsp;
+                        <a  [routerLink]="" style="font-size: medium;" (click)="teacher()">อาจารย์</a>
+                    </h5>
                     <div class="card-body">
                         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                             <div class="form-row">
                             <div class="form-group col-4">
-                                    <label>รหัสนิสิต</label>
+                                <div *ngIf="hide == 0">
+                                    <label >รหัสนิสิต</label>
                                     <input type="text" formControlName="username" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                                         <div *ngIf="f.username.errors.required">กรุณากรอกรหัสนิสิต</div>
                                         <div *ngIf="f.username.errors.pattern">รหัสนิสิต 11 หลัก</div>
-                                    </div>
+                                    </div>    
+                                </div>
+                                <div *ngIf="hide == 1">
+                                    <label >ชื่อผู้ใช้</label>
+                                    <input type="text" formControlName="username" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                        <div *ngIf="f.username.errors.required">กรุณากรอกชื่อผู้ใช้</div>  
+                                    </div>    
+                                </div>
+
+                                   
                             </div>
                              <div class="form-group col-4"> 
                                     <label>Password</label>
@@ -52,26 +67,37 @@
                                     </div>  
                             </div>
                              <div class="form-group col-4">
-                                <label>Email</label>
-                                <input type="text" formControlName="email" class="form-control" 
-                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                    <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
-                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                <label>เบอร์โทรศัพท์</label>
+                                <input type="text" formControlName="phone" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
+                                <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
                                 </div>
                             </div>
                                 <div class="form-group col-2">
+                                    <div *ngIf="hide ==0">
                                     <label>คำนำหน้า</label>
-                                    
-                                    <select formControlName="title" class="form-control" style="font-size: medium;"
-                                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-                                        <option value=""></option>
-                                        <option value="นาย">นาย</option>
-                                        <option value="นางสาว">นางสาว</option>
-                                    </select>
-                                    <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                                        <div *ngIf="f.title.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
+                                        <select formControlName="title" class="form-control" style="font-size: medium;"
+                                        [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                            <option value=""></option>
+                                            <option value="นาย">นาย</option>
+                                            <option value="นางสาว">นางสาว</option>
+                                        </select>
+                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
+                                        </div>
                                     </div>
+                                    <div *ngIf="hide ==1">
+                                     
+                                        <label>ตำแหน่งทางวิขาการ</label>
+                                        <input type="text" formControlName="title" class="form-control" 
+                                        [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
+                                        </div>
+                                    </div>
+                                
                                 </div>
                                 <div class="form-group col-5">
                                     <label>ชื่อ</label>
@@ -91,32 +117,39 @@
                                 </div>
                             <div class="form-group col-2">
                                     <label>สถานะ</label>
-                                    <select formControlName="role" class="form-control" style="font-size: medium;"
+                                    <select *ngIf="hide == 0" formControlName="role" class="form-control" style="font-size: medium;"
                                     [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
                                         <option value=""></option>
                                         <option value="2">ศิษย์ปัจจุบัน</option>
                                         <option value="3">ศิษย์เก่า</option>
                                     </select>
+                                    <select *ngIf="hide == 1" formControlName="role" class="form-control" style="font-size: medium;"
+                                    [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
+                                        <option value=""></option>
+                                        <option value="1">อาจารย์ </option>
+                                        
+                                    </select>
                                     <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
                                         <div *ngIf="f.role.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
                                     </div>
                             </div>
-                            <div class="form-group col-5"> 
+                            <div class="form-group col-5">
+                                <label>Email</label>
+                                <input type="text" formControlName="email" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group col-5">
                                 <label>Facebook</label>
                                 <input type="text" formControlName="facebook" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.facebook.errors }" />
                                 <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
                                 <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
                                 </div>  
-                            </div>
-                            <div class="form-group col-5">
-                                <label>เบอร์โทรศัพท์</label>
-                                <input type="text" formControlName="phone" class="form-control" 
-                                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
-                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                                <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
-                                <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
-                                </div>
                             </div>
                         </div>    
                           

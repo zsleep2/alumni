@@ -95,20 +95,18 @@ export class NewListComponent implements OnInit {
         },
         {
             
-            label: 'นักศึกษา', routerLink:['/member1/'+this.user_username]
+            label: 'สมาชิก', routerLink:['/member1/'+this.user_username]
           
         },
         
         {
-          label: ' อัลบั้มรูปภาพ ', routerLink:['/album/'+this.user_username]
+          label: ' อัลบั้ม ', routerLink:['/album/'+this.user_username]
           
       },
         {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
         },
-        {
-          label:'ออกจากระบบ', routerLink:['/home']
-        }
+       
   ]
     
 
@@ -157,6 +155,12 @@ export class NewListComponent implements OnInit {
       this.highlightId = +params.get('new_ID');
     }    
 
+  }
+
+  logOut(){
+    this.router1.navigateByUrl('/home');
+    localStorage.removeItem('status');
+  
   }
 
 }

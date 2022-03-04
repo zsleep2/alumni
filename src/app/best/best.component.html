@@ -9,8 +9,7 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            font-family: Arial;
-            font-size: 24px;
+
         }
         .TestCss {
                 color:rgba(27,31,34,0.85);
@@ -33,7 +32,28 @@
             <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
                 <app-header2></app-header2>
             </div>
-            <div class="t">
+            <div class="t"> 
+                <table class="table table-sm">
+                <thead style="background-color:rgba(9, 8, 85, 0.85);">
+                  <tr>
+                    <th scope="col" colspan="2" style="font-size: medium;color: white;">ค้นหา</th>
+                  </tr>
+                </thead>
+                <tbody >
+                    <label style="font-size: medium;">ค้นหาชื่อสมาขิก</label> <br> &nbsp;&nbsp;
+                    <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"> <br>
+                    <label style="font-size: medium;">ค้นหาปี</label> <br> &nbsp;&nbsp;
+                    <input list="syear" name="year" [(ngModel)]= "year" (ngModelChange)="ser()"/>
+                    <datalist id="syear">
+                        <option *ngFor="let y of sYear" value="{{y}}">
+                       
+                    </datalist> <br> <br> &nbsp; 
+                  
+                    <label style="font-size: medium;">ค้นหาความสำเร็จ</label> <br> &nbsp;&nbsp;
+                    <input type="text" name="achievement" [(ngModel)]= "achievement"  (ngModelChange)="SearchA()"> <br>
+
+                </tbody>
+              </table>
             </div>
             <div class="two"  > 
                 <div class="hear">
@@ -51,7 +71,10 @@
                         <th style="width: 40%;font-size: medium;"><p>ความสำเร็จ</p></th>
                        
                     </tr>
-                    <tr i *ngFor="let best of bestStudent" style="text-align: พ;">
+                       
+                    <tr style="text-align: center;" 
+                    *ngFor="let best of bestStudent | paginate: config "
+                    [routerLink]="['/member1/'+this.user_username,best.UID]">
                         <td><label style="font-size: medium;">{{best.best_year}}</label></td>
                         <td><label style="font-size: medium;">{{best.user_prefix}} {{best.user_name}}</label></td>
                         <td><label style="font-size: medium;">{{best.user_username}}</label></td>
@@ -59,7 +82,10 @@
                        
                     </tr>
                 </tbody>
-            </table>
+            </table>    
+            <div style="text-align: center;">
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+              </div>
             </div> 
             <div class="four" style="text-align: right;">
             </div> 

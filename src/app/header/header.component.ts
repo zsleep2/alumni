@@ -17,11 +17,11 @@ export class HeaderComponent implements OnInit {
         label: ' หน้าแรก ', routerLink:['/home']
       },
       {
-          label: ' นักศึกษา ', routerLink:['/login'],
+          label: ' สมาชิก ', routerLink:['/login'],
          
       },
       {
-        label: ' อัลบั้มรูปภาพ ', routerLink:['/login'],
+        label: ' อัลบั้ม ', routerLink:['/login'],
         
     },
       {

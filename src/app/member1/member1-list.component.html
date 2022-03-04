@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <style>
+       body{
+            background-image: url(https://campus.campus-star.com/app/uploads/2017/02/IMG_6492.jpg);
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        } 
+    </style>
+</head>
+    <body>
+     
+        <div class="wrapper">
+            <div class="one" style=" background-color: rgba(9, 8, 85, 0.85);">
+                <div class="ui-g">
+                    <div class="ui-g-6" >
+                        <h1>
+                            วิทยาการคอมพิวเตอร์
+                        </h1>
+                        <p>
+                            Informatics Mahasarakham University
+                        </p>
+                        <img src="./assets/images/logo-it-x.png" class="img"> 
+                    </div>
+                    <div class="ui-g-6" >
+                        <br>
+                        <p-menubar [model]="items "></p-menubar>
+                        <div style="text-align: right;">
+                            <button pButton (click) ="logOut()"
+                            type="button" label="ออกจากระบบ" 
+                            class="pui-button-rounded ui-button-danger"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+             <div  class="three" >
+                    <table id="customers" >
+                        <tbody>
+                            <tr>
+                                <th  style="text-align: center;font-size: medium;"></th>
+                            </tr>
+                            <div style="text-align: center;">
+                                <label for="fr" style="font-size: medium;">ค้นหารุ่น:</label> 
+                                <select  [(ngModel)]="year" (click)="ser()">
+                                <option *ngFor="let method of rawData" >{{ method }}</option>
+                                </select> <br>
+                                <button pButton type="button" label="สมาชิกทั้งหมด" class="ui-button-rounded ui-button-Primary" 
+                                (click)='cl()'></button> <br> <br> &nbsp; 
+                                <label >ค้นหาชื่อสมาขิก</label> &nbsp; &nbsp; 
+                                <input type="text" name="sName" [(ngModel)]= "sName" (ngModelChange)="SearchName()"> <br> <br> &nbsp; 
+                                <label >ค้นหาตำแหน่งงาน</label> &nbsp; &nbsp; 
+                                <input list="job" name="sJob" [(ngModel)]= "sJob" (ngModelChange)="SearchJob()"/>
+                                <datalist id="job">
+                                    <option value="Sytem Analysit">
+                                    <option value="System Engineer">
+                                    <option value="Tester">
+                                    <option value="Project Manger">
+                                    <option value="IT consulting">
+
+                                    <option value="IT support / Administrator">
+                                    <option value="NetworkAdmin">
+                                    <option value="Developer">
+                                    <option value="ธุรกิจส่วนตัว">
+                                    <option value="ว่างงาน">
+                                </datalist> <br> <br> &nbsp; 
+                                <label >จังหวัด</label> &nbsp; &nbsp; 
+                                <input list="county" name="sAddress" [(ngModel)]= "sAddress" (ngModelChange)="SearchAddress()"/>
+                                <datalist id="county">
+                                        <option *ngFor="let con of county" value="{{con.name}}"></option>
+                                </datalist>
+                            </div>
+                            
+                            </tbody>
+                        </table>
+                   
+
+                </div>
+
+           
+            <div class="two" align="center" >
+                <div class="hear" style="text-align: center;">
+                    <label *ngIf="this.mygen == 0" class="head">สมาชิกทั้งหมด</label>
+                    <label *ngIf="this.mygen != 0" class="head">รุ่น {{this.mygen}}</label>
+                </div>
+              <table id="customers">           
+                    <thead>
+                    <tr> 
+                        <th style="font-size: medium;">รหัสนิสิต</th>
+                        <th style="font-size: medium;">ชื่อ</th>
+                        <th style="font-size: medium;">email</th>
+                        <th style="font-size: medium;">เบอร์โทรศัพท์</th>
+                        <th style="font-size: medium;">facebook</th>
+                        
+                    </tr>
+                    </thead>
+               <tbody>
+
+                           
+                        <tr style="text-align: center;"
+                        *ngFor="let user of rUser | paginate: config" 
+                        [routerLink]="['/member1/'+this.user_username,user.UID]">
+                    
+                        <td style="font-size: medium;">{{user.user_username}}</td>
+                        <td style="font-size: medium;"> {{user.user_prefix}} {{user.user_name}}</td>
+                        <td style="font-size: medium;">{{user.user_email}}</td>
+                        <td style="font-size: medium;">{{user.user_phone}}</td>
+                        <td style="font-size: medium;"> <a href="{{user.user_facebook}}">{{user.user_facebook}}</a> </td>   
+                      
+                        </tr>
+               </tbody>     
+                </table>    
+                    <br>
+                    <div >
+                        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                      </div>
+               <!--  <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <li class="page-item">
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: 1}"> First</a>
+                      </li>
+                      <li class="page-item" [class.disabled]="activePage==1">
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: prevPage}"> Previous</a> 
+                      </li>
+                      <li class="page-item" *ngFor="let i of iPage" [class.active]="activePage==i"> 
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: i}"> {{ i }} </a> 
+                      </li>
+                      <li class="page-item" [class.disabled]="activePage==totalPage"> 
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  
+                                  [queryParams]="{page: nextPage}"> Next</a>
+                      </li>
+                      <li class="page-item">
+                        <input #pageInput type="number"class="form-control" min="1" max="{{ totalPage }}"
+                                style="width:80px;" (input)="changePage(pageInput.value)" value="{{ activePage }}" />
+                      </li>
+                      <li class="page-item"> 
+                          <a class="page-link" [routerLink]="['/member1/'+this.user_username]"  [queryParams]="{page: totalPage}"> Last</a> 
+                      </li>
+                    </ul>
+                  </nav> -->
+                
+          </div>
+           </div>
+        
+    </body>
+</html>

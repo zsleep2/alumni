@@ -62,12 +62,8 @@ export class WebboardDetailComponent implements OnInit {
     private http: HttpClient, 
     private router1: Router, 
     private _auth: AuthService,
-    private router4: ActivatedRoute) { 
-
+    private router4: ActivatedRoute) {
       this.user_username = localStorage.getItem('user_username');;
-    
-      /* console.log('detail'+this.user_username); */
-
       }
 
   ngOnInit(): void {

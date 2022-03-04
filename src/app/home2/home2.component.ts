@@ -29,7 +29,7 @@ export class Home2Component implements OnInit {
   des:string;
   fname:string;
   public myrole;
- 
+ uid;
   public iPage:number[] = [];
   public iPageStart:number = 1;
   public prevPage:number;
@@ -121,6 +121,7 @@ export class Home2Component implements OnInit {
         this.router1.navigateByUrl('/login');
      }else{
       this.myrole = localStorage.getItem('role');
+      this.uid = localStorage.getItem('uid');
      }
     
      

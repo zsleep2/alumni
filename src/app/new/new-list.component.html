@@ -50,9 +50,13 @@
                         </div>
                         <div class="ui-g-6" >
                             <br>
-                            <p-menubar [model]="items" >
-                               
-                            </p-menubar>
+                            <p-menubar [model]="items" ></p-menubar>
+                            <div style="text-align: right;">
+                                <button pButton (click) ="logOut()"
+                                type="button" label="ออกจากระบบ" 
+                                class="pui-button-rounded ui-button-danger"></button>
+                            </div>
+    
                         </div>
                     </div>
                 </div>

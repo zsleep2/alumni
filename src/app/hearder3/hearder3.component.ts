@@ -22,12 +22,12 @@ export class Hearder3Component implements OnInit {
         label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
       },
       {
-          label: 'นักศึกษา', routerLink:['/member1/'+this.user_username],
+          label: 'สมาชิก', routerLink:['/member1/'+this.user_username],
          
       },
       
       {
-        label: ' อัลบั้มรูป ', routerLink:['/album/'+this.user_username],
+        label: ' อัลบั้ม ', routerLink:['/album/'+this.user_username],
         
     },
       {

@@ -31,7 +31,23 @@ interface Articles{
 })
 export class AdminUserComponent implements OnInit {
   myValue;
-  data: [][];
+  data: [{
+    user_username,
+    user_password,
+    user_prefix,
+    user_name,
+    user_phone,
+    user_email,
+    user_facebook,
+    user_year,
+    user_workname,
+    user_workaddress,
+    user_job,
+    user_workphone,
+    user_role,
+    user_best,
+    user_status
+  }];
   data1: [][];
   user_username;
   rUser;
@@ -75,15 +91,21 @@ export class AdminUserComponent implements OnInit {
   best: any;
   workname: any;
   workaddress: any;
+  config: { itemsPerPage: number; currentPage: number; };
+  checkuser;
 
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
     private router1: Router,
     private _auth: AuthService) { 
       this.user_username = localStorage.getItem('user_username');
+      this.config = {
+        itemsPerPage: 10,
+        currentPage: 1
+      };
     }
 
-    changePage(page:number){
+    /* changePage(page:number){
       this.activePage = page;
       this.router1.navigate(['/admin_user/'+this.user_username], {queryParams:{page:page}});
     }
@@ -110,7 +132,7 @@ export class AdminUserComponent implements OnInit {
         }              
       }   
        
-    }
+    } */
   
 
   ngOnInit(): void {
@@ -123,7 +145,7 @@ export class AdminUserComponent implements OnInit {
      }
 
 
-    this.activePage = 1;
+    /* this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;
     this.totalPage = Math.ceil(this.totalItem/this.perPage);
@@ -148,7 +170,7 @@ export class AdminUserComponent implements OnInit {
         this.pointEnd = this.perPage*this.activePage;
         this.pagination();
       }   
-    });  
+    });   */
     
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
@@ -174,6 +196,10 @@ export class AdminUserComponent implements OnInit {
        }, error => {
       }); 
      
+  }
+
+  pageChanged(event){
+    this.config.currentPage = event;
   }
   
   onFileChange(evt: any) {
@@ -201,43 +227,54 @@ export class AdminUserComponent implements OnInit {
    }
 
    inputData() {
-   /*  for (var i in this.data) {
-  
-     let json ={
-                user_username : this.data[i].user_username || '',       
-                user_password : this.data[i].user_password || '',
-                user_prefix : this.data[i].user_prefix || '',
-                user_name : this.data[i].user_name || '',
-                user_email : this.data[i].user_email || '',
-                user_phone : this.data[i].user_phone || '',
-                user_facebook : this.data[i].user_facebook || '',
-                user_year : this.data[i].user_year || '',
-                user_workname : this.data[i].user_workname || '',
-                user_workaddress : this.data[i].user_workaddress || '',
-                user_job : this.data[i].user_job || '',
-                user_workphone : this.data[i].user_workphone || '',
-                user_role : this.data[i].user_role || '',
-                user_best : 0 ,
-                user_status : 0
-              }
-     console.log(json) 
-       this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
-        
-        if(data == 1){
-          console.log('OK');
-          alert('OK!!');
-          window.location.reload();
-        }else{
-        
-          console.log(data);
-        }
+    for (var i in this.data) {
+      for(var j in this.rUser){ 
+        if(this.data[i].user_username == this.rUser[i].user_username){
+           alert(this.data[i].user_username+' ซ้ำในระบบไม่สามารถสมัครได้');
+            this.checkuser = 1;
+            break; 
+          } 
+        } 
+        if(this.checkuser ==1){
           
-        },
-        (error) => {
-          console.log(error);
-        }); 
-          }    */
-      } 
+           window.location.reload();
+        }else{
+          let json ={
+            user_username : this.data[i].user_username || '',       
+            user_password : this.data[i].user_password || '',
+            user_prefix : this.data[i].user_prefix || '',
+            user_name : this.data[i].user_name || '',
+            user_email : this.data[i].user_email || '',
+            user_phone : this.data[i].user_phone || '',
+            user_facebook : this.data[i].user_facebook || '',
+            user_year : this.data[i].user_year || '',
+            user_workname : this.data[i].user_workname || '',
+            user_workaddress : this.data[i].user_workaddress || '',
+            user_job : this.data[i].user_job || '',
+            user_workphone : this.data[i].user_workphone || '',
+            user_role : this.data[i].user_role || '',
+            user_best : 0 ,
+            user_status : 0
+          } 
+          console.log(json);
+  
+        this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
+          if(data == 1){
+            console.log('OK');
+            alert('OK!!');
+            window.location.reload();
+          }else{
+            console.log(data);
+          }
+            
+          },
+          (error) => {
+            console.log(error);
+          }); 
+        }
+        
+    }
+  } 
 
       toggle() {
        
@@ -262,7 +299,7 @@ export class AdminUserComponent implements OnInit {
                 this.workname = this.rUser[i].user_workname;
                 this.workaddress = this.rUser[i].user_workaddress;
                 this.workphone = this.rUser[i].user_workphone;
-                this.best = this.rUser[0].user_best;
+                this.best = this.rUser[i].user_best;
                 this.role = this.rUser[i].user_role;
 
                 console.log(this.rUser[i].user_status);
@@ -369,6 +406,7 @@ export class AdminUserComponent implements OnInit {
           for(let i in this.results){
             let json = {user_username : this.results[i].user_username || '', 
             user_password : this.results[i].user_password || '', 
+            user_prefix : this.results[i].user_prefix || '',
             user_name : this.results[i].user_name || '',
             user_phone :  this.results[i].user_phone || '',
             user_email : this.results[i].user_email || '',
@@ -378,6 +416,8 @@ export class AdminUserComponent implements OnInit {
             user_workname : this.results[i].user_workname|| '',
             user_workaddress : this.results[i].user_workaddress || '',
             user_workphone : this.results[i].user_workphone || '',
+            user_best : this.results[i].user_best || '',
+            user_role : this.results[i].user_role || '',
             user_status : 1
           }
             console.log(json);
@@ -412,19 +452,50 @@ export class AdminUserComponent implements OnInit {
             }); 
            
       }
-
-      clearUser(){
+      
+      showTeacher(){
         this.year = '';
-        this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+        this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/teacher').subscribe(
           data => {  
             this.rUser = data;
            }, error => {
           }); 
       }
+
+      clearUser(){
+        this.year = '';
+        if(this.nrSelect == 0){
+          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+          data => {  
+            this.rUser = data;
+           }, error => {
+          })
+        }
+        if(this.nrSelect ==1 ){
+          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+            data => {
+             
+              this.rUser = data.filter( user => {
+                return user.user_status == 0;
+              });
+             }, error => {
+            }); 
+        }
+        if(this.nrSelect == 2 ){
+          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/teacher').subscribe(
+            data => {
+             
+              this.rUser = data.filter( user => {
+                return user.user_status == 0;
+              });
+             }, error => {
+            }); 
+        }
+    }
       SearchName(){
         console.log(this.rUser);
         if(this.sName == ""){
-           /*  this.ngOnInit(); */
+            this.ngOnInit();
            
         }else{
           this.rUser = this.rUser.filter(res =>{
