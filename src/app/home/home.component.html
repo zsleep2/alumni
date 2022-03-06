@@ -22,8 +22,8 @@
                 <div class="wa">
                     <div class="item1"> <button  class= "button"   a routerLink="/login">เข้าสู่ระบบ</button> </div>
                     <div class="item2"><button  class= "button"   a routerLink="/regis">สมัครสมาชิก</button></div>
-                    <div class="item3"> <button  class= "button"   a routerLink="/login">ศิษย์เก่าดีเด่น</button> </div>
-                    <div class="item4"><button  class= "button"   a routerLink="/login">About</button></div>
+                    <div class="item3"> <button  class= "button"   a routerLink="/best">ศิษย์เก่าดีเด่น</button> </div>
+                    <div class="item4"><button  class= "button"   a routerLink="/about">About</button></div>
                     
                 </div>
                 
@@ -33,6 +33,9 @@
                 <app-new-l></app-new-l>
             </div>
             <div class="six">
+              <button class="btn btn-success" [routerLink]="['/new/'+this.user_username]">
+                ข่าวทั้งหมด
+              </button> &nbsp;
                 <div class="wrapper2" >
                   <div class="a"  >
                     <div *ngIf = "this.allnew && this.allnew[5] != undefined" >

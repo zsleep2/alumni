@@ -41,6 +41,8 @@ export class NewDetailComponent implements OnInit {
  
  
   items: MenuItem[];
+  items1: MenuItem[];
+  status: string;
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
@@ -55,7 +57,7 @@ export class NewDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.myrole = localStorage.getItem('role');
-    
+     this.status = localStorage.getItem('status');
   
       this.items = [
         {
@@ -75,6 +77,24 @@ export class NewDetailComponent implements OnInit {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
         },
   ]
+  this.items1 = [
+    {
+      label: 'หน้าแรก', routerLink:['/home']
+    },
+    {
+        
+        label: 'สมาชิก', routerLink:['/login']
+      
+    },
+    
+    {
+      label: ' อัลบั้ม ', routerLink:['/login']
+      
+  },
+    {
+        label: 'เว็บบอร์ด', routerLink:['/login']
+    },
+]
     
 
     

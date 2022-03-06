@@ -59,6 +59,9 @@ b = 1;
   submitted = false;
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
   usernamePattern = "^((\\+91-?)|0)?[0-9]{11}$"; 
+  address;
+  showname: any;
+  showaddress: any;
 
 
   constructor(private router: ActivatedRoute,
@@ -77,8 +80,10 @@ b = 1;
        this.router1.navigateByUrl('/login');
     }else{
      this.myrole = localStorage.getItem('role');
+     this.showname = localStorage.getItem('name').split(" ");
+     this.showaddress = localStorage.getItem('address').split(" ");
     }
-    console.log(this.myrole);
+    console.log(this.showaddress);
     this.registerForm = this.formBuilder.group({
       phone: [''],
       prefix:[''],
@@ -106,7 +111,7 @@ b = 1;
       console.log("g");
       this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/teacher').subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.rUser = data.filter( u => {  
             return u.user_username == this.user_username;
            
@@ -117,7 +122,7 @@ b = 1;
   }else{
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
     data => {
-      console.log(data);
+      //console.log(data);
       this.rUser = data.filter( u => {  
         return u.user_username == this.user_username;
        
@@ -129,7 +134,7 @@ b = 1;
 
 
   
-   console.log(this.user_username);
+   //console.log(this.user_username);
        
   }
   
@@ -161,8 +166,7 @@ b = 1;
    /*  if (this.registerForm.invalid) {
         return;
     } */
-    this.test = this.name.split(" ")
-    console.log(this.test[0]);
+    this.test = this.name.split(" ");
     if(this.registerForm.value.firstName ){
       this.name = this.registerForm.value.firstName + " " + this.test[1];
     }
@@ -191,20 +195,61 @@ b = 1;
     if(this.registerForm.value.job){
       this.job = this.registerForm.value.job;
     }
-   /*  if(this.registerForm.value.workaddress){
-      this.workaddress = this.registerForm.value.workaddress;
-    } */
+   
     if(this.registerForm.value.workphone){
       this.workphone = this.registerForm.value.workphone;
     }
-    this.workaddress = "บ้านเลขที่ "+this.registerForm.value.no+" "+
-    "หมู่ "+this.registerForm.value.swine+" "+
-    "ถนน "+this.registerForm.value.road+" "+
-    "ตำบล"+this.registerForm.value.subdistrict+" "+
-    "อำเภอ"+this.registerForm.value.district+" "+
-    "จังหวัด"+this.registerForm.value.county+" "+
-    "รหัสไปรษณี "+this.registerForm.value.zipcode
+    this.address = this.workaddress.split(" ")
+    console.log(this.address);
+    if(this.registerForm.value.no){
+        this.workaddress = "เลขที่ "+this.registerForm.value.no + " หมู่ "+
+        this.address[3]+" ถนน "+this.address[5]+" ตำบล "+this.address[7]+" อำเภอ "+
+        this.address[9]+" จังหวัด "+this.address[11]+" รหัสไปรษณี "+this.address[13] 
+    } 
+    this.address = this.workaddress.split(" ");
+    if(this.registerForm.value.swine){
+      this.workaddress = "เลขที่ "+this.address[1]+" หมู่ "+this.registerForm.value.swine
+      +" ถนน "+this.address[5]+" ตำบล "+this.address[7]+" อำเภอ "+
+      this.address[9]+" จังหวัด "+this.address[11]+" รหัสไปรษณี "+this.address[13] 
+     } 
+    
+     this.address = this.workaddress.split(" ")
+     if(this.registerForm.value.road){
+      this.workaddress = "เลขที่ "+this.address[1] + " หมู่ "+
+      this.address[3]+" ถนน "+this.registerForm.value.road+" ตำบล "+this.address[7]+" อำเภอ "+
+      this.address[9]+" จังหวัด "+this.address[11]+" รหัสไปรษณี "+this.address[13] 
+     } 
    
+     this.address = this.workaddress.split(" ")
+     if(this.registerForm.value.subdistrict){
+      this.workaddress = "เลขที่ "+this.address[1] + " หมู่ "+
+      this.address[3]+" ถนน "+this.address[5]+" ตำบล "+this.registerForm.value.subdistrict+" อำเภอ "+
+      this.address[9]+" จังหวัด "+this.address[11]+" รหัสไปรษณี "+this.address[13] 
+     } 
+   
+     this.address = this.workaddress.split(" ")
+     if(this.registerForm.value.district){
+      this.workaddress = "เลขที่ "+this.address[1] + " หมู่ "+
+      this.address[3]+" ถนน "+this.address[5]+" ตำบล "+this.address[7]+" อำเภอ "+
+      this.registerForm.value.district+" จังหวัด "+this.address[11]+" รหัสไปรษณี "+this.address[13] 
+     } 
+     
+     this.address = this.workaddress.split(" ")
+     if(this.registerForm.value.county){
+      this.workaddress = "เลขที่ "+this.address[1] + " หมู่ "+this.address[3]+" ถนน "+
+      this.address[5]+" ตำบล "+this.address[7]+" อำเภอ "+this.address[9]+" จังหวัด "+
+      this.registerForm.value.county+" รหัสไปรษณี "+this.address[13] 
+     } 
+    
+     this.address = this.workaddress.split(" ")
+     if(this.registerForm.value.zipcode){
+      this.workaddress = "เลขที่ "+this.address[1] + " หมู่ "+
+      this.address[3]+" ถนน "+this.address[5]+" ตำบล "+this.address[7]+" อำเภอ "+
+      this.address[9]+" จังหวัด "+this.address[11]+" รหัสไปรษณี "+this.registerForm.value.zipcode
+     }
+     console.log(this.workaddress);
+     console.log(this.address);
+  
     let json = {
     user_username : this.user_username,
     user_password : this.password,
@@ -223,7 +268,7 @@ b = 1;
     user_role : this.role 
   }
     console.log(json);
-   /*  if(window.confirm('คุณต้องการเปลี่ยนข้อมูลส่วนตัว ? ')){
+    /* if(window.confirm('คุณต้องการเปลี่ยนข้อมูลส่วนตัว ? ')){
       this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.user_username,
       JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){

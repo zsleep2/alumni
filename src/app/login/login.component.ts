@@ -48,6 +48,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('uid',this._auth.myData[0].UID);
               localStorage.setItem('role',this._auth.myData[0].user_role);
               localStorage.setItem('password',this._auth.myData[0].user_password);
+              localStorage.setItem('name',this._auth.myData[0].user_name);
+              localStorage.setItem('address',this._auth.myData[0].user_workaddress);
                 this.router.navigateByUrl('/home2/'+this.user_username);
             }else{
                 alert('รอรับการอนุมัติจากระบบ');

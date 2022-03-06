@@ -23,6 +23,7 @@ export class AboutComponent implements OnInit {
   myValue;
   myrole;
   results;
+  status: string;
   constructor( private _auth: AuthService,
     private http: HttpClient,
     private router: ActivatedRoute,
@@ -32,13 +33,8 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {  
 
-    const status = localStorage.getItem('status');
-    if(status !== '1'){
-       this.router1.navigateByUrl('/login');
-    }else{
-     this.myrole = localStorage.getItem('role');
-    }
-    console.log(this.myrole);
+     this.status = localStorage.getItem('status');
+    
 
     this.http.get<lstAbout[]>('http://qpos.msuproject.net/AllNewService/about/showabout')
     .subscribe(

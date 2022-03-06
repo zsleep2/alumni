@@ -46,6 +46,7 @@ export class BestComponent implements OnInit {
   min:number;
   max:number;
   d;
+  status:any;
   constructor(private _auth: AuthService,
     private http: HttpClient,
     private router1: Router,
@@ -94,13 +95,15 @@ export class BestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const status = localStorage.getItem('status');
-    if(status !== '1'){
+    this.status = localStorage.getItem('status');
+   /*  if(status !== '1'){
        this.router1.navigateByUrl('/login');
     }else{
      this.myrole = localStorage.getItem('role');
-    }
+    } */
 
+    this.myrole = localStorage.getItem('role');
+    console.log(this.myrole,this.status);
     this.activePage = 1;
     this.nextPage = 2;
     this.pointEnd = this.perPage*this.activePage;

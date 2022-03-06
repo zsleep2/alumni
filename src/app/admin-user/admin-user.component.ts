@@ -31,7 +31,7 @@ interface Articles{
 })
 export class AdminUserComponent implements OnInit {
   myValue;
-  data: [{
+  /* data:{
     user_username,
     user_password,
     user_prefix,
@@ -47,8 +47,9 @@ export class AdminUserComponent implements OnInit {
     user_role,
     user_best,
     user_status
-  }];
-  data1: [][];
+  }; */
+  data:any;
+  data1: any;
   user_username;
   rUser;
   userID;
@@ -214,11 +215,18 @@ export class AdminUserComponent implements OnInit {
        const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
        const wsname: string = wb.SheetNames[0];
        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-        //console.log(ws);
-        this.data = XLSX.utils.sheet_to_json(ws);
-        /* this.data1 = (XLSX.utils.sheet_to_json(ws , {header : 1})); */
-     /* console.log(this.data); */
-     //console.log(this.data1);
+        console.log(ws);
+        /* this.data:Articles[] = XLSX.utils.sheet_to_json<Articles>(ws); */
+     /*    const row : Articles[] = XLSX.utils.sheet_to_json<Articles>(ws); */
+       this.data = XLSX.utils.sheet_to_json<Articles>(ws);
+
+     
+       /*    this.data1 = JSON.stringify(this.data);
+          console.log(this.data1); */
+          
+       /*  this.data1 = (XLSX.utils.sheet_to_json(ws , {header : 2})); */
+   /*   console.log(this.data);
+     console.log(this.data1); */
        //console.log(this.data[0]);
      //console.log(this.data[0].user_username);
     /*   this.inputData(); */

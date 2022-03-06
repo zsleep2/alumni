@@ -46,7 +46,7 @@ user_name;
       },
         {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
-        },   
+        },  
   ]
   
 /*   console.log(this.items); */
@@ -56,7 +56,10 @@ user_name;
 logOut(){
   this.router1.navigateByUrl('/home');
   localStorage.removeItem('status');
-
+  localStorage.removeItem('user_username');
+  localStorage.removeItem('role');
+  localStorage.removeItem('uid');
+  localStorage.removeItem('password');
 }
   }
 

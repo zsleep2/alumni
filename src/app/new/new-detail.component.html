@@ -29,12 +29,18 @@
                 </div>
                 <div class="ui-g-6" >
                     <br>
-                    <p-menubar [model]="items" ></p-menubar>
-                    <div style="text-align: right;">
-                        <button pButton (click) ="logOut()"
-                        type="button" label="ออกจากระบบ" 
-                        class="pui-button-rounded ui-button-danger"></button>
+                    <div *ngIf="status == '1'">
+                        <p-menubar [model]="items" ></p-menubar>
+                        <div style="text-align: right;">
+                            <button pButton (click) ="logOut()"
+                            type="button" label="ออกจากระบบ" 
+                            class="pui-button-rounded ui-button-danger"></button>
+                        </div>
                     </div>
+                    <div *ngIf="status == null">
+                        <p-menubar [model]="items1" ></p-menubar>
+                    </div>
+                   
                 </div>
             </div>
             </div>

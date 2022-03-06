@@ -25,6 +25,7 @@ export class NewListComponent implements OnInit {
 
   user_username;
   items: MenuItem[];
+  items1: MenuItem[];
   public myValue;
   
   public iPage:number[] = [];
@@ -44,6 +45,7 @@ export class NewListComponent implements OnInit {
   public urlSource:string = "https://jsonplaceholder.typicode.com";
   public highlightId:number; // สำหรับเก็บ id ที่เพิ่งเข้าดู
   lstNew:lstNew[];
+  status: string;
   constructor(
     private router: ActivatedRoute,
     private http: HttpClient, 
@@ -58,7 +60,7 @@ export class NewListComponent implements OnInit {
 
   changePage(page:number){
     this.activePage = page;
-    this.router1.navigate(['/new/'+this.myValue[0].user_username], {queryParams:{page:page}});
+    this.router1.navigate(['/new/'+this.user_username], {queryParams:{page:page}});
   }
 
   pagination(){
@@ -87,8 +89,8 @@ export class NewListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myValue = this._auth.myData;
-   
+  
+    this.status = localStorage.getItem('status');
       this.items = [
         {
           label: 'หน้าแรก', routerLink:['/home2/'+this.user_username]
@@ -105,9 +107,28 @@ export class NewListComponent implements OnInit {
       },
         {
             label: 'เว็บบอร์ด', routerLink:['/webboard/'+this.user_username]
-        },
-       
+        },  
   ]
+    
+  this.items1 = [
+    {
+      label: 'หน้าแรก', routerLink:['/home']
+    },
+    {
+        
+        label: 'สมาชิก', routerLink:['/login']
+      
+    },
+    
+    {
+      label: ' อัลบั้ม ', routerLink:['/login']
+      
+  },
+    {
+        label: 'เว็บบอร์ด', routerLink:['/login']
+    },
+   
+]
     
 
   this.activePage = 1;
