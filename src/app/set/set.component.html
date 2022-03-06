@@ -174,18 +174,20 @@
                                 <label style="font-size: medium;" >ปีที่จบ</label>
                                 <select formControlName="year" 
                                 class="form-control" style="font-size: medium;">
-                                    <option value=""></option>
-                                    <option value="2564" style="font-size: medium;">2564</option>
-                                    <option value="2563" style="font-size: medium;" >2563</option>
+                                <option value=""></option>
+                                <option *ngFor="let y of sYear">{{y}}</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-5">
-                                <label style="font-size: medium;" >สถานที่ทำงาน</label>
+                                <label style="font-size: medium;" >สถานที่ทำงาน</label> &nbsp;
+                                <label style="font-size: smaller;color: red;">* จำเป็น</label>
                                 <input type="text" formControlName="workname" placeholder="{{user.user_workname}}"
                                 class="form-control" style="font-size: medium;"/>
                             </div>
                             <div class="form-group col-5">
-                                <label style="font-size: medium;" >ตำแหน่งงาน</label>
+                                <label style="font-size: medium;" >ตำแหน่งงาน</label> &nbsp;
+                                <label style="font-size: smaller;color: red;">* จำเป็น</label>
                                 <input list="job" formControlName="job" placeholder="{{user.user_job}}"
                                 class="form-control" style="font-size: medium;" />
                                 <datalist id="job">
@@ -201,7 +203,8 @@
                                     <option value="ว่างงาน">
                                 </datalist> 
                             </div> 
-                            <label style="font-size: medium;" >ที่อยู่</label>
+                            <label style="font-size: medium;" >ที่อยู่</label> &nbsp;
+                            <label style="font-size: smaller;color: red;">* จำเป็น</label>
                             <div class="form-group col-1">
                                  <br>
                                 <label style="font-size: medium;">เลขที่</label>
@@ -253,7 +256,8 @@
                         </div>    
                     <div class="text-center">
                                 <button class="btn btn-primary mr-1" style="font-size: medium;">แก้ไขข้อมูลส่วนตัว</button>
-                                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                                <button class="btn btn-secondary" type="reset" [routerLink]="['/home2/'+this.user_username]"
+                                >Cancel</button>
                     </div>
                         </form>
                     </div>

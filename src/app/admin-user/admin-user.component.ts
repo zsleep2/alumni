@@ -31,23 +31,7 @@ interface Articles{
 })
 export class AdminUserComponent implements OnInit {
   myValue;
-  /* data:{
-    user_username,
-    user_password,
-    user_prefix,
-    user_name,
-    user_phone,
-    user_email,
-    user_facebook,
-    user_year,
-    user_workname,
-    user_workaddress,
-    user_job,
-    user_workphone,
-    user_role,
-    user_best,
-    user_status
-  }; */
+
   data:any;
   data1: any;
   user_username;
@@ -93,7 +77,7 @@ export class AdminUserComponent implements OnInit {
   workname: any;
   workaddress: any;
   config: { itemsPerPage: number; currentPage: number; };
-  checkuser;
+ public checkuser:boolean =false;
 
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
@@ -106,34 +90,7 @@ export class AdminUserComponent implements OnInit {
       };
     }
 
-    /* changePage(page:number){
-      this.activePage = page;
-      this.router1.navigate(['/admin_user/'+this.user_username], {queryParams:{page:page}});
-    }
-    pagination(){
-      if(this.activePage > this.useShowPage){
-        if(this.activePage+2 <= this.totalPage){
-          this.iPageStart = this.activePage-2;
-          this.maxShowPage = this.activePage+2;
-        }else{
-          if(this.activePage <= this.totalPage){
-            this.iPageStart = (this.totalPage+1)-this.useShowPage;
-            this.maxShowPage = (this.iPageStart-1)+this.useShowPage;
-          }
-        }
-        this.iPage = [];
-        for(let i=this.iPageStart;i<=this.maxShowPage;i++){
-          this.iPage.push(i);
-        }            
-      }else{
-        this.iPageStart = 1;
-        this.iPage = [];
-        for(let i=this.iPageStart;i<=this.useShowPage;i++){
-          this.iPage.push(i);
-        }              
-      }   
-       
-    } */
+    
   
 
   ngOnInit(): void {
@@ -143,35 +100,11 @@ export class AdminUserComponent implements OnInit {
      if(status !== '1'){
         this.router1.navigateByUrl('/login');
      }else{
+     
      }
 
 
-    /* this.activePage = 1;
-    this.nextPage = 2;
-    this.pointEnd = this.perPage*this.activePage;
-    this.totalPage = Math.ceil(this.totalItem/this.perPage);
-    if(this.totalPage>this.useShowPage){
-      this.useShowPage = 5;
-    }else{
-      this.useShowPage = this.totalPage;
-    }
-  
-    for(let i=this.iPageStart;i<=this.useShowPage;i++){
-      this.iPage.push(i);
-    }
-  
-    this.router
-    .queryParams
-    .subscribe((data: { page: any }) => {
-      if(data!=null && data.page!=null){
-        this.activePage = +data.page;   
-        this.prevPage = this.activePage-1;
-        this.nextPage = this.activePage+1;   
-        this.pointStart = (this.activePage-1)*this.perPage;
-        this.pointEnd = this.perPage*this.activePage;
-        this.pagination();
-      }   
-    });   */
+    
     
     this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
       data => {
@@ -235,17 +168,20 @@ export class AdminUserComponent implements OnInit {
    }
 
    inputData() {
+     console.log(this.data);
+     console.log(this.rUser);
     for (var i in this.data) {
       for(var j in this.rUser){ 
-        if(this.data[i].user_username == this.rUser[i].user_username){
-           alert(this.data[i].user_username+' ซ้ำในระบบไม่สามารถสมัครได้');
-            this.checkuser = 1;
-            break; 
+        if(this.data[i].user_username == this.rUser[j].user_username){
+            console.log('ซ้ำ'+this.data[i].user_username);
+            this.check();
+            break;
           } 
         } 
-        if(this.checkuser ==1){
-          
-           window.location.reload();
+        console.log(this.checkuser);
+        if(this.checkuser == true){
+          alert(this.data[i].user_username+' ซ้ำในระบบไม่สามารถสมัครได้');
+          this.check();
         }else{
           let json ={
             user_username : this.data[i].user_username || '',       
@@ -265,24 +201,25 @@ export class AdminUserComponent implements OnInit {
             user_status : 0
           } 
           console.log(json);
-  
-        this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
-          if(data == 1){
-            console.log('OK');
-            alert('OK!!');
-            window.location.reload();
-          }else{
-            console.log(data);
-          }
-            
-          },
-          (error) => {
-            console.log(error);
-          }); 
-        }
-        
+          
+          this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
+            if(data == 1){
+         
+            }else{
+              console.log(data);
+            }
+              
+            },
+            (error) => {
+              console.log(error);
+            }); 
+          }   
+      }
+    this.ngOnInit();
+}
+    check(){
+        this.checkuser = !this.checkuser;
     }
-  } 
 
       toggle() {
        
@@ -393,7 +330,7 @@ export class AdminUserComponent implements OnInit {
           let json = {
           user_username : this.deuserID
         }
-        if(window.confirm('ต้องการลบสมาชิก ?')){
+        if(window.confirm('ต้องการลบสมาขิก ' + this.deuserID +" ?")){
             this.http.post('http://qpos.msuproject.net/AllNewService/user/delete',JSON.stringify(json)).toPromise().then(data => {
          if(data == 1){
           

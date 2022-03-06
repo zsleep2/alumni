@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -15,10 +16,13 @@ export class AddnewComponent implements OnInit {
   myValue;
   user_username;
   uid;
+  addNewForm: FormGroup;
+  submitted = false;
   constructor( private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router,
-    private _auth: AuthService) {
+    private _auth: AuthService,
+    private formBuilder: FormBuilder) {
     this.user_username = localStorage.getItem('user_username');
    }
 
@@ -30,6 +34,7 @@ export class AddnewComponent implements OnInit {
     }else{
       this.uid = localStorage.getItem('uid');
     }
+   
     
 
   }
@@ -48,8 +53,16 @@ export class AddnewComponent implements OnInit {
     toPromise().then(data => {
       
       console.log(data);
+      if(data ==1){
+        this.router1.navigateByUrl('/new/'+this.user_username);
+      }else{
+        alert("กรอกข้อมูลไม่ครบ");
+      }
+
         
-      this.router1.navigateByUrl('/new/'+this.user_username);
+      
+        
+      
       },
       (error) => {
         console.log(error);
@@ -65,6 +78,10 @@ export class AddnewComponent implements OnInit {
       /*   console.log(reader.result); */
       this.img_file = reader.result;
     };
+  }
+  onReset() {
+    this.submitted = false;
+    this.addNewForm.reset();
   }
 
 }

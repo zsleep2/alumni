@@ -119,11 +119,12 @@ margin-top: -20px;
   background-color: rgba(2, 0, 73, 0.85);
    padding-left: 20px;
    padding-right: 20px;
+ 
 }
 .top{
   padding-left: 20px;
   padding-right: 20px;
-  background-color: rgba(14, 12, 75, 0.85);
+  background-color: rgba(57, 54, 168, 0.85);
   border-bottom-style: solid; 
   border-top-style: solid; 
   border-color: white;
@@ -131,7 +132,7 @@ margin-top: -20px;
 .bot{
   padding-left: 20px;
   padding-right: 20px;
-  background-color: rgba(2, 0, 73, 0.85);
+  background-color: rgba(38, 35, 129, 0.85);
   border-bottom-style: solid; 
   border-top-style: solid; 
   border-color: white;

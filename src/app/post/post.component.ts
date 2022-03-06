@@ -77,7 +77,7 @@ export class PostComponent implements OnInit {
             this.router1.navigateByUrl('/webboard/'+this.user_username);
             }
             else{
-              console.log('fail');
+              alert('กรอกข้อมูลไม่ครบ');
             }       
          
       }, error =>{

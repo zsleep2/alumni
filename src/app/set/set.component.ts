@@ -62,7 +62,9 @@ b = 1;
   address;
   showname: any;
   showaddress: any;
-
+  public sYear:number[]=[];
+  myYear;
+  d;
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
@@ -83,7 +85,12 @@ b = 1;
      this.showname = localStorage.getItem('name').split(" ");
      this.showaddress = localStorage.getItem('address').split(" ");
     }
-    console.log(this.showaddress);
+    this.d = new Date();
+    this.myYear = +this.d.getFullYear() +543;
+    for(let i = this.myYear; i>this.myYear-20;i--){
+        this.sYear.push(i);
+    }
+    console.log(this.sYear);
     this.registerForm = this.formBuilder.group({
       phone: [''],
       prefix:[''],
@@ -268,7 +275,7 @@ b = 1;
     user_role : this.role 
   }
     console.log(json);
-    /* if(window.confirm('คุณต้องการเปลี่ยนข้อมูลส่วนตัว ? ')){
+    if(window.confirm('คุณต้องการเปลี่ยนข้อมูลส่วนตัว ? ')){
       this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.user_username,
       JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
@@ -286,7 +293,7 @@ b = 1;
                 (error) => {
                   console.log(error);
             });
-    } */
+    }
   }
 
   onReset() {

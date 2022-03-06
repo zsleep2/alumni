@@ -58,7 +58,8 @@
                             </div>
                             <div class="text-center">
                                 <button class="btn btn-primary mr-1">เปลี่ยนรหัสผ่าน</button>
-                                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                                <button class="btn btn-secondary" type="reset" 
+                                 [routerLink]="['/home2/'+this.user_username]">Cancel</button>
                             </div>
                           </form>
                       </div>

@@ -84,27 +84,31 @@ get f() { return this.addAlbumForm.controls; }
 
   addAlbum(){
     this.submitted = true;
-   
+    
     let json = {album_name :this.addAlbumForm.value.nameAlbum,
     album_gen : this.addAlbumForm.value.gen,
     UID : this.uid}
     console.log(json);
-    
-    this.http.post('http://qpos.msuproject.net/AllNewService/album/addalbum',JSON.stringify(json)).toPromise().then(
-      data =>{
-          if(data ==1){
+    if(this.addAlbumForm.value.gen !== ""){
+      this.http.post('http://qpos.msuproject.net/AllNewService/album/addalbum',JSON.stringify(json)).toPromise().then(
+        data =>{
+            if(data ==1){
+                console.log(data);
+                console.log('ok');
+                this.router1.navigateByUrl('/album/'+this.user_username);
+            }else{
               console.log(data);
-              console.log('ok');
-              this.router1.navigateByUrl('/album/'+this.user_username);
-          }else{
-            console.log(data);
-          }
+            }
+              
             
           
-         
-      }, error =>{
-        alert('fail');
-      });
+        }, error =>{
+          alert('fail');
+        });
+    }else{
+     alert('กรอกข้อมูลไม่ครบ');
+    }
+    
   }
 
  

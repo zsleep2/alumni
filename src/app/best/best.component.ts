@@ -59,7 +59,7 @@ export class BestComponent implements OnInit {
       };
       this.d = new Date();
       this.myYear = +this.d.getFullYear() +543;
-      for(let i = this.myYear; i>this.myYear-10;i--){
+      for(let i = this.myYear; i>this.myYear-20;i--){
           this.sYear.push(i);
       }
       console.log(this.sYear);
