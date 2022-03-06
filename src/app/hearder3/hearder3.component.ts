@@ -40,6 +40,10 @@ export class Hearder3Component implements OnInit {
   logOut(){
     this.router1.navigateByUrl('/home');
     localStorage.removeItem('status');
+    localStorage.removeItem('user_username');
+    localStorage.removeItem('role');
+    localStorage.removeItem('uid');
+    localStorage.removeItem('password');
   
   }
 

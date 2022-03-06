@@ -47,6 +47,7 @@ export class BestComponent implements OnInit {
   max:number;
   d;
   status:any;
+  username1;
   constructor(private _auth: AuthService,
     private http: HttpClient,
     private router1: Router,
@@ -96,11 +97,12 @@ export class BestComponent implements OnInit {
   ngOnInit(): void {
 
     this.status = localStorage.getItem('status');
-   /*  if(status !== '1'){
-       this.router1.navigateByUrl('/login');
+    if(status !== '1'){
+       this.username1 = undefined;
+       console.log(this.username1);
     }else{
      this.myrole = localStorage.getItem('role');
-    } */
+    }
 
     this.myrole = localStorage.getItem('role');
     console.log(this.myrole,this.status);
