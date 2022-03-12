@@ -166,6 +166,7 @@ export class Member1ListComponent implements OnInit {
                  return u.user_status == 1;
        
                });
+              
               this.max = +data[0].user_username.substring(0,2)
               this.min = +data[data.length-1].user_username.substring(0,2) 
               for(var i=this.max+1; i>=this.min; i--){
@@ -294,7 +295,9 @@ cl(){
   SearchName(){
     this.year = '';
     if(this.sName == ""){
+    this.rawData = []
      this.ngOnInit();
+    
     }else{
       this.rUser = this.rUser.filter(res =>{
         return res.user_name.toLocaleLowerCase().match(this.sName.toLocaleLowerCase());
@@ -304,6 +307,7 @@ cl(){
   SearchJob(){
     this.year = '';
     if(this.sJob == ""){
+      this.rawData = []
      this.ngOnInit();
     }else{
       this.rUser = this.rUser.filter(res =>{
@@ -314,6 +318,7 @@ cl(){
   SearchAddress(){
     this.year = '';
     if(this.sAddress == ""){
+      this.rawData = []
      this.ngOnInit();
     }else{
       this.rUser = this.rUser.filter(res =>{

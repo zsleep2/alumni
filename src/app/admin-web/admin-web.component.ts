@@ -156,20 +156,21 @@ export class AdminWebComponent implements OnInit {
       this.webboardId = +value;
       let json = {webboard_ID:this.webboardId}
       console.log(json);
-      
-      this.http.post('http://qpos.msuproject.net/AllNewService/post/delete',JSON.stringify(json)).toPromise().then(
-    data =>{
-          if(data == 1){
-          console.log(data);
-          }
-          else{
-            console.log(data);
-            window.location.reload()
-          }       
-       
-    }, error =>{
-      alert('fail');
-    });
+      if(window.confirm('ต้องการลบเว็บบอร์ด ?')){
+          this.http.post('http://qpos.msuproject.net/AllNewService/webboard/delete',JSON.stringify(json)).toPromise().then(
+            data =>{
+              if(data == 1){
+              console.log(data);
+              }
+              else{
+                console.log(data);
+                window.location.reload()
+              }       
+          
+        }, error =>{
+          alert('fail');
+        });
+      }
   }
   searchGen(){
     this.myGen = this.year;

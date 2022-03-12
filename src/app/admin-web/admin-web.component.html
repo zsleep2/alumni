@@ -52,7 +52,8 @@
                           <td style="text-align: center;">
                              {{result.user_prefix}} {{result.user_name}}
                           </td>
-                            <td style="text-align: center;"> <a class="text-secondary" [routerLink]="['/webboard/'+this.user_username,result.webboard_ID]"
+                            <td style="text-align: center;"> <a class="text-secondary" 
+                                [routerLink]="['/webboard/'+this.user_username,result.webboard_ID]"
                               [queryParams]="{page: activePage}" >  
                               {{ result.webboard_title }}
                               </a></td>

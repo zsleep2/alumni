@@ -44,7 +44,9 @@ export class PostComponent implements OnInit {
   user_username2;
   public myrole;
   localUser;
-
+  eyear: number;
+  syear: number;
+  public year:number[]=[];
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
@@ -56,7 +58,13 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.uid = localStorage.getItem('uid');    
+      this.uid = localStorage.getItem('uid');
+      this.myrole = localStorage.getItem('role');
+      this.eyear = 70;
+      this.syear = 50;
+      for(let i = this.syear ; i<=this.eyear;i++){
+         this.year.push(i);
+      }
   }
 
   post(){

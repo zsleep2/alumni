@@ -7,6 +7,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormBuilder , Validators} from '@angular/forms';
 
 interface Articles{
+  user_name: any;
   user_username:string,
   user_password :string ,
   user_phone :string,
@@ -76,7 +77,7 @@ b = 1;
      }
 
   ngOnInit(): void {
-
+   
     const status = localStorage.getItem('status');
     if(status !== '1'){
        this.router1.navigateByUrl('/login');
@@ -131,13 +132,16 @@ b = 1;
     data => {
       //console.log(data);
       this.rUser = data.filter( u => {  
+      
         return u.user_username == this.user_username;
-       
+        
       });
       
      }, error => {
-    }); 
+    });
   }
+
+ 
 
 
   
@@ -172,11 +176,16 @@ b = 1;
      // stop here if form is invalid
    /*  if (this.registerForm.invalid) {
         return;
-    } */
+    } */  
+
+    if(this.registerForm.value.prefix){
+      this.prefix = this.registerForm.value.prefix
+    }
+
     this.test = this.name.split(" ");
     if(this.registerForm.value.firstName ){
       this.name = this.registerForm.value.firstName + " " + this.test[1];
-    }
+    }  this.test = this.name.split(" ");
     if(this.registerForm.value.lastName){
       this.name = this.test[0]+" "+ this.registerForm.value.lastName;
     }
@@ -280,10 +289,12 @@ b = 1;
       JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
                   console.log("ok");
+                  localStorage.setItem('name',this.name);
+                  localStorage.setItem('address',this.workaddress);
                   alert('แก้ไขข้อมูลเรียบร้อย');
                   this.submitted = false;
                   this.registerForm.reset();
-                 this.ngOnInit();
+                  window.location.reload();
                 }else{
                 
                   console.log(data);

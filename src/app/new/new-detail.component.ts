@@ -197,22 +197,22 @@ export class NewDetailComponent implements OnInit {
   }
 
   deletenew(){
+
     if(window.confirm('ต้องการลบข่าว ?')){
-        
         let json = {
-          photo_ID: this.newId
+          new_ID: +this.newId
         }
         console.log(json);
 
         this.http.post('http://qpos.msuproject.net/AllNewService/new/delete',JSON.stringify(json)).toPromise().then(
         data =>{
               if(data == 1){
-              console.log(data);
-              this.router1.navigateByUrl('/new/'+this.myValue[0].user_username);
+              console.log('1');
+            
               }
               else{
                 console.log(data);
-                  
+                    this.router1.navigateByUrl('/new/'+this.user_username);
               }       
           
         }, error =>{

@@ -118,9 +118,10 @@ export class RegisComponent implements OnInit {
 
     if(this.checkUser ==1){
         alert('เป็นสมาชิกแล้ว');
-    }else{
-      if(window.confirm('ยืนยัน ?')){
-          if(this.hide == 0){
+    }
+
+    if(window.confirm('ยืนยัน ?')){
+        
             let json = {user_username : this.registerForm.value.username || '', 
             user_password : this.registerForm.value.password || '',
             user_prefix : this.registerForm.value.title ||'',
@@ -136,23 +137,7 @@ export class RegisComponent implements OnInit {
             user_best : '0',
             user_role : this.registerForm.value.role || '',
             user_status : 0
-        } }else{
-              let json = {user_username : this.registerForm.value.username || '', 
-              user_password : this.registerForm.value.password || '',
-              user_prefix : this.registerForm.value.title ||'',
-              user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
-              user_phone : this.registerForm.value.phone || '',
-              user_email : this.registerForm.value.email || '',
-              user_facebook : this.registerForm.value.facebook || '',
-              user_year : this.registerForm.value.year || '',
-              user_job :this.registerForm.value.job || '',
-              user_workname : this.registerForm.value.workname  || '',
-              user_workaddress : this.registerForm.value.workaddress || '',
-              user_workphone :this.registerForm.value.workphone || '',
-              user_best : '0',
-              user_role : this.registerForm.value.role || '',
-              user_status : 0
-        }
+        } 
             this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){
                   console.log('OK');
@@ -168,12 +153,9 @@ export class RegisComponent implements OnInit {
                   console.log(error);
                 });  
       
-        }
+        
       }
-     
-    } 
-   
-    
+ 
 }
 onReset() {
   this.submitted = false;

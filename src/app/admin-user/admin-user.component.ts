@@ -252,7 +252,7 @@ export class AdminUserComponent implements OnInit {
                 if(this.rUser[i].user_status == 0){
                       let json = {user_username : this.username || '', 
                       user_password : this.password || '', 
-                      user_prefux : this.prefix || '',
+                      user_prefix : this.prefix || '',
                       user_name : this.name || '',
                       user_phone : this.phone || '',
                       user_email : this.email || '',
@@ -285,7 +285,7 @@ export class AdminUserComponent implements OnInit {
                 }else{
                    let json = {user_username : this.username || '', 
                     user_password : this.password || '', 
-                    user_prefux : this.prefix || '',
+                    user_prefix : this.prefix || '',
                     user_name : this.name || '',
                     user_phone : this.phone || '',
                     user_email : this.email || '',
@@ -347,7 +347,7 @@ export class AdminUserComponent implements OnInit {
       }
       
       checkallUser(){
-      
+        if(window.confirm('ต้องการเพิ่มสมาชิก ?')){
           for(let i in this.results){
             let json = {user_username : this.results[i].user_username || '', 
             user_password : this.results[i].user_password || '', 
@@ -366,7 +366,7 @@ export class AdminUserComponent implements OnInit {
             user_status : 1
           }
             console.log(json);
-            if(window.confirm('ต้องการเพิ่มสมาชิก ?')){
+          
             this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.results[i].user_username,
             JSON.stringify(json)).toPromise().then(data => {
                 if(data == 1){

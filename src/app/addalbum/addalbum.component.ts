@@ -40,6 +40,9 @@ export class AddalbumComponent implements OnInit {
   addAlbumForm: FormGroup;
   submitted = false;
   uid;
+  eyear: number;
+  syear: number;
+  public year:number[]=[];
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
@@ -70,6 +73,12 @@ export class AddalbumComponent implements OnInit {
   }, {
   });
 
+  this.eyear = 70;
+  this.syear = 50;
+  for(let i = this.syear ; i<=this.eyear;i++){
+     this.year.push(i);
+  }
+  console.log(this.year);
   this._freeApi.getAlbum().subscribe
   (
     data =>{

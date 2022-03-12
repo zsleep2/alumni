@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 interface Articles{
   user_username:string;
@@ -53,6 +54,7 @@ export class AdminBestComponent implements OnInit {
   
   
   public yearBest;
+  public achievement1;
   public achievement;
   bestStudent;
   mygen;
@@ -63,7 +65,7 @@ export class AdminBestComponent implements OnInit {
   public bestID;
   public show:boolean = false;
 
-
+  selectedSkill: any
   public iPage:number[] = [];
   public iPageStart:number = 1;
   public prevPage:number;
@@ -76,7 +78,8 @@ export class AdminBestComponent implements OnInit {
   public useShowPage:number = 5; // จำนวนปุ่มที่แสดง ใช้แค่ 5 ปุ่มตัวเลข
   public pointStart:number = 0; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
   public pointEnd:number; // ค่าส่วนนี้ใช้การกำหนดการแสดงข้อมูล
-
+  public best: FormGroup;
+  yearBest1: any;
   constructor(private http: HttpClient ,
     private router: ActivatedRoute, 
     private router1: Router,
@@ -190,11 +193,29 @@ export class AdminBestComponent implements OnInit {
 
   checkBest(value : string){
     
-    this.userID = value;
+    
+
+}
+getAchievement(){
+  this.achievement1 = this.achievement; 
+  this.achievement = "";
+ 
+  console.log(this.achievement1)
+}
+getYear(){
+  this.yearBest1 = this.yearBest
+  this.yearBest = "";
+ 
+  console.log(this.yearBest1)
+}
+
+addBest(value : string){
+
+  this.userID = value;
 
 
   for(let i = 0 ; i < this.rUser.length ; i++){
-      if(this.userID == this.rUser[i].user_username){
+      if(this.userID == this.rUser[i].UID){
 
           this.username = this.rUser[i].user_username;
           this.password = this.rUser[i].user_password;
@@ -229,11 +250,11 @@ export class AdminBestComponent implements OnInit {
          }
          console.log(json,this.username);
 
-         if(window.confirm('ต้องการเพิ่มศิษย์เก่าดีเด่น ?')){
-             this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
+      
+          this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
           if(data == 1){
-            alert('เพิ่มศิษย์เก่าเรียบร้อย');
-            window.location.reload()
+          /*   alert('เพิ่มศิษย์เก่าเรียบร้อย');
+            window.location.reload() */
           }else{
           
             console.log(data);
@@ -242,23 +263,26 @@ export class AdminBestComponent implements OnInit {
           (error) => {
             console.log(error);
           });
-      }
+      
   }    
   }
 
-}
 
-addBest(value : string){
+
+
+
   console.log(value);
   for(let i = 0 ;  i < this.rUser.length ; i++ ){
       if(value == this.rUser[i].UID){
           this.prefix = this.rUser[i].user_prefix;
       }
   }
+
+
   console.log(this.prefix);
  
   let json = {
-    best_achievement : this.achievement ,
+    best_achievement : this.achievement1 ,
     best_year : this.yearBest ,
     UID : value,
     user_prefix : this.prefix

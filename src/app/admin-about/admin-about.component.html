@@ -32,8 +32,9 @@
 
                
                 <div *ngFor="let result of results" style="text-align: center;">
-                    <label>{{result.about_title}}</label> <br> <br>
-                    <label >{{result.about_description}}</label> <br>
+                    
+                    <label >{{result.about_title}}</label> <br> <br>
+                    <label textWrap="true">{{result.about_description}}</label> <br> <br>
                     <img src= {{result.about_image}} alt="" style="width: 400px;height: 300px; 
                     border: 1px solid rgb(27,31,34,0.85)"> <br>
                 </div>

@@ -66,10 +66,10 @@
                                     <td>{{user.user_username}}</td>
                                     <td> {{user.user_prefix}} {{user.user_name}}</td>
                                     <td>
-
-                                        <div *ngIf="this.yearBest != undefined">
-                                            <div *ngIf="user.user_best == 1" >
-                                                <select id="country"  [(ngModel)]='yearBest'>
+                                      
+                                        <div >
+                                            <div >
+                                                <select id="country"  [(ngModel)]='yearBest' (change)="getYear()">
                                                 <option value=""> </option>
                                                 <option value="2564">2564</option>
                                                 <option value="2563">2563</option>  
@@ -81,14 +81,16 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div *ngIf="this.achievement != undefined">
-                                            <div *ngIf="user.user_best == 1"  >
-                                                <select id="country"  [(ngModel)]='achievement'>
+                                        <div>
+                                            <div >
+                                                <select id="country"  [(ngModel)]="achievement"
+                                                (change)="getAchievement()">
                                                 <option value=""> </option>
                                                 <option value="เกียรตินิยมอันดับ 1">เกียรตินิยมอันดับ 1</option>
                                                 <option value="เกียรตินิยมอันดับ 2">เกียรตินิยมอันดับ 2</option>
                                                 <option value="เกียรตินิยมอันดับ 3">เกียรตินิยมอันดับ 3</option>  
                                                 </select>
+                                                
                                             </div>
                                         </div>
                                      
@@ -96,15 +98,15 @@
                                     <td>
                                         <button *ngIf="user.user_best == 1" 
                                             pButton type="button"  style="height: 24px; width: 24px;background-color:rgb(26, 153, 14) ;" 
-                                            (click) ="addBest(user.UID)" class="showpopup" data-title="เพิ่มศิษย์เก่าดีเด่น" > 
+                                                 > 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                             </svg>
                                         </button>
 
-                                        <button *ngIf="user.user_best == 0" (click) ="checkBest(user.user_username)"
+                                        <button *ngIf="user.user_best == 0" (click) ="addBest(user.UID)"
                                             pButton type="button" style="height: 24px; width: 24px;background-color: red;"  
-                                            class="showpopup" data-title="เปลี่ยนสถานะเป็นศิษย์เก่าดีเด่น"> 
+                                            class="showpopup" data-title="เพิ่มศิษย์เก่าดีเด่น"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                                 <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
                                             </svg>
