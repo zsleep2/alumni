@@ -21,7 +21,7 @@ body{
   .navigation{
     position: absolute;
     bottom: 20px;
-    top: 71%;
+    top: 68%;
     left: 57%;
     transform: translateX(-50%);
   }

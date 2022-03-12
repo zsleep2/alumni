@@ -47,6 +47,10 @@ export class PostComponent implements OnInit {
   eyear: number;
   syear: number;
   public year:number[]=[];
+  rawData = [];
+  min:number;
+  rUser;
+  max: number;
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
@@ -60,11 +64,26 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
       this.uid = localStorage.getItem('uid');
       this.myrole = localStorage.getItem('role');
-      this.eyear = 70;
-      this.syear = 50;
-      for(let i = this.syear ; i<=this.eyear;i++){
-         this.year.push(i);
-      }
+      this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+        data => {
+          console.log(data);
+          this.rUser = data.filter( u => {  
+            return u.user_status == 1;
+    
+          });
+         
+         this.max = +data[0].user_username.substring(0,2)
+         this.min = +data[data.length-1].user_username.substring(0,2) 
+         for(var i=this.max; i>=this.min; i--){
+        
+        
+            this.rawData.push(i);
+          
+          
+          }
+          console.log(this.rawData);
+         }, error => {
+        });  
   }
 
   post(){

@@ -69,13 +69,14 @@
                                         <option value="0">อัลบั้มทั่วไป</option>
                                         <option value={{this.gen}}>อัลบั้มรุ่น</option>
                                     </select>
-                                    <input  *ngIf="myrole == 1"
-                                    list="gen"  formControlName="gen" class="form-control" style="font-size: medium;"/>
-                                    <datalist id="gen">
-                                        <option value="อัลบั้มทั่วไป"></option>
-                                        <option *ngFor="let y of year" value="{{y}}">
-                                       
-                                    </datalist>
+                                    <select *ngIf="myrole == 1"
+                                    formControlName="gen" class="form-control" style="font-size: medium;"
+                                    [ngClass]="{ 'is-invalid': submitted  }">
+                                        <option value="0">อัลบั้มทั่วไป</option>
+                                        <option disabled>อัลบั้มรุ่น</option>
+                                        <option *ngFor="let y of rawData" value="{{y}}" value={{y}}>{{y}}</option>
+                                    </select>
+                                   
                                 </div>
                             </div>    
                         <div class="text-center">

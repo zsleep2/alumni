@@ -50,7 +50,7 @@
                     <label style="font-size: medium;">ค้นหาปี</label> <br> &nbsp;&nbsp;
                     <input list="syear" name="year" [(ngModel)]= "year" (ngModelChange)="ser()"/>
                     <datalist id="syear">
-                        <option *ngFor="let y of sYear" value="{{y}}">
+                        <option *ngFor="let y of rawData" value="{{y}}">
                        
                     </datalist> <br> <br> &nbsp; 
                   

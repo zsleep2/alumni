@@ -31,7 +31,7 @@
   }
   
   .four{
-    grid-column: 6 / 8;
+    grid-column: 2 / 8;
     grid-row: 2 / 8;
     background-color:white;
   
@@ -97,7 +97,7 @@
   }
   .showpopup:hover::after{
     opacity: 1;
-    transform: translateY(-50px);
+    transform: translateY(50px);
     transform: translateX(-100px);
   }
   

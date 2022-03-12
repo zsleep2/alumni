@@ -17,6 +17,17 @@ interface lstPhoto{
   'photo_ID':number;
   'photo_file':string;
 }
+interface Articles{
+  'user_username':string,
+   'user_user_prefix':string,
+  'user_name':string,
+  'user_email':string,
+  'user_phone':string,
+  'user_facebook':string,
+  'user_status':number,
+  'UID':number
+}
+
 
 @Component({
   selector: 'app-addalbum',
@@ -43,6 +54,10 @@ export class AddalbumComponent implements OnInit {
   eyear: number;
   syear: number;
   public year:number[]=[];
+  rawData = [];
+  min:number;
+  rUser;
+  max: number;
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
     private router1: Router, 
@@ -73,12 +88,27 @@ export class AddalbumComponent implements OnInit {
   }, {
   });
 
-  this.eyear = 70;
-  this.syear = 50;
-  for(let i = this.syear ; i<=this.eyear;i++){
-     this.year.push(i);
-  }
-  console.log(this.year);
+  this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+    data => {
+      console.log(data);
+      this.rUser = data.filter( u => {  
+        return u.user_status == 1;
+
+      });
+     
+     this.max = +data[0].user_username.substring(0,2)
+     this.min = +data[data.length-1].user_username.substring(0,2) 
+     for(var i=this.max; i>=this.min; i--){
+    
+    
+        this.rawData.push(i);
+      
+      
+      }
+      console.log(this.rawData);
+     }, error => {
+    });  
+  
   this._freeApi.getAlbum().subscribe
   (
     data =>{
@@ -137,6 +167,8 @@ get f() { return this.addAlbumForm.controls; }
     this.submitted = false;
     this.addAlbumForm.reset();
   }
-
+getgen(){
+  console.log(this.gen)
+}
 
 }

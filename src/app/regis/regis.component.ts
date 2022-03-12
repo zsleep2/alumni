@@ -67,6 +67,17 @@ export class RegisComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       }, {
       });
+      
+      this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+        data => {
+          console.log(data);
+          this.rUser = data.filter( u => {  
+            return u.user_status == 1;
+  
+          });
+         }, error => {
+        }); 
+
     }else{
       this.registerForm = this.formBuilder.group({
         username: ['', [Validators.required]],
@@ -80,20 +91,23 @@ export class RegisComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
         }, {
         });
+
+        this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/teacher').subscribe(
+        data => {
+          console.log(data);
+          this.rUser = data.filter( u => {  
+            return u.user_status == 1;
+  
+          });
+         }, error => {
+        }); 
+
       
     }
 
    
 
-    this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
-      data => {
-        console.log(data);
-        this.rUser = data.filter( u => {  
-          return u.user_status == 1;
-
-        });
-       }, error => {
-      }); 
+    
     
     
   }
@@ -118,9 +132,8 @@ export class RegisComponent implements OnInit {
 
     if(this.checkUser ==1){
         alert('เป็นสมาชิกแล้ว');
-    }
-
-    if(window.confirm('ยืนยัน ?')){
+    }else{
+      if(window.confirm('ยืนยัน ?')){
         
             let json = {user_username : this.registerForm.value.username || '', 
             user_password : this.registerForm.value.password || '',
@@ -156,6 +169,9 @@ export class RegisComponent implements OnInit {
         
       }
  
+    }
+
+    
 }
 onReset() {
   this.submitted = false;

@@ -106,7 +106,7 @@ export class AdminUserComponent implements OnInit {
 
     
     
-    this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+    this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/checkname').subscribe(
       data => {
         console.log(data);
         this.rUser = data;
@@ -410,14 +410,14 @@ export class AdminUserComponent implements OnInit {
       clearUser(){
         this.year = '';
         if(this.nrSelect == 0){
-          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/checkname').subscribe(
           data => {  
             this.rUser = data;
            }, error => {
           })
         }
         if(this.nrSelect ==1 ){
-          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+          this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/checkname').subscribe(
             data => {
              
               this.rUser = data.filter( user => {

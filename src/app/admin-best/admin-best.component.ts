@@ -283,7 +283,7 @@ addBest(value : string){
  
   let json = {
     best_achievement : this.achievement1 ,
-    best_year : this.yearBest ,
+    best_year : this.yearBest1 ,
     UID : value,
     user_prefix : this.prefix
   }

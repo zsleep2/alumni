@@ -48,6 +48,7 @@ export class BestComponent implements OnInit {
   d;
   status:any;
   username1;
+  rawData = [];
   constructor(private _auth: AuthService,
     private http: HttpClient,
     private router1: Router,
@@ -57,12 +58,13 @@ export class BestComponent implements OnInit {
         itemsPerPage: 5,
         currentPage: 1
       };
-      this.d = new Date();
+
+    /*   this.d = new Date();
       this.myYear = +this.d.getFullYear() +543;
       for(let i = this.myYear; i>this.myYear-20;i--){
           this.sYear.push(i);
       }
-      console.log(this.sYear);
+      console.log(this.sYear); */
      }
 
      pageChanged(event){
@@ -139,11 +141,18 @@ export class BestComponent implements OnInit {
               data => {
                 console.log(data);
                 this.bestStudent = data;
-                for(let i in data){
-                  this.testData.push(data[i].best_year)
-                /*   console.log(data[i].best_year); */
-                }
-                /* console.log(this.testData); */
+
+                this.max = +data[0].best_year;
+                this.min = +data[this.bestStudent.length-1].best_year;
+                for(var i=this.max+1; i>=this.min; i--){
+                 if(i ==this.max+1){
+                   this.rawData.push('');
+                 }else{
+                   this.rawData.push(i);
+                 }
+                 
+                 }
+                 console.log(this.rawData);
                }, error => {
               }); 
               
@@ -157,6 +166,7 @@ export class BestComponent implements OnInit {
   SearchName(){
     this.year = '';
     if(this.sName == ""){
+      this.rawData =[];
      this.ngOnInit();
     }else{
       this.bestStudent = this.bestStudent.filter(res =>{
@@ -167,6 +177,7 @@ export class BestComponent implements OnInit {
   ser(){
   
     if(this.year == ""){
+      this.rawData = [];
       this.ngOnInit();
      }else{
        this.bestStudent = this.bestStudent.filter(res =>{
@@ -178,6 +189,7 @@ export class BestComponent implements OnInit {
 SearchA(){
   this.year = '';
   if(this.achievement == ""){
+    this.rawData = [];
    this.ngOnInit();
   }else{
     this.bestStudent = this.bestStudent.filter(res =>{
