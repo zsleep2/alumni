@@ -440,6 +440,7 @@ export class AdminUserComponent implements OnInit {
       SearchName(){
         console.log(this.rUser);
         if(this.sName == ""){
+          this.rawData =[];
             this.ngOnInit();
            
         }else{
