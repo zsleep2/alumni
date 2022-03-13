@@ -49,15 +49,16 @@
                       </tr>
                     </thead>
                     <tbody *ngFor="let result of results">
-                      <tr>
-                        <th class="table-secondary text-right" width="200" scope="row">รหัสนิสิต &nbsp;</th>
+                      <tr >
+                        <th  *ngIf="myrole != '1'" class="table-secondary text-right" width="200" scope="row">รหัสนิสิต &nbsp;</th>
+                        <th *ngIf="myrole == '1'" class="table-secondary text-right" width="200" scope="row">id &nbsp;</th>
                         <td> {{ result.user_username }} </td>
                       </tr>
                       <tr>
                         <th class="table-secondary text-right" scope="row">ชื่อ &nbsp;</th>
                         <td> {{result.user_prefix}} {{ result.user_name }} </td>
                       </tr>
-                      <tr>
+                      <tr  *ngIf="myrole != '1'">
                         <th class="table-secondary text-right" scope="row">ปีที่จบ &nbsp;</th>
                         <td> {{ result.user_year }} </td>
                       </tr>
@@ -73,26 +74,31 @@
                         <th class="table-secondary text-right" scope="row">facebook &nbsp;</th>
                         <td>  <a href="{{ result.user_facebook }}">{{ result.user_facebook }}</a>  </td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="myrole != '1'">
                         <th class="table-secondary text-right" scope="row">สถานที่ทำงาน &nbsp;</th>
                         <td> {{ result.user_workname }} </td>
                       </tr>
-                      <tr>
+                      <tr  *ngIf="myrole != '1'">
                         <th class="table-secondary text-right" scope="row">ตำแหน่ง &nbsp;</th>
                         <td> {{ result.user_job }} </td>
                       </tr>
-                      <tr>
+                      <tr  *ngIf="myrole != '1'">
                         <th class="table-secondary text-right" scope="row">ที่อยู่ที่ทำงาน &nbsp;</th>
                         <td> {{ result.user_workaddress }} </td>
                       </tr>
-                      <tr>
+                      <tr  *ngIf="myrole != '1'">
                         <th class="table-secondary text-right" scope="row">เบอร์โทรศัพท์ที่ทำงาน &nbsp;</th>
                         <td> {{ result.user_workphone }} </td>
                       </tr>
                     </tbody>
                   </table>
-            </div>
-           </div>
+                  <button *ngIf="this.uid == this.userID" class="btn btn-secondary" 
+                  [routerLink]="['/set/'+this.user_username]">แก้ไขข้อมูลส่วนตัว</button>
+      
+
+      </div>
+
+      </div>
         
     </body>
 </html>

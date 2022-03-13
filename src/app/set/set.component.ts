@@ -7,7 +7,8 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormBuilder , Validators} from '@angular/forms';
 
 interface Articles{
-  user_name: any;
+  user_name: any ,
+  user_prefix : string,
   user_username:string,
   user_password :string ,
   user_phone :string,
@@ -66,6 +67,7 @@ b = 1;
   public sYear:number[]=[];
   myYear;
   d;
+  uid:any;
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
@@ -84,6 +86,7 @@ b = 1;
     }else{
      this.myrole = localStorage.getItem('role');
      this.showname = localStorage.getItem('name').split(" ");
+     this.uid = localStorage.getItem('uid');
      this.showaddress = localStorage.getItem('address').split(" ");
     }
     this.d = new Date();
@@ -92,6 +95,7 @@ b = 1;
         this.sYear.push(i);
     }
     console.log(this.sYear);
+    
     this.registerForm = this.formBuilder.group({
       phone: [''],
       prefix:[''],

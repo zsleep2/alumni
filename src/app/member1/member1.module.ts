@@ -9,8 +9,10 @@ import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormBuilder , Validators} from '@angular/forms';
+
 
 @NgModule({
   declarations: [Member1ListComponent, Member1DetailComponent],
@@ -21,7 +23,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ButtonModule,
     InputTextareaModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    
   ]
 })
 export class Member1Module { }

@@ -68,7 +68,8 @@
                                 </div>    
                             <div class="text-center">
                                         <button class="btn btn-primary mr-1">แก้ไขข้อมูลส่วนตัว</button>
-                                        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                                        <button class="btn btn-secondary" type="reset" 
+                                        [routerLink]="['/member1/'+this.user_username,this.uid]">Cancel</button>
                             </div>
                                 </form>
                             </div>
@@ -125,7 +126,8 @@
                                 </div>    
                             <div class="text-center">
                                         <button class="btn btn-primary mr-1">แก้ไขข้อมูลส่วนตัว</button>
-                                        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                                        <button class="btn btn-secondary" type="reset"  
+                                        [routerLink]="['/member1/'+this.user_username,this.uid]">Cancel</button>
                             </div>
                                 </form>
                             </div>
@@ -203,40 +205,42 @@
                                     <option value="ว่างงาน">
                                 </datalist> 
                             </div> 
-                            <label style="font-size: medium;" >ที่อยู่</label> &nbsp;
-                            <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                            <div class="form-group col-12">
+                                <label style="font-size: medium;" >ที่อยู่</label> &nbsp;
+                                <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                            </div>
                             <div class="form-group col-1">
-                                 <br>
+                                
                                 <label style="font-size: medium;">เลขที่</label>
                                 <input type="text" formControlName="no" placeholder="{{showaddress[1]}}"
                                 class="form-control" style="font-size: medium;">  
                             </div>
                             <div class="form-group col-1">
-                                <br>
+                             
                                 <label style="font-size: medium;">หมู่</label>
                                 <input type="text" formControlName="swine"  placeholder="{{showaddress[3]}}"
                                 class="form-control" style="font-size: medium;">  
                             </div> 
                             <div class="form-group col-2">
-                                <br>
+                               
                                 <label style="font-size: medium;">ถนน</label>
                                 <input type="text" formControlName="road"  placeholder="{{showaddress[5]}}"
                                 class="form-control" style="font-size: medium;">  
                             </div>
                             <div class="form-group col-2">
-                                <br>
+                               
                                 <label style="font-size: medium;">ตำบล</label>
                                 <input type="text" formControlName="subdistrict"  placeholder="{{showaddress[7]}}"
                                 class="form-control" style="font-size: medium;">  
                             </div> 
                             <div class="form-group col-3">
-                                <br>
+                               
                                 <label style="font-size: medium;">อำเภอ</label>
                                 <input type="text" formControlName="district"  placeholder="{{showaddress[9]}}"
                                 class="form-control" style="font-size: medium;">  
                             </div>
                             <div class="form-group col-2">
-                                <br>
+                                
                                 <label style="font-size: medium;">จังหวัด</label>
                                 <input type="text" formControlName="county"  placeholder="{{showaddress[11]}}"
                                 class="form-control" style="font-size: medium;">  
@@ -256,8 +260,8 @@
                         </div>    
                     <div class="text-center">
                                 <button class="btn btn-primary mr-1" style="font-size: medium;">แก้ไขข้อมูลส่วนตัว</button>
-                                <button class="btn btn-secondary" type="reset" [routerLink]="['/home2/'+this.user_username]"
-                                >Cancel</button>
+                                <button class="btn btn-secondary" type="reset" 
+                                [routerLink]="['/member1/'+this.user_username,this.uid]">Cancel</button>
                     </div>
                         </form>
                     </div>

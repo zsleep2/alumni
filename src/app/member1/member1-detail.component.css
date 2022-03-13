@@ -14,7 +14,7 @@
   }
   
   .two{
-    grid-column: 2  / 6;
+    grid-column: 1  / 8;
     grid-row: 2 / 8;
     background-color:white; 
    

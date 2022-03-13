@@ -25,7 +25,7 @@
                     <div class="item1">
                       <button  *ngIf="this.myrole == 1"
                       class= "button" [routerLink]="['/admin_user/'+this.user_username]">จัดการเว็บไซต์</button>
-                      <button  class= "button" [routerLink]="['/set/'+this.user_username]">แก้ไขข้อมูลส่วนตัว</button>
+                      <button  class= "button" [routerLink]="['/member1/'+this.user_username,this.uid]">ข้อมูลส่วนตัว</button>
                     </div>
                     <div class="item2"> 
                       <button  class= "button"   [routerLink]="['/resetpass/'+this.user_username]">เปลี่ยนรหัสผ่าน</button> 
