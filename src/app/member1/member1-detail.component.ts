@@ -41,6 +41,7 @@ export class Member1DetailComponent implements OnInit {
   activePage: number;
   uid: number;
   results: Articles[];
+  resultss: Articles[];
   newpassword;
 //old data
   username; 
@@ -75,7 +76,7 @@ export class Member1DetailComponent implements OnInit {
   show:boolean = false;
 
 
-  public urlSource:string = "http://qpos.msuproject.net/AllNewService/user/result";
+  public urlSource:string = "http://qpos.msuproject.net/AllNewService/user/alluser";
 
   constructor(private router: ActivatedRoute,
     private http: HttpClient, 
@@ -164,25 +165,7 @@ export class Member1DetailComponent implements OnInit {
    
     console.log(this.userID + " = " +this.uid);
 
-    if(this.myrole == '1'){
-      this.http.get<Articles[]> ("http://qpos.msuproject.net/AllNewService/user/teacher")
-      .subscribe(
-        data => {
-          // กรณี resuponse success
-          this.results = data.filter( res => {
-            return res.UID == this.userID;
-          });
-        },
-        ( err:HttpErrorResponse ) => {
-          // กรณี error
-          if (err.error instanceof Error) {
-            // กรณี error ฝั่งผู้ใช้งาน หรือ การเชื่อมต่อเกิด error ขึ้น
-            console.log('An error occurred:', err.error.message);
-          }else{ // กรณี error ฝั่ง server ไม่พบไฟล์ ,server error 
-            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-          }       
-        } ); 
-    }else{
+   
       this.http.get<Articles[]>(this.urlSource)
       .subscribe(
         data => {
@@ -200,7 +183,7 @@ export class Member1DetailComponent implements OnInit {
             console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
           }       
         } ); 
-    }
+ 
 
   }
 

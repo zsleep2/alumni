@@ -47,6 +47,7 @@
                             <div style="text-align: center;">
                                 <label for="fr" style="font-size: medium;">ค้นหารุ่น:</label> 
                                 <select  [(ngModel)]="year" (click)="ser()">
+                            
                                 <option *ngFor="let method of rawData" >{{ method }}</option>
                                 </select> <br>
                                 <button pButton type="button" label="สมาชิกทั้งหมด" class="ui-button-rounded ui-button-Primary" 

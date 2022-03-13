@@ -41,8 +41,8 @@
             
 
            
-            <div class="two" align="center" >
-                <table class="table table-sm">
+            <div class="two" align="center">
+                <table class="table table-sm" >
                     <thead class="thead-dark">
                       <tr>
                         <th scope="col" colspan="2">ข้อมูลสมาชิก</th>
@@ -50,15 +50,15 @@
                     </thead>
                     <tbody *ngFor="let result of results">
                       <tr >
-                        <th  *ngIf="myrole != '1'" class="table-secondary text-right" width="200" scope="row">รหัสนิสิต &nbsp;</th>
-                        <th *ngIf="myrole == '1'" class="table-secondary text-right" width="200" scope="row">id &nbsp;</th>
+                        <th  *ngIf="result.user_role != '1'" class="table-secondary text-right" width="200" scope="row">รหัสนิสิต &nbsp;</th>
+                        <th *ngIf="result.user_role == '1'" class="table-secondary text-right" width="200" scope="row">ชื่อผู้ใช้ &nbsp;</th>
                         <td> {{ result.user_username }} </td>
                       </tr>
                       <tr>
                         <th class="table-secondary text-right" scope="row">ชื่อ &nbsp;</th>
                         <td> {{result.user_prefix}} {{ result.user_name }} </td>
                       </tr>
-                      <tr  *ngIf="myrole != '1'">
+                      <tr  *ngIf="result.user_role != '1'">
                         <th class="table-secondary text-right" scope="row">ปีที่จบ &nbsp;</th>
                         <td> {{ result.user_year }} </td>
                       </tr>
@@ -74,19 +74,19 @@
                         <th class="table-secondary text-right" scope="row">facebook &nbsp;</th>
                         <td>  <a href="{{ result.user_facebook }}">{{ result.user_facebook }}</a>  </td>
                       </tr>
-                      <tr *ngIf="myrole != '1'">
+                      <tr *ngIf="result.user_role != '1'">
                         <th class="table-secondary text-right" scope="row">สถานที่ทำงาน &nbsp;</th>
                         <td> {{ result.user_workname }} </td>
                       </tr>
-                      <tr  *ngIf="myrole != '1'">
+                      <tr  *ngIf="result.user_role != '1'">
                         <th class="table-secondary text-right" scope="row">ตำแหน่ง &nbsp;</th>
                         <td> {{ result.user_job }} </td>
                       </tr>
-                      <tr  *ngIf="myrole != '1'">
+                      <tr  *ngIf="result.user_role != '1'">
                         <th class="table-secondary text-right" scope="row">ที่อยู่ที่ทำงาน &nbsp;</th>
                         <td> {{ result.user_workaddress }} </td>
                       </tr>
-                      <tr  *ngIf="myrole != '1'">
+                      <tr  *ngIf="result.user_role != '1'">
                         <th class="table-secondary text-right" scope="row">เบอร์โทรศัพท์ที่ทำงาน &nbsp;</th>
                         <td> {{ result.user_workphone }} </td>
                       </tr>
