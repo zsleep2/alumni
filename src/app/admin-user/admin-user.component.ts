@@ -54,8 +54,8 @@ export class AdminUserComponent implements OnInit {
   nrSelect:number;
   results
   sName:any;
-  min;
-  max;
+  min:number;
+  max:number;
   rawData = [];
 
   public iPage:number[] = [];
@@ -114,21 +114,28 @@ export class AdminUserComponent implements OnInit {
           
           return user.user_status == 0;
         });
-        this.max = +data[0].user_username.substring(0,2)
-        this.min = +data[data.length-1].user_username.substring(0,2) 
-        for(var i=this.max+1; i>=this.min; i--){
-         if(i ==this.max+1){
-           this.rawData.push('');
-         }else{
-           this.rawData.push(i);
-         }
-         
-         }
-         console.log(this.rawData);
-        
 
        }, error => {
       }); 
+
+      this.http.get<Articles[]>('http://qpos.msuproject.net/AllNewService/user/result').subscribe(
+             data => {
+               console.log(data);
+             
+              
+              this.max = +data[0].user_username.substring(0,2)
+              this.min = +data[data.length-1].user_username.substring(0,2) 
+              for(var i=this.max+1; i>=this.min; i--){
+               if(i ==this.max+1){
+                 this.rawData.push('');
+               }else{
+                 this.rawData.push(i);
+               }
+               
+               }
+               console.log(this.rawData);
+              }, error => {
+             });  
      
   }
 
@@ -205,8 +212,9 @@ export class AdminUserComponent implements OnInit {
           this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
             if(data == 1){
               document.getElementById("myForm").style.display = "none";
-              this.rawData=[];
-              this.ngOnInit();
+             this.rawData=[];
+           window.location.reload();
+           
             }else{
               console.log(data);
             }
@@ -217,7 +225,7 @@ export class AdminUserComponent implements OnInit {
             }); 
           }   
       }
-    this.ngOnInit();
+     
 }
     check(){
         this.checkuser = !this.checkuser;
@@ -275,7 +283,7 @@ export class AdminUserComponent implements OnInit {
                       if(data == 1){
                         alert('เปิดสถานะของ '+this.name+' เรียบร้อย' );
                         this.rawData=[];
-                        this.ngOnInit();
+                        window.location.reload();
                       }else{
                       
                         console.log(data);
@@ -308,7 +316,7 @@ export class AdminUserComponent implements OnInit {
                     if(data == 1){
                       alert('ปิดสถานะของ '+this.name+' เรียบร้อย' );
                       this.rawData=[];
-                     this.ngOnInit();
+                      window.location.reload();
                     }else{
                     
                       console.log(data);
@@ -341,7 +349,7 @@ export class AdminUserComponent implements OnInit {
          }else{
           alert('ลบสมาชิกเรียบร้อย');
           this.rawData=[];
-         this.ngOnInit();
+          window.location.reload();
            console.log(data);
          }   
          },
@@ -378,7 +386,7 @@ export class AdminUserComponent implements OnInit {
                   this.nrSelect = 0;
                   this.show = true;
                   this.rawData=[];
-                  this.ngOnInit();
+                  window.location.reload();
                   console.log('ok');
                 }else{
                   console.log(data);
