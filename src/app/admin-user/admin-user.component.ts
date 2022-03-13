@@ -204,7 +204,9 @@ export class AdminUserComponent implements OnInit {
           
           this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
             if(data == 1){
-         
+              document.getElementById("myForm").style.display = "none";
+              this.rawData=[];
+              this.ngOnInit();
             }else{
               console.log(data);
             }
@@ -272,7 +274,8 @@ export class AdminUserComponent implements OnInit {
                         +this.username,JSON.stringify(json)).toPromise().then(data => {
                       if(data == 1){
                         alert('เปิดสถานะของ '+this.name+' เรียบร้อย' );
-                        window.location.reload()
+                        this.rawData=[];
+                        this.ngOnInit();
                       }else{
                       
                         console.log(data);
@@ -304,7 +307,8 @@ export class AdminUserComponent implements OnInit {
                       this.http.post('http://qpos.msuproject.net/AllNewService/user/edit/'+this.username,JSON.stringify(json)).toPromise().then(data => {
                     if(data == 1){
                       alert('ปิดสถานะของ '+this.name+' เรียบร้อย' );
-                      window.location.reload()
+                      this.rawData=[];
+                     this.ngOnInit();
                     }else{
                     
                       console.log(data);
@@ -336,7 +340,8 @@ export class AdminUserComponent implements OnInit {
           
          }else{
           alert('ลบสมาชิกเรียบร้อย');
-          window.location.reload()
+          this.rawData=[];
+         this.ngOnInit();
            console.log(data);
          }   
          },
@@ -372,7 +377,8 @@ export class AdminUserComponent implements OnInit {
                 if(data == 1){
                   this.nrSelect = 0;
                   this.show = true;
-                  window.location.reload()
+                  this.rawData=[];
+                  this.ngOnInit();
                   console.log('ok');
                 }else{
                   console.log(data);
