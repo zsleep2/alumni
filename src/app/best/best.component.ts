@@ -55,7 +55,7 @@ export class BestComponent implements OnInit {
     private router: ActivatedRoute) {
       this.user_username = localStorage.getItem('user_username');
       this.config = {
-        itemsPerPage: 5,
+        itemsPerPage: 20,
         currentPage: 1
       };
 

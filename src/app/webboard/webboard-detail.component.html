@@ -71,7 +71,7 @@
                     </div>
                 <div  *ngIf="show" style="text-align: left;">
                   <label style="background-color: rgb(243, 225, 60);color: white;">แก้ไขหัวข้อเว็บบอร์ด</label>  &nbsp;
-                <input type="text" style="text-align: center;" value="{{this.results[0].webboard_title}}"
+                <input type="text"  class="form-control"  value="{{this.results[0].webboard_title}}"
                  [(ngModel)]= "webTitle"  >  <br>
                  </div> 
                  <br>
@@ -82,7 +82,7 @@
 
                   <div  *ngIf="show" style="text-align: left;" >
                     <label style="background-color: rgb(243, 225, 60);color: white;">แก้ไขรายละเอียด</label>  &nbsp;
-                    <textarea class="form-control" [(ngModel)]= "webDes" rows="6"
+                    <textarea class="form-control" class="form-control" [(ngModel)]= "webDes" rows="6"
                     value="{{this.results[0].webboard_description}}" ></textarea>
                        
                   </div> 

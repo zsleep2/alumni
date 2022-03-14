@@ -69,7 +69,7 @@ export class Member1ListComponent implements OnInit {
       this.user_username = localStorage.getItem('user_username');
     this.user_username2 =  this.user_username.substring(0, 2);
     this.config = {
-      itemsPerPage: 10,
+      itemsPerPage: 20,
       currentPage: 1
     };
      

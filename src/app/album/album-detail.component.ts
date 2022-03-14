@@ -228,6 +228,7 @@ export class AlbumDetailComponent implements OnInit {
         }else{
           alert('แก้ไขเรียบร้อย');
           this.show = !this.show;
+          this.showup = !this.showup;
           this.ngOnInit();
          
         }
