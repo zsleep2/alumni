@@ -293,7 +293,7 @@ cl(){
       console.log(this.rUser);
   }
   SearchName(){
-    this.year = '';
+   
     if(this.sName == ""){
     this.rawData = []
      this.ngOnInit();
@@ -305,7 +305,7 @@ cl(){
     }
   }
   SearchJob(){
-    this.year = '';
+   
     if(this.sJob == ""){
       this.rawData = []
      this.ngOnInit();
@@ -316,7 +316,7 @@ cl(){
     }
   }
   SearchAddress(){
-    this.year = '';
+   
     if(this.sAddress == ""){
       this.rawData = []
      this.ngOnInit();

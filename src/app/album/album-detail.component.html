@@ -82,7 +82,7 @@
                             class="showpopup" style="background-color: rgb(28, 66, 235);" (click)="save()" ></button> <br>
                          <label style="background-color: rgb(243, 225, 60);color: dimgrey;font-size: medium;">เลือกรูปภาพ</label>  &nbsp;
                     <input type ="file" name="" id="" (change)="getFile($event.target.files)"  > <br>
-                    <button *ngIf ="showup"
+                    <button *ngIf ="show"
                     type="button" class="btn btn-success" (click)="addPhoto()"   >เพิ่มรูปภาพ</button>
                       </div>
                     <div *ngFor="let pho of photo | paginate: config">

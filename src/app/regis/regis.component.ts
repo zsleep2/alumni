@@ -133,39 +133,81 @@ export class RegisComponent implements OnInit {
     if(this.checkUser ==1){
         alert('เป็นสมาชิกแล้ว');
     }else{
+       
+     
+   
+
       if(window.confirm('ยืนยัน ?')){
-        
-            let json = {user_username : this.registerForm.value.username || '', 
-            user_password : this.registerForm.value.password || '',
-            user_prefix : this.registerForm.value.title ||'',
-            user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
-            user_phone : this.registerForm.value.phone || '',
-            user_email : this.registerForm.value.email || '',
-            user_facebook : this.registerForm.value.facebook || '',
-            user_year : this.registerForm.value.year || '',
-            user_job :this.registerForm.value.job || '',
-            user_workname : this.registerForm.value.workname  || '',
-            user_workaddress : this.registerForm.value.workaddress || '',
-            user_workphone :this.registerForm.value.workphone || '',
-            user_best : '0',
-            user_role : this.registerForm.value.role || '',
-            user_status : 0
-        } 
+
+        if(this.hide == 1){
+          let json = {user_username : this.registerForm.value.username || '', 
+          user_password : this.registerForm.value.password || '',
+          user_prefix : this.registerForm.value.title ||'',
+          user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
+          user_phone : this.registerForm.value.phone || '',
+          user_email : this.registerForm.value.email || '',
+          user_facebook : this.registerForm.value.facebook || '',
+          user_year : this.registerForm.value.year || '',
+          user_job :this.registerForm.value.job || '',
+          user_workname : this.registerForm.value.workname  || '',
+          user_workaddress : this.registerForm.value.workaddress || '',
+          user_workphone :this.registerForm.value.workphone || '',
+          user_best : '0',
+          user_role : 1,
+          user_status : 0
+          } 
+            console.log(json);
+           this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
+            if(data == 1){
+              console.log('OK');
+              alert('สมัครสมาชิกเรียบร้อย');
+              this.router1.navigateByUrl('/login');
+            }else{
+              alert('err');
+              console.log(data);
+            }
+              
+            },
+            (error) => {
+              console.log(error);
+            });  
+   
+
+        }else{
+          let json = {user_username : this.registerForm.value.username || '', 
+          user_password : this.registerForm.value.password || '',
+          user_prefix : this.registerForm.value.title ||'',
+          user_name :this.registerForm.value.firstName +' '+ this.registerForm.value.lastName || '',
+          user_phone : this.registerForm.value.phone || '',
+          user_email : this.registerForm.value.email || '',
+          user_facebook : this.registerForm.value.facebook || '',
+          user_year : this.registerForm.value.year || '',
+          user_job :this.registerForm.value.job || '',
+          user_workname : this.registerForm.value.workname  || '',
+          user_workaddress : this.registerForm.value.workaddress || '',
+          user_workphone :this.registerForm.value.workphone || '',
+          user_best : '0',
+          user_role : this.registerForm.value.role || '',
+          user_status : 0
+            } 
+
             this.http.post('http://qpos.msuproject.net/AllNewService/user/register',JSON.stringify(json)).toPromise().then(data => {
-                if(data == 1){
-                  console.log('OK');
-                  alert('สมัครสมาชิกเรียบร้อย');
-                  this.router1.navigateByUrl('/login');
-                }else{
-                  alert('err');
-                  console.log(data);
-                }
-                  
-                },
-                (error) => {
-                  console.log(error);
-                });  
-      
+              if(data == 1){
+                console.log('OK');
+                alert('สมัครสมาชิกเรียบร้อย');
+                this.router1.navigateByUrl('/login');
+              }else{
+                alert('err');
+                console.log(data);
+              }
+                
+              },
+              (error) => {
+                console.log(error);
+              });  
+    
+            }
+
         
       }
  
@@ -178,6 +220,13 @@ onReset() {
   this.registerForm.reset();
 }
 
+pre = [
+  { id:1, name: "ศาสตราจารย์"},
+  { id:2, name: "รองศาสตราจารย์"},
+  { id:3, name: "ผู้ช่วยศาสตราจารย์"},
+  { id:4, name: "อาจารย์"}
+
+];
  
   sinImputarHo(){
     

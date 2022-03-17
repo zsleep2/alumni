@@ -237,6 +237,10 @@ export class AdminUserComponent implements OnInit {
         this.nrSelect = 0;
       }
 
+      getId(value : string){
+        this.userID = value;
+      }
+
       checkUser(value : string){
         this.userID = value;
         for(let i = 0 ; i < this.rUser.length ; i++){

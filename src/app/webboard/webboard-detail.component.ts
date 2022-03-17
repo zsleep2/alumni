@@ -186,6 +186,7 @@ addComment(){
             if(data == 1){
             console.log(data);
             console.log('ok');
+            this.text = '';
             this.ngOnInit();
             }
             else{
@@ -225,13 +226,17 @@ addComment(){
       this.comid = +value;
       for (let i = 0; i < this.comments.length; i++) {
           if(this.comid == this.comments[i].comment_ID){
-              console.log(this.comments[i].comment_description);
-              if(this.comments[i].user_username == this.user_username){
-                    this.showcom = !this.showcom
-                   console.log('ok');
-              }else{
-                alert('ไม่สามารถแก้ไขได้');
-              }
+             
+                this.showcom = !this.showcom
+             
+                if(this.comments[i].user_username == this.user_username){
+                  this.showcom = !this.showcom
+                 console.log('ok');
+                }else{
+                  alert('ไม่สามารถแก้ไขได้');
+                }
+              
+             
           }
       }
   

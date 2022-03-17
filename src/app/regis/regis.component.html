@@ -33,21 +33,12 @@
                         <a  [routerLink]="" style="font-size: medium;" (click)="nisit()">นิสิต</a> &nbsp;
                         <a  [routerLink]="" style="font-size: medium;" (click)="teacher()">อาจารย์</a>
                     </h5>
-                    <div class="card-body">
+                    <div class="card-body" *ngIf="hide == 1">
                         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                             <div class="form-row">
                             <div class="form-group col-4">
-                                <div *ngIf="hide == 0">
-                                    <label >รหัสนิสิต</label> 
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
-                                    <input type="text" formControlName="username" class="form-control" 
-                                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                                        <div *ngIf="f.username.errors.required">กรุณากรอกรหัสนิสิต</div>
-                                        <div *ngIf="f.username.errors.pattern">รหัสนิสิต 11 หลัก</div>
-                                    </div>    
-                                </div>
-                                <div *ngIf="hide == 1">
+                               
+                                <div>
                                     <label >ชื่อผู้ใช้</label>
                                     <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
                                     <input type="text" formControlName="username" class="form-control" 
@@ -80,25 +71,15 @@
                                 </div>
                             </div>
                                 <div class="form-group col-2">
-                                    <div *ngIf="hide ==0">
-                                    <label>คำนำหน้า</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
-                                        <select formControlName="title" class="form-control" style="font-size: medium;"
-                                        [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-                                            <option value=""></option>
-                                            <option value="นาย">นาย</option>
-                                            <option value="นางสาว">นางสาว</option>
-                                        </select>
-                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                                            <div *ngIf="f.title.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="hide ==1">
+                                  
+                                    <div>
                                      
                                         <label>ตำแหน่งทางวิขาการ</label>
-                                       
-                                        <input type="text" formControlName="title" class="form-control" 
-                                        [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+
+                                        <select  formControlName="role" class="form-control" style="font-size: medium;"
+                                        [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
+                                        <option *ngFor="let result of pre" value="{{result.name}}">{{result.name}}</option>
+                                        </select>
                                         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                                             <div *ngIf="f.title.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
                                         </div>
@@ -123,24 +104,124 @@
                                         <div *ngIf="f.lastName.errors.required">กรุณากรอกนามสกุล</div>
                                     </div>
                                 </div>
+                          
+                            <div class="form-group col-6">
+                                <label>Email</label>
+                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <input type="text" formControlName="email" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">กรุณากรอก email</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Facebook</label>
+                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <input type="text" formControlName="facebook" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.facebook.errors }" />
+                                <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
+                                <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
+                                </div>  
+                            </div>
+                            
+                        </div>    
+                          
+                            <div class="text-center">
+                                <button class="btn btn-primary mr-1">Register</button>
+                                <button class="btn btn-secondary" type="reset" 
+                                [routerLink]="['/home']">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body" *ngIf="hide == 0">
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                            <div class="form-row">
+                            <div class="form-group col-4">
+                                <div >
+                                    <label >รหัสนิสิต</label> 
+                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <input type="text" formControlName="username" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                        <div *ngIf="f.username.errors.required">กรุณากรอกรหัสนิสิต</div>
+                                        <div *ngIf="f.username.errors.pattern">รหัสนิสิต 11 หลัก</div>
+                                    </div>    
+                                </div>
+
+                                   
+                            </div>
+                             <div class="form-group col-4"> 
+                                    <label>Password</label>
+                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <input type="password" formControlName="password" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">กรุณากรอกรหัสผ่าน</div>
+                                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                    </div>  
+                            </div>
+                             <div class="form-group col-4">
+                                <label>เบอร์โทรศัพท์</label>
+                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <input type="text" formControlName="phone" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">กรุณากรอกเบอร์โทรศัพท์</div>
+                                <div *ngIf="f.phone.errors.pattern"> ex 080-000-0000</div>
+                                </div>
+                            </div>
+                                <div class="form-group col-2">
+                                    <div>
+                                    <label>คำนำหน้า</label>
+                                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                                        <select formControlName="title" class="form-control" style="font-size: medium;"
+                                        [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                            <option value=""></option>
+                                            <option value="นาย">นาย</option>
+                                            <option value="นางสาว">นางสาว</option>
+                                        </select>
+                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
+                                        </div>
+                                    </div>
+                                 
+                                
+                                </div>
+                                <div class="form-group col-5">
+                                    <label>ชื่อ</label>
+                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <input type="text" formControlName="firstName" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.firstName.errors.required">กรุณากรอกชื่อ</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-5">
+                                    <label>นามสกุล</label>
+                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <input type="text" formControlName="lastName" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastName.errors.required">กรุณากรอกนามสกุล</div>
+                                    </div>
+                                </div>
                             <div class="form-group col-2">
+                                <div>
                                     <label>สถานะ</label>
                                     <label style="font-size: smaller;color: red;">* จำเป็น</label>
-                                    <select *ngIf="hide == 0" formControlName="role" class="form-control" style="font-size: medium;"
+                                    <select  formControlName="role" class="form-control" style="font-size: medium;"
                                     [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
                                         <option value=""></option>
                                         <option value="2">ศิษย์ปัจจุบัน</option>
                                         <option value="3">ศิษย์เก่า</option>
                                     </select>
-                                    <select *ngIf="hide == 1" formControlName="role" class="form-control" style="font-size: medium;"
-                                    [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
-                                        <option value=""></option>
-                                        <option value="1">อาจารย์ </option>
-                                        
-                                    </select>
-                                    <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
-                                        <div *ngIf="f.role.errors.required">กรุณากรอกคำนำหน้าชื่อ</div>
-                                    </div>
+                                </div>
+                            
+                                  
+                                    
                             </div>
                             <div class="form-group col-5">
                                 <label>Email</label>
@@ -162,6 +243,7 @@
                                 <div *ngIf="f.facebook.errors.required">กรุณากรอก Facebook</div>
                                 </div>  
                             </div>
+                            
                         </div>    
                           
                             <div class="text-center">
@@ -171,6 +253,7 @@
                             </div>
                         </form>
                     </div>
+
                   </div>
             </div>
             

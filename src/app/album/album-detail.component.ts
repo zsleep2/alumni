@@ -274,7 +274,7 @@ export class AlbumDetailComponent implements OnInit {
     console.log(files.item(0).name);
     let file = files.item(0);
     let reader = new FileReader();
-    this.showup = !this.showup;
+   
     reader.readAsDataURL(file);
     reader.onload = () => {
       /*   console.log(reader.result); */
