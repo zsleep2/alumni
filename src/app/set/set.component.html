@@ -33,13 +33,15 @@
                                  
                             <form [formGroup]="registerForm" (ngSubmit)="eDit()">
                                 <div class="form-row">
-                                    <div class="form-group col-2">
+                                    <div class="form-group col-3">
                                         <label style="font-size: medium;">ตำแหน่งทางวิชาการ</label>
-                                        <input type="text" formControlName="prefix" placeholder="{{user.user_prefix}}"
-                                        class="form-control" style="font-size: medium;">
+                                        <select  formControlName="role" class="form-control" style="font-size: medium;"
+                                        [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
+                                        <option *ngFor="let result of pre" value="{{result.name}}">{{result.name}}</option>
+                                        </select>
                                   
                                     </div>
-                                    <div class="form-group col-5">
+                                    <div class="form-group col-4">
                                         <label style="font-size: medium;">ชื่อ</label>
                                         <input type="text" formControlName="firstName" placeholder="{{showname[0]}}"
                                         class="form-control" style="font-size: medium;">
@@ -215,13 +217,13 @@
                             </div>
                             <div class="form-group col-5">
                                 <label style="font-size: medium;" >สถานที่ทำงาน</label> &nbsp;
-                                <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="workname" placeholder="{{user.user_workname}}"
                                 class="form-control" style="font-size: medium;"/>
                             </div>
                             <div class="form-group col-5">
                                 <label style="font-size: medium;" >ตำแหน่งงาน</label> &nbsp;
-                                <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input list="job" formControlName="job" placeholder="{{user.user_job}}"
                                 class="form-control" style="font-size: medium;" />
                                 <datalist id="job">
@@ -239,7 +241,7 @@
                             </div> 
                             <div class="form-group col-12">
                                 <label style="font-size: medium;" >ที่อยู่</label> &nbsp;
-                                <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                             </div>
                             <div class="form-group col-1">
                                 
@@ -275,7 +277,7 @@
                                 <label style="font-size: medium;">จังหวัด</label>
                                 <select formControlName="county" class="form-control" style="font-size: medium;">
                                 
-                                    <option *ngFor="let cou of county" value="{{cou.name}}" >{{cou.name}}</option>
+                                    <option *ngFor="let cou of county" value="{{cou.name}}">{{cou.name}}</option>
                                 </select>
                                 
                             </div> 

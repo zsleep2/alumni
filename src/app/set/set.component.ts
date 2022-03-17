@@ -70,8 +70,8 @@ b = 1;
   d;
   uid:any;
   checklist:number;
-
-
+  amphures;
+  pid;
   constructor(private router: ActivatedRoute,
     private http: HttpClient,
     private _auth: AuthService,
@@ -82,6 +82,8 @@ b = 1;
      }
 
   ngOnInit(): void {
+  
+ 
    
     const status = localStorage.getItem('status');
     if(status !== '1'){
@@ -161,6 +163,7 @@ b = 1;
   
 
   eDit(){
+
     this.submitted = true;
     console.log(this.rUser);
     if(this.rUser){
@@ -415,10 +418,16 @@ b = 1;
     { id:77, name: "บึงกาฬ"}
   ];
 
+  pre = [
+    { id:1, name: "ศาสตราจารย์"},
+    { id:2, name: "รองศาสตราจารย์"},
+    { id:3, name: "ผู้ช่วยศาสตราจารย์"},
+    { id:4, name: "อาจารย์"}
+  
+  ];
   onReset() {
     this.submitted = false;
     this.registerForm.reset();
   }
-
 
 }

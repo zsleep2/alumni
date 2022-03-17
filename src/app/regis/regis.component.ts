@@ -46,6 +46,7 @@ export class RegisComponent implements OnInit {
   usernamePattern = "^((\\+91-?)|0)?[0-9]{11}$"; 
   hide;
   regisData = [];
+  pid:number;
 
 
   constructor( private _auth: AuthService,private http: HttpClient,private router1: Router,

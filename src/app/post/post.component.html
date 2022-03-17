@@ -21,11 +21,11 @@
             <div class="two">
                 
                     <label for="fname">หัวข้อโพสต์</label> &nbsp;
-                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                    <label style="font-size: smaller;color: red;">*</label>
                     <br>
                     <input id="text" type="text"  class="form-control" pInputText  [(ngModel)]="text"> <br>
                     <label for="country">ประเภทเว็บบอร์ด</label> &nbsp; 
-                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                    <label style="font-size: smaller;color: red;">*</label>
                     <select *ngIf="myrole !=1"
                     id="country"  [(ngModel)]="nrSelect" >
                         <option value="0">เว็บบอร์ดทั่วไป</option>
@@ -38,7 +38,7 @@
                         <option *ngFor="let y of rawData" value="{{y}}" value={{y}}>{{y}}</option>
                     </select>
                     <label for="subject">รายละเอียดโพสต์</label> &nbsp;
-                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                    <label style="font-size: smaller;color: red;">*</label>
                     <textarea class="form-control" rows="6" id="text2"  [(ngModel)]="text2"></textarea>
                 
                     <button

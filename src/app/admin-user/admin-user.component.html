@@ -76,10 +76,9 @@
                                 </tr>
                                 </thead>
                            <tbody>
-                                    <tr li *ngFor="let user of rUser | paginate: config " 
-                                    [routerLink]="['/member1/'+this.user_username,this.user.UID]">
+                                    <tr li *ngFor="let user of rUser | paginate: config " >
                                    
-                                    <td >{{user.user_username}}</td>
+                                    <td   [routerLink]="['/member1/'+this.user_username,this.user.UID]">{{user.user_username}}</td>
                                     <td>{{user.user_password}}</td>
                                     <td> {{user.user_prefix}} {{user.user_name}}</td>
                                     <td>

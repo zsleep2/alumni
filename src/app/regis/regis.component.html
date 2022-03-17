@@ -40,7 +40,7 @@
                                
                                 <div>
                                     <label >ชื่อผู้ใช้</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="text" formControlName="username" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -52,7 +52,7 @@
                             </div>
                              <div class="form-group col-4"> 
                                     <label>Password</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="password" formControlName="password" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -62,7 +62,7 @@
                             </div>
                              <div class="form-group col-4">
                                 <label>เบอร์โทรศัพท์</label>
-                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="phone" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
                                 <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="form-group col-5">
                                     <label>ชื่อ</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="text" formControlName="firstName" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                                     <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group col-5">
                                     <label>นามสกุล</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="text" formControlName="lastName" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                                     <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
@@ -107,7 +107,7 @@
                           
                             <div class="form-group col-6">
                                 <label>Email</label>
-                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="email" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Facebook</label>
-                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="facebook" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.facebook.errors }" />
                                 <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
@@ -142,7 +142,7 @@
                             <div class="form-group col-4">
                                 <div >
                                     <label >รหัสนิสิต</label> 
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="text" formControlName="username" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -155,7 +155,7 @@
                             </div>
                              <div class="form-group col-4"> 
                                     <label>Password</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="password" formControlName="password" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -165,7 +165,7 @@
                             </div>
                              <div class="form-group col-4">
                                 <label>เบอร์โทรศัพท์</label>
-                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="phone" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
                                 <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
@@ -176,7 +176,7 @@
                                 <div class="form-group col-2">
                                     <div>
                                     <label>คำนำหน้า</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                         <select formControlName="title" class="form-control" style="font-size: medium;"
                                         [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
                                             <option value=""></option>
@@ -192,7 +192,7 @@
                                 </div>
                                 <div class="form-group col-5">
                                     <label>ชื่อ</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="text" formControlName="firstName" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                                     <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="form-group col-5">
                                     <label>นามสกุล</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <input type="text" formControlName="lastName" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                                     <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
@@ -211,7 +211,7 @@
                             <div class="form-group col-2">
                                 <div>
                                     <label>สถานะ</label>
-                                    <label style="font-size: smaller;color: red;">* จำเป็น</label>
+                                    <label style="font-size: smaller;color: red;">*</label>
                                     <select  formControlName="role" class="form-control" style="font-size: medium;"
                                     [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
                                         <option value=""></option>
@@ -225,7 +225,7 @@
                             </div>
                             <div class="form-group col-5">
                                 <label>Email</label>
-                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="email" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -236,7 +236,7 @@
                             </div>
                             <div class="form-group col-5">
                                 <label>Facebook</label>
-                                <label style="font-size: smaller;color: red;">* จำเป็นต้องกรอก</label>
+                                <label style="font-size: smaller;color: red;">*</label>
                                 <input type="text" formControlName="facebook" class="form-control" 
                                 [ngClass]="{ 'is-invalid': submitted && f.facebook.errors }" />
                                 <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
