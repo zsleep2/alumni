@@ -76,8 +76,8 @@
                                      
                                         <label>ตำแหน่งทางวิขาการ</label>
 
-                                        <select  formControlName="role" class="form-control" style="font-size: medium;"
-                                        [ngClass]="{ 'is-invalid': submitted  && f.role.errors }">
+                                        <select  formControlName="title" class="form-control" style="font-size: medium;"
+                                        [ngClass]="{ 'is-invalid': submitted  && f.title.errors }">
                                         <option *ngFor="let result of pre" value="{{result.name}}">{{result.name}}</option>
                                         </select>
                                         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">

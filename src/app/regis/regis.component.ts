@@ -88,7 +88,7 @@ export class RegisComponent implements OnInit {
         phone: ['',[ Validators.required, Validators.pattern(this.mobnumPattern)]],
         facebook: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        role : ['', Validators.required],
+       
         password: ['', [Validators.required, Validators.minLength(6)]],
         }, {
         });
